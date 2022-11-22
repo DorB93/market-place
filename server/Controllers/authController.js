@@ -79,7 +79,7 @@ async function protect(req, res, next) {
 			return next(
 				new AppError("You are not logged in! Please log in to ger access", 401)
 			);
-		// Verifiction token
+		// Verification token
 		const data = jwt.verify(token, process.env.JWT_SECRET);
 		console.log(data);
 		// check if user still exists

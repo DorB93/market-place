@@ -12,7 +12,7 @@ function filterObj(obj, ...allowedFields) {
 	return filteredObj;
 }
 async function getMe(req, _, next) {
-	req.params.id = req.user.id;
+	req.params.id = req.user._id;
 	next();
 }
 async function updateMe(req, res, next) {

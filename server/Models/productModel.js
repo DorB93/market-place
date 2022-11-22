@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
 		},
 		quantity: {
 			type: Number,
-			required: [true, "A product musd have a quantity"],
+			required: [true, "A product must have a quantity"],
 		},
 		ratingsQuantity: {
 			type: Number,

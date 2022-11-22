@@ -11,6 +11,7 @@ router
 	.post(
 		authController.protect,
 		authController.restrictTo("admin", "seller"),
+		productsController.setSellerId,
 		productsController.createProduct
 	);
 
