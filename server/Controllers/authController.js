@@ -31,7 +31,7 @@ function createSendToken(user, statusCode, res) {
 	});
 }
 
-async function singup(req, res, next) {
+async function signUp(req, res, next) {
 	try {
 		const newUser = await User.create({
 			name: req.body.name,
@@ -87,7 +87,7 @@ async function protect(req, res, next) {
 		if (!freshUser) {
 			return next(new AppError("This user no longer exists.", 401));
 		}
-		// Check user chnged password after the token eas issued
+		// Check user changed password after the token eas issued
 		if (freshUser.changesPasswordAfter(decoded.iat)) {
 			return next(
 				new AppError(
@@ -175,7 +175,7 @@ async function resetPassword(req, res, next) {
 		});
 		// 2) If token not expired, and there is a user. set the new password
 		if (!user) {
-			next(new AppError("Token is unvalid or expired!", 400));
+			next(new AppError("Token is invalid or expired!", 400));
 		}
 		user.password = req.body.password;
 		user.passwordConfirm = req.body.passwordConfirm;
@@ -193,13 +193,13 @@ async function resetPassword(req, res, next) {
 
 async function updatePassword(req, res, next) {
 	try {
-		// 1) Get user from collaction
+		// 1) Get user from collation
 		const user = await User.findById(req.user._id).select("+password");
 
 		// 2) Check posted password is correct
 		const { password } = req.body;
 		if (!(await user.correctPassword(password, user.password))) {
-			return next(new AppError("Wrong Password! Please try agian", 401));
+			return next(new AppError("Wrong Password! Please try again", 401));
 		}
 		// 3) If true, update the password
 		const { newPassword, newPasswordConfirm } = req.body;
@@ -217,7 +217,7 @@ async function updatePassword(req, res, next) {
 }
 
 module.exports = {
-	singup,
+	signUp,
 	login,
 	protect,
 	restrictTo,
