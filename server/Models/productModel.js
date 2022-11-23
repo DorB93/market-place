@@ -51,7 +51,9 @@ const productSchema = new mongoose.Schema(
 		toObject: { virtuals: true },
 	}
 );
+
 productSchema.index({ price: 1, ratingsAverage: -1 });
+productSchema.index({ category: 1 });
 productSchema.index({ seller: 1 });
 
 const Product = mongoose.model("Product", productSchema);
