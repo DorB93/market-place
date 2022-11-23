@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: [true, "A product musd have a name"],
+			required: [true, "A product must have a name"],
 			trim: true,
 			maxlength: [
 				50,
@@ -15,9 +15,13 @@ const productSchema = new mongoose.Schema(
 				"A product name must have more or equal then 40 characters",
 			],
 		},
-		quantity: {
+		category: {
+			type: String,
+			required: [true, "A product must have a category"],
+		},
+		inventory: {
 			type: Number,
-			required: [true, "A product must have a quantity"],
+			required: [true, "A product must have a inventory"],
 		},
 		ratingsQuantity: {
 			type: Number,
