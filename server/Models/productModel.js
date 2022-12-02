@@ -23,6 +23,10 @@ const productSchema = new mongoose.Schema(
 			type: Number,
 			required: [true, "A product must have a inventory"],
 		},
+		bought: {
+			type: Number,
+			default: 0,
+		},
 		ratingsQuantity: {
 			type: Number,
 			default: 0,
