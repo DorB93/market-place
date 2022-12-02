@@ -13,7 +13,7 @@ console.log(process.env.NODE_ENV);
 
 // Connect to MongoDB database
 mongoose.connect("mongodb://localhost:27017/BSM").then(() => {
-	console.log("MongoDB connected successfuly!");
+	console.log("MongoDB connected successfully!");
 });
 
 // START THE SERVER
@@ -25,7 +25,7 @@ const server = app.listen(port, () => {
 
 process.on("unhandleRejection", (err) => {
 	console.error(`${err.name}: ${err.message}`);
-	console.log("Unhandle Rejection! 💥 Shutting Down....");
+	console.log("Unhandled Rejection! 💥 Shutting Down....");
 	server.close(() => {
 		process.exit(1);
 	});
