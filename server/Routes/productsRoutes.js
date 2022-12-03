@@ -5,6 +5,9 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
+// Nested Route
+router.use("/:productId/reviews", reviewRouter);
+
 router
 	.route("/")
 	.get(productsController.getAllProducts)
