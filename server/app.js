@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const helmet = require("helmet");
+const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
 const errorMiddleware = require("./controllers/errorController");
@@ -12,10 +13,10 @@ const userRouter = require("./Routes/userRoutes");
 const productsRouter = require("./Routes/productsRoutes");
 const app = express();
 
-// Body parser, readind data from body into req.body
+// Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
 
-// Development loggin
+// Development login
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
@@ -41,7 +42,10 @@ app.use(cookieParser());
 // Data Sanitization against XSS
 app.use(xss());
 
-// Implament Routes
+// Compressing the JSON responses
+app.use(compression());
+
+// Implement Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productsRouter);
 
