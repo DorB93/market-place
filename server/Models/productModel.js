@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema(
 		name: {
 			type: String,
 			required: [true, "A product must have a name"],
+			unique: true,
 			trim: true,
 			maxlength: [
 				50,
@@ -15,6 +16,7 @@ const productSchema = new mongoose.Schema(
 				"A product name must have more or equal then 40 characters",
 			],
 		},
+		slug: String,
 		category: {
 			type: String,
 			required: [true, "A product must have a category"],
@@ -48,6 +50,7 @@ const productSchema = new mongoose.Schema(
 		seller: {
 			type: mongoose.Schema.ObjectId,
 			ref: "User",
+			required: [true, "A tour must have a seller"],
 		},
 	},
 	{
@@ -59,6 +62,26 @@ const productSchema = new mongoose.Schema(
 productSchema.index({ price: 1, ratingsAverage: -1 });
 productSchema.index({ category: 1 });
 productSchema.index({ seller: 1 });
+
+productSchema.virtual("reviews", {
+	ref: "Review",
+	foreignField: "product",
+	localField: "_id",
+	justOne: false,
+});
+
+productSchema.pre("save", function (next) {
+	this.slug = slugify(this.name, { lower: true });
+	next();
+});
+
+productSchema.pre(/^find/, function (next) {
+	this.populate({
+		path: "seller",
+		select: ["-__v", "-passwordChangedAt"],
+	});
+	next();
+});
 
 const Product = mongoose.model("Product", productSchema);
 
