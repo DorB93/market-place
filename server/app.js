@@ -9,6 +9,8 @@ const rateLimit = require("express-rate-limit");
 
 const errorMiddleware = require("./controllers/errorController");
 const AppError = require("./utils/appError");
+const reviewRouter = require("./Routes/reviewsRoutes");
+const orderRouter = require("./Routes/orderRoutes");
 const userRouter = require("./Routes/userRoutes");
 const productsRouter = require("./Routes/productsRoutes");
 const app = express();
@@ -46,6 +48,8 @@ app.use(xss());
 app.use(compression());
 
 // Implement Routes
+app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productsRouter);
 
