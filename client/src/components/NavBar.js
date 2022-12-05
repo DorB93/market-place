@@ -8,20 +8,27 @@ import {
 	CartInfo,
 	HeaderBar,
 	Nav,
-	NavLink,
+	Link,
 	UserBar,
 } from "./styleComponents";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
 	return (
 		<>
 			<Nav>
-				<NavLink>Home</NavLink>
+				<Link>
+					<NavLink to='/'>Home</NavLink>
+				</Link>
 				<HeaderBar>Welcome Guest</HeaderBar>
 				<UserBar>
-					<NavLink>Sign In</NavLink>
-					<NavLink>Login</NavLink>
-					<NavLink>Cart</NavLink>
+					<Link>
+						<NavLink to='/signup'>Sign Up</NavLink>
+					</Link>
+					<Link>
+						<NavLink to='/login'>Login</NavLink>
+					</Link>
+					<Link>Cart</Link>
 				</UserBar>
 				<CartContainer>
 					<BtnCloseCart>X</BtnCloseCart>

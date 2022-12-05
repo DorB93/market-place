@@ -34,7 +34,7 @@ export const UserBar = styled.div`
 	gap: 15px;
 `;
 
-export const NavLink = styled.a`
+export const Link = styled.a`
 	padding: 15px;
 	margin-right: 2px;
 	border-right: 3px rgb(128, 128, 128);
