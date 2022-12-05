@@ -1,6 +1,6 @@
 import NavBar from "./NavBar";
 import { Routes, Route } from "react-router-dom";
-import { AppWrapper, StoreContainer } from "./styleComponents";
+import { AppWrapper } from "./styleComponents";
 import Store from "../pages/Store";
 import About from "../pages/About";
 import Login from "../pages/Login";
