@@ -18,6 +18,8 @@ router
 		productsController.createProduct
 	);
 
+router.route("/categories", productsController.getAllCategories);
+
 router
 	.route("/:id")
 	.get(productsController.getProduct)
