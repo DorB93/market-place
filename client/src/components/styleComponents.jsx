@@ -5,16 +5,22 @@ export const AppWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	min-width: 320px;
-	width: 100%;
+	width: 99vw;
+	box-sizing: border-box;
 `;
 
 export const Nav = styled.nav`
 	position: sticky;
+	align-self: center;
+	margin: 0;
 	top: 0;
 	display: flex;
+	box-sizing: border-box;
 	justify-content: space-between;
-	height: 50px;
+	align-items: center;
+	height: 60px;
 	width: 100vw;
 	padding: 5px;
 	background-color: rgb(255, 255, 255);
@@ -22,15 +28,17 @@ export const Nav = styled.nav`
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
 	z-index: 1;
 	font-size: 20px;
-	color: black;
+	color: rgb(125, 125, 125);
 `;
 export const HeaderBar = styled.h1`
 	margin: 0;
 	font-weight: bold;
+	box-sizing: border-box;
 `;
 export const UserBar = styled.div`
 	display: flex;
 	align-items: center;
+	box-sizing: border-box;
 	gap: 15px;
 `;
 
@@ -38,9 +46,14 @@ export const Link = styled.a`
 	padding: 15px;
 	margin-right: 2px;
 	border-right: 3px rgb(128, 128, 128);
+	box-sizing: border-box;
 	text-decoration: none;
 	color: rgb(125, 125, 125);
 
+	& a {
+		text-decoration: none;
+		color: rgb(125, 125, 125);
+	}
 	&:hover {
 		color: black;
 	}
@@ -48,6 +61,7 @@ export const Link = styled.a`
 export const StoreContainer = styled.section`
 	background-color: #fbfafa;
 	width: 100vw;
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -58,7 +72,9 @@ export const StoreContainer = styled.section`
 `;
 
 export const CategorySelector = styled.nav`
-	width: 100%;
+	width: 100vw;
+	box-sizing: border-box;
+
 	height: 30px;
 	background-color: #dfdfdf8f;
 	display: flex;
@@ -166,16 +182,16 @@ export const ProductsContainer = styled.section`
 
 export const Product = styled.div`
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 	border: 1px solid rgb(179, 179, 179);
 	box-shadow: 2px 2px 3px 2px rgba(40, 40, 40, 0.34);
-	width: 330px;
-	height: 470px;
+	width: 400px;
+	height: 250px;
 	font-size: 15px;
 	margin: 20px;
 	border-radius: 10px;
 	box-sizing: border-box;
-	color: #000;
+	color: rgb(125, 125, 125);
 	overflow: hidden;
 	padding: 15px;
 	background-color: white;
@@ -183,29 +199,28 @@ export const Product = styled.div`
 	position: relative;
 
 	& img {
-		height: 150px;
+		height: 100%;
 		object-fit: contain;
 		justify-self: center;
 	}
-	& p {
-		height: 100px;
-		overflow: auto;
-		justify-items: center;
-	}
 `;
-
-export const ProductPriceAction = styled.div`
+export const ProductMinDetails = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	position: absolute;
-	bottom: 15px;
-	width: 90%;
 	align-items: flex-end;
-	& span {
-		margin-right: 2px;
-		font-size: x-large;
-		color: rgb(71, 158, 246);
+
+	& h3 {
+		margin: 0;
 	}
+	& a {
+		color: rgb(125, 125, 125);
+		text-decoration: none;
+	}
+	& span {
+		font-size: larger;
+	}
+
 	& button {
 		height: 35px;
 		font-size: 15px;
@@ -214,7 +229,7 @@ export const ProductPriceAction = styled.div`
 		background-color: rgb(71, 158, 246);
 		transition: all linear 250ms;
 		border: 0;
-		width: 33%;
+		width: 100px;
 	}
 	& button:hover {
 		background-color: white;

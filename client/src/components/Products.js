@@ -2,8 +2,9 @@ import React from "react";
 import {
 	Product,
 	ProductsContainer,
-	ProductPriceAction,
+	ProductMinDetails,
 } from "./styleComponents";
+import { NavLink } from "react-router-dom";
 
 function Products() {
 	return (
@@ -11,219 +12,146 @@ function Products() {
 			<ProductsContainer>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
 				</Product>
 				<Product>
 					<img src='/logo512.png' alt='product name' />
-					<h3>Product Title</h3>
-					<p>
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description: Product description: Product description:
-						Product description:{" "}
-					</p>
-					<ProductPriceAction>
-						<span>$100.50</span>
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
 						<button>Add to cart</button>
-					</ProductPriceAction>
+					</ProductMinDetails>
+				</Product>
+				<Product>
+					<img src='/logo512.png' alt='product name' />
+					<ProductMinDetails>
+						<h3>Product Title</h3>
+						<span>
+							<NavLink to='/products/:id'>Click for more..</NavLink>
+						</span>
+						<span>Price: $100.50</span>
+						<button>Add to cart</button>
+					</ProductMinDetails>
 				</Product>
 			</ProductsContainer>
 		</>
