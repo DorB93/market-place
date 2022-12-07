@@ -21,7 +21,10 @@ const userSchema = new mongoose.Schema(
 			enum: ["user", "seller", "admin"],
 			default: "user",
 		},
-		photo: String,
+		photo: {
+			type: String,
+			default: "default.jpg",
+		},
 		password: {
 			type: String,
 			required: [true, "Please provide a password"],
@@ -33,7 +36,7 @@ const userSchema = new mongoose.Schema(
 		},
 		passwordConfirm: {
 			type: String,
-			required: [true, "Please confirme your password"],
+			required: [true, "Please confirm your password"],
 			validate: {
 				// Only work on SAVE & CREATE!!
 				validator: function (val) {
