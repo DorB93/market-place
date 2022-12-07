@@ -9,11 +9,11 @@ const productSchema = new mongoose.Schema(
 			trim: true,
 			maxlength: [
 				50,
-				"A product name must have less or equal then 40 characters",
+				"A product name must have less or equal then 50 characters",
 			],
 			minlength: [
-				8,
-				"A product name must have more or equal then 40 characters",
+				5,
+				"A product name must have more or equal then 5 characters",
 			],
 		},
 		slug: String,
@@ -35,22 +35,22 @@ const productSchema = new mongoose.Schema(
 		},
 		price: {
 			type: Number,
-			required: [true, "A tour must have a price"],
+			required: [true, "A product must have a price"],
 		},
 		summary: {
 			type: String,
 			trim: true,
-			required: [true, "A tour must have a summary"],
 		},
 		description: {
 			type: String,
 			trim: true,
+			required: [true, "A product must have a description"],
 		},
 		images: [String],
 		seller: {
 			type: mongoose.Schema.ObjectId,
 			ref: "User",
-			required: [true, "A tour must have a seller"],
+			required: [true, "A product must have a seller"],
 		},
 	},
 	{

@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
+const productsController = require("./Controllers/productsController");
 const errorMiddleware = require("./controllers/errorController");
 const AppError = require("./utils/appError");
 const reviewRouter = require("./Routes/reviewsRoutes");
@@ -52,6 +53,7 @@ app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productsRouter);
+app.get("/api/v1/categories", productsController.getAllCategories);
 
 // Handling Unhandled Routes - must be the last
 app.all("*", (req, res, next) => {

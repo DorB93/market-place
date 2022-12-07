@@ -88,7 +88,7 @@ async function protect(req, res, next) {
 			return next(new AppError("This user no longer exists.", 401));
 		}
 		// Check user changed password after the token eas issued
-		if (freshUser.changesPasswordAfter(decoded.iat)) {
+		if (freshUser.changesPasswordAfter(data.iat)) {
 			return next(
 				new AppError(
 					"User recently changed the password! Please log in again",
