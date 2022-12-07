@@ -1,5 +1,6 @@
 const express = require("express");
 
+const reviewRouter = require("./reviewsRoutes");
 const productsController = require("../controllers/productsController");
 const authController = require("../controllers/authController");
 
