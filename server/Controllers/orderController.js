@@ -1,5 +1,5 @@
 const Order = require("../models/orderModel");
-const AppError = require("../utils/appError");
+// const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 
 const getAllOrders = factory.getAll(Order);

@@ -12,7 +12,7 @@ process.on("uncaughtException", (err) => {
 console.log(process.env.NODE_ENV);
 
 // Connect to MongoDB database
-mongoose.connect("mongodb://localhost:27017/BSM").then(() => {
+mongoose.connect("mongodb://127.0.0.1:27017/BSM").then(() => {
 	console.log("MongoDB connected successfully!");
 });
 

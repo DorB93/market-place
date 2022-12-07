@@ -1,5 +1,5 @@
 const Product = require("./../Models/productModel");
-const AppError = require("../utils/appError");
+// const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 
 function setSellerId(req, res, next) {

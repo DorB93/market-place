@@ -32,7 +32,7 @@ function handleCastErrorDB(err) {
 	return new AppError(message, 400);
 }
 
-function handleduplicateFieldsDB(err) {
+function handleDuplicateFieldsDB(err) {
 	const value = err.keyValue.name;
 	const message = `Duplicate field value: ${value} Please use another value`;
 	return new AppError(message, 400);
@@ -63,7 +63,7 @@ function errorMiddleware(err, req, res, next) {
 		let error = { ...err };
 
 		if (error.name === "CastError") error = handleCastErrorDB(error);
-		if (error.code === 11000) error = handleduplicateFieldsDB(error);
+		if (error.code === 11000) error = handleDuplicateFieldsDB(error);
 		if (error.name === "ValidationError") {
 			error = handleValidationErrorDB(error);
 		}
