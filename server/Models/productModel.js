@@ -83,6 +83,10 @@ productSchema.pre(/^find/, function (next) {
 	next();
 });
 
+if (mongoose.models.Product) {
+	delete mongoose.models.Product;
+}
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
