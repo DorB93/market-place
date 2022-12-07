@@ -1,16 +1,5 @@
 import React from "react";
-import {
-	BtnCloseCart,
-	CartContainer,
-	CartBtn,
-	CartBtnContainer,
-	CartContents,
-	CartInfo,
-	HeaderBar,
-	Nav,
-	Link,
-	UserBar,
-} from "./styleComponents";
+import { HeaderBar, Nav, Link, UserBar } from "./styleComponents";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
