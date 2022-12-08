@@ -1,8 +1,14 @@
 import React from "react";
-import { ProductsContainer } from "./styleComponents";
-
+import styled from "styled-components";
 import useProducts from "../hooks/useProducts";
 import Product from "./Product";
+
+export const ProductsContainer = styled.section`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+`;
 
 function Products() {
 	const catalog = useProducts();
