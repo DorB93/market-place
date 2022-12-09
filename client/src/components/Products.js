@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import useProducts from "../hooks/useProducts";
 import Product from "./Product";
+import { useFilter } from "../context/FilterContext";
 
 export const ProductsContainer = styled.section`
 	display: flex;
@@ -12,12 +13,12 @@ export const ProductsContainer = styled.section`
 
 function Products() {
 	const catalog = useProducts();
-
+	const { filter } = useFilter();
 	const products = catalog
-		// .filter((product) => {
-		// 	if (category === "All") return product;
-		// 	return product.category === category;
-		// })
+		.filter((product) => {
+			if (filter === "All") return product;
+			return product.category === filter;
+		})
 		.map((p) => <Product key={p.id} product={p} />);
 	return (
 		<>

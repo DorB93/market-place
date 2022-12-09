@@ -3,6 +3,8 @@ import Filter from "../components/Filter";
 import Products from "../components/Products";
 import styled from "styled-components";
 
+import { FilterProvider } from "../context/FilterContext";
+
 export const StoreContainer = styled.section`
 	background-color: #fbfafa;
 	width: 100vw;
@@ -18,10 +20,12 @@ export const StoreContainer = styled.section`
 
 function Store() {
 	return (
-		<StoreContainer>
-			<Filter />
-			<Products />
-		</StoreContainer>
+		<FilterProvider>
+			<StoreContainer>
+				<Filter />
+				<Products />
+			</StoreContainer>
+		</FilterProvider>
 	);
 }
 

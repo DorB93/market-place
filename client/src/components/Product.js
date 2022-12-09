@@ -60,18 +60,18 @@ export const ProductMinDetails = styled.div`
 	& span {
 		font-size: larger;
 	}
+`;
+export const BtnAddToCart = styled.button`
+	height: 35px;
+	font-size: 15px;
+	border-radius: 40px;
+	color: white;
+	background-color: rgb(71, 158, 246);
+	transition: all linear 250ms;
+	border: 0;
+	width: 100px;
 
-	& button {
-		height: 35px;
-		font-size: 15px;
-		border-radius: 40px;
-		color: white;
-		background-color: rgb(71, 158, 246);
-		transition: all linear 250ms;
-		border: 0;
-		width: 100px;
-	}
-	& button:hover {
+	&:hover {
 		background-color: white;
 		box-shadow: 2px 2px 2px 2px rgba(71, 159, 246, 0.453);
 		color: rgb(71, 158, 246);
@@ -91,7 +91,7 @@ function Product({ product }) {
 					<NavLink to={url}>Click for more..</NavLink>
 				</span>
 				<span>Price: ${Number(product.getPrice()).toFixed(2)}</span>
-				<button>Add to cart</button>
+				<BtnAddToCart>Add to cart</BtnAddToCart>
 			</ProductMinDetails>
 		</ProductContainer>
 	);

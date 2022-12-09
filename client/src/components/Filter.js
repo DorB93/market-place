@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import useFetch from "../hooks/useFetch";
+import { useFilter } from "../context/FilterContext";
 
 export const CategorySelector = styled.nav`
 	width: 100vw;
@@ -34,14 +36,19 @@ export const CategoryOption = styled.div`
 `;
 
 function Filter() {
+	const categories = [
+		"All",
+		...useFetch("https://fakestoreapi.com/products/categories"),
+	];
+	const { selectFilter } = useFilter();
+	const selection = categories.map((atr) => (
+		<CategoryOption key={atr} title={atr} onClick={() => selectFilter(atr)}>
+			{atr}
+		</CategoryOption>
+	));
 	return (
 		<>
-			<CategorySelector>
-				<CategoryOption>Category</CategoryOption>
-				<CategoryOption>Category</CategoryOption>
-				<CategoryOption>Category</CategoryOption>
-				<CategoryOption>Category</CategoryOption>
-			</CategorySelector>
+			<CategorySelector>{selection}</CategorySelector>
 		</>
 	);
 }
