@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext,useReducer } from "react";
+import React, { useState, createContext, useContext } from "react";
 // import useFetch from "../hooks/useFetch";
 
 const FilterContext = createContext({});
