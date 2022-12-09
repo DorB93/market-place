@@ -53,6 +53,13 @@ const userSchema = new mongoose.Schema(
 			default: true,
 			select: false,
 		},
+		shippingAddress: {
+			state: String,
+			city: String,
+			street: String,
+			streetNum: Number,
+			zipCode: String,
+		},
 	},
 	{
 		toJSON: { virtuals: true },
