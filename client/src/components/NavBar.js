@@ -16,7 +16,7 @@ export const Nav = styled.nav`
 	width: 100vw;
 	padding: 5px;
 	background-color: rgb(255, 255, 255);
-	margin-bottom: 3px;
+	/* margin-bottom: 3px; */
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
 	z-index: 1;
 	font-size: 20px;

@@ -13,7 +13,7 @@ export const StoreContainer = styled.section`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
-	padding-top: 5px;
+	/* padding-top: 5px; */
 	padding-bottom: 5px;
 	min-height: 60vh;
 `;
