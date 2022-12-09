@@ -6,7 +6,7 @@ import { useFilter } from "../context/FilterContext";
 export const CategorySelector = styled.nav`
 	width: 100vw;
 	box-sizing: border-box;
-
+	box-shadow: 2px 2px 5px 1px rgba(128, 128, 128, 0.193);
 	height: 30px;
 	background-color: #dfdfdf8f;
 	display: flex;

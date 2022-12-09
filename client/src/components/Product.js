@@ -5,8 +5,7 @@ import styled from "styled-components";
 export const ProductContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid rgb(179, 179, 179);
-	box-shadow: 2px 2px 3px 2px rgba(40, 40, 40, 0.34);
+	box-shadow: 2px 2px 5px 3px rgba(40, 40, 40, 0.34);
 	width: 400px;
 	height: 250px;
 	font-size: 15px;
