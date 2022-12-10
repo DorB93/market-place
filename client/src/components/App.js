@@ -9,6 +9,7 @@ import Signup from "../pages/Signup";
 import ProductDetail from "../pages/ProductDetail";
 import { CartProvider } from "./../context/CartContext";
 import { UserProvider } from "./../context/UserContext";
+import ForgotPassword from "../pages/ForgotPassword";
 
 export const AppWrapper = styled.div`
 	margin: 0;
@@ -29,11 +30,12 @@ function App() {
 					<NavBar />
 					<>
 						<Routes>
-							<Route path='/' element={<Store />}></Route>
-							<Route path='/about' element={<About />}></Route>
-							<Route path='/login' element={<Login />}></Route>
-							<Route path='/signup' element={<Signup />}></Route>
-							<Route path='/products/:id' element={<ProductDetail />}></Route>
+							<Route path='/' element={<Store />} />
+							<Route path='/about' element={<About />} />
+							<Route path='/login' element={<Login />} />
+							<Route path='/signup' element={<Signup />} />
+							<Route path='/products/:id' element={<ProductDetail />} />
+							<Route path='/forgot-password' element={<ForgotPassword />} />
 						</Routes>
 					</>
 				</AppWrapper>

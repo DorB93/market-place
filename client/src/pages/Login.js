@@ -51,7 +51,8 @@ function Login() {
 				</InputContainer>
 				<SubmitBtn type='submit'>Login</SubmitBtn>
 				<p>
-					Forgot your password? <NavLink>click here</NavLink>
+					Forgot your password?{" "}
+					<NavLink to='/forgot-password'>click here</NavLink>
 				</p>
 			</Form>
 			<p>
