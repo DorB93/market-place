@@ -7,6 +7,8 @@ import About from "../pages/About";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import ProductDetail from "../pages/ProductDetail";
+import { CartProvider } from "./../context/CartContext";
+import { UserProvider } from "./../context/UserContext";
 
 export const AppWrapper = styled.div`
 	margin: 0;
@@ -21,18 +23,22 @@ export const AppWrapper = styled.div`
 
 function App() {
 	return (
-		<AppWrapper>
-			<NavBar />
-			<>
-				<Routes>
-					<Route path='/' element={<Store />}></Route>
-					<Route path='/about' element={<About />}></Route>
-					<Route path='/login' element={<Login />}></Route>
-					<Route path='/signup' element={<Signup />}></Route>
-					<Route path='/products/:id' element={<ProductDetail />}></Route>
-				</Routes>
-			</>
-		</AppWrapper>
+		<UserProvider>
+			<CartProvider>
+				<AppWrapper>
+					<NavBar />
+					<>
+						<Routes>
+							<Route path='/' element={<Store />}></Route>
+							<Route path='/about' element={<About />}></Route>
+							<Route path='/login' element={<Login />}></Route>
+							<Route path='/signup' element={<Signup />}></Route>
+							<Route path='/products/:id' element={<ProductDetail />}></Route>
+						</Routes>
+					</>
+				</AppWrapper>
+			</CartProvider>
+		</UserProvider>
 	);
 }
 

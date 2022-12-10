@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import LoadingSpinner from "./LoadingSpinner";
+import { useCart } from "../context/CartContext";
 
 export const ProductContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	box-shadow: 2px 2px 5px 3px rgba(40, 40, 40, 0.34);
+	/* box-shadow: 2px 2px 5px 3px rgba(40, 40, 40, 0.34); */
 	width: 400px;
 	height: 250px;
 	font-size: 15px;
@@ -16,8 +18,12 @@ export const ProductContainer = styled.div`
 	overflow: hidden;
 	padding: 15px;
 	background-color: white;
-	transition: all linear 500ms;
+	transition: all linear 200ms;
 	position: relative;
+
+	&:hover {
+		box-shadow: 2px 2px 5px 3px rgba(40, 40, 40, 0.34);
+	}
 
 	& img {
 		width: 50%;
@@ -78,19 +84,42 @@ export const BtnAddToCart = styled.button`
 	}
 `;
 
+const StyledLink = styled(NavLink)`
+	color: rgb(125, 125, 125);
+	text-decoration: none;
+	transition: 200ms all linear;
+	&:hover {
+		color: rgb(71, 158, 246);
+	}
+`;
+
 function Product({ product }) {
+	const { increaseItemQuantity } = useCart();
 	const url = `/products/${product.id}`;
+	const [isLoading, setIsLoading] = useState(true);
 
 	return (
 		<ProductContainer>
-			<img src={product.image} alt={product.title} />
+			{isLoading && <LoadingSpinner />}
+			<img
+				src={product.image}
+				alt={product.title}
+				onLoad={() => setIsLoading(false)}
+				onError={() => setIsLoading(false)}
+				loading='lazy'
+			/>
 			<ProductMinDetails>
 				<h3>{product.title}</h3>
 				<span>
-					<NavLink to={url}>Click for more..</NavLink>
+					<StyledLink to={url}>Click for more..</StyledLink>
 				</span>
 				<span>Price: ${Number(product.getPrice()).toFixed(2)}</span>
-				<BtnAddToCart>Add to cart</BtnAddToCart>
+				<BtnAddToCart
+					onClick={() => {
+						increaseItemQuantity(product.id);
+					}}>
+					Add to cart
+				</BtnAddToCart>
 			</ProductMinDetails>
 		</ProductContainer>
 	);

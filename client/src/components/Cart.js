@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useCart } from "../context/CartContext";
+import CartItem from "./CartItem";
 export const CartContainer = styled.div`
 	position: fixed;
 	top: 0;
@@ -69,21 +70,44 @@ export const CartBtn = styled.button`
 	&:hover {
 		box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.586);
 	}
+	&.primary {
+		background-color: rgb(71, 158, 246);
+	}
+
+	&.secondary {
+		background-color: red;
+	}
 `;
 
 function Cart() {
+	const { cart, cartFullPrice, cartQuantity, closeCart, removeCart, catalog } =
+		useCart();
+
+	const items = Object.entries(cart).map(([id, q]) => {
+		const item = catalog.find((p) => p.id === Number(id));
+		if (!item) return "";
+		return <CartItem key={item.id} item={item} />;
+	});
+
 	return (
 		<CartContainer>
 			<BtnCloseCart>X</BtnCloseCart>
 			<h3>Cart</h3>
 			<CartContents></CartContents>
 			<CartInfo>
-				<span>Total quantity: 10</span>
-				<span>Total price:1000$</span>
+				<span>Total quantity: {cartQuantity}</span>
+				<span>Total price: {cartFullPrice.toFixed(2)}$</span>
 			</CartInfo>
 			<CartBtnContainer>
-				<CartBtn>Checkout</CartBtn>
-				<CartBtn>Reset</CartBtn>
+				<CartBtn className='primary'>Checkout</CartBtn>
+				<CartBtn
+					onClick={() => {
+						removeCart();
+						closeCart();
+					}}
+					className='secondary'>
+					Reset
+				</CartBtn>
 			</CartBtnContainer>
 		</CartContainer>
 	);
