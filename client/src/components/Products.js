@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import useProducts from "../hooks/useProducts";
 import Product from "./Product";
+import LoadingSpinner from "./LoadingSpinner";
 import { useFilter } from "../context/FilterContext";
 
 export const ProductsContainer = styled.section`
@@ -22,7 +23,9 @@ function Products() {
 		.map((p) => <Product key={p.id} product={p} />);
 	return (
 		<>
-			<ProductsContainer>{products}</ProductsContainer>
+			<ProductsContainer>
+				{products.length === 0 ? <LoadingSpinner /> : products}
+			</ProductsContainer>
 		</>
 	);
 }

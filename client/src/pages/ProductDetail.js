@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import useFetch from "./../hooks/useFetch";
 import useProducts from "../hooks/useProducts";
 import Product, { BtnAddToCart } from "../components/Product";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const ProductWrapper = styled.div`
+	background-color: #fbfafa;
 	width: 80%;
 	display: flex;
 	flex-direction: column;
@@ -20,6 +22,7 @@ const Details = styled.section`
 	gap: 50px;
 `;
 const ProductImg = styled.img`
+	background-color: transparent;
 	min-width: 250px;
 	object-fit: contain;
 	max-height: 500px;
@@ -55,22 +58,26 @@ function ProductDetail() {
 		.map((p) => <Product key={p.id} product={p} />);
 	return (
 		<>
-			<ProductWrapper>
-				<h1>{productData.title}</h1>
-				<Details>
-					<ProductImg src={productData.image} alt={productData.title} />
-					<TextDetails>
-						<h3>Category: {productData.category}</h3>
-						<p>{productData.description}</p>
-						<PriceAction>
-							<span>Price: ${Number(productData.price).toFixed(2)}</span>
-							<BtnAddToCart>Add to cart</BtnAddToCart>
-						</PriceAction>
-					</TextDetails>
-				</Details>
-				<h3>More from this category:</h3>
-				<RelatedContainer>{sameCategory}</RelatedContainer>
-			</ProductWrapper>
+			{productData.length === 0 ? (
+				<LoadingSpinner />
+			) : (
+				<ProductWrapper>
+					<h1>{productData.title}</h1>
+					<Details>
+						<ProductImg src={productData.image} alt={productData.title} />
+						<TextDetails>
+							<h3>Category: {productData.category}</h3>
+							<p>{productData.description}</p>
+							<PriceAction>
+								<span>Price: ${Number(productData.price).toFixed(2)}</span>
+								<BtnAddToCart>Add to cart</BtnAddToCart>
+							</PriceAction>
+						</TextDetails>
+					</Details>
+					<h3>More from this category:</h3>
+					<RelatedContainer>{sameCategory}</RelatedContainer>
+				</ProductWrapper>
+			)}
 		</>
 	);
 }
