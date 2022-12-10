@@ -17,7 +17,7 @@ export const Form = styled.form`
 	background-color: #dfdfdf8f;
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
 	height: 80%;
-	width: 30%;
+	width: 455px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
