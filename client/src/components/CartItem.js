@@ -14,16 +14,18 @@ const CartBtn = styled.button`
 	width: 2rem;
 `;
 export const ItemCard = styled.div`
-	height: 110px;
+	height: 130px;
 	display: grid;
 	grid-template-columns: 1fr 3fr 0.5fr;
 	color: #000;
 	width: 90%;
 	border-radius: 15px;
 	overflow: hidden;
-	padding: 5px;
+	padding: 1px;
+	padding-left: 5px;
 	margin: 7px;
 	background-color: white;
+	transition: 200ms all linear;
 `;
 const ImageContainer = styled.div`
 	display: flex;
@@ -53,13 +55,14 @@ export const ItemQuantity = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	width: 120%;
 
-	& CartBtn {
+	& button {
 		background-color: rgba(71, 159, 246, 0);
 		color: rgb(71, 158, 246);
 	}
-	& CartBtn:hover {
+	& button:hover {
 		background-color: rgba(71, 159, 246, 0.403);
 		color: black;
 		box-shadow: 1px 3px 5px 2px rgba(0, 0, 0, 0.659);
@@ -71,11 +74,11 @@ const RemoveItem = styled.div`
 	justify-content: space-between;
 	margin-left: 10px;
 
-	& CartBtn {
+	& button {
 		color: rgb(255, 0, 0);
-		background: none;
+		background: transparent;
 	}
-	& CartBtn:hover {
+	& button:hover {
 		color: white;
 		background-color: brown;
 		box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.659);
@@ -111,6 +114,7 @@ function CartItem({ item }) {
 						className='btn btn-qControl'>
 						<IoRemove />
 					</CartBtn>
+					<span>Price: ${Number(item.getPrice()).toFixed(2)}</span>
 				</ItemQuantity>
 			</ItemDetails>
 			<RemoveItem>

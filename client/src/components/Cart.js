@@ -20,7 +20,8 @@ export const CartContainer = styled.div`
 	transition: all 500ms linear;
 	height: 85vh;
 
-	& h3 {
+	& h2,
+	h3 {
 		text-align: center;
 	}
 `;
@@ -47,6 +48,20 @@ export const CartContents = styled.div`
 	height: 70%;
 	overflow: auto;
 	margin-left: 12px;
+
+	&::-webkit-scrollbar {
+		width: 7px;
+	}
+
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: white;
+		outline: 0.5px solid rgba(255, 255, 255, 0.444);
+		border-radius: 12px;
+	}
 `;
 export const CartInfo = styled.div`
 	font-size: large;
@@ -91,9 +106,9 @@ function Cart() {
 
 	return (
 		<CartContainer>
-			<BtnCloseCart>X</BtnCloseCart>
-			<h3>Cart</h3>
-			<CartContents></CartContents>
+			<BtnCloseCart onClick={closeCart}>X</BtnCloseCart>
+			<h2>Cart</h2>
+			<CartContents>{items}</CartContents>
 			<CartInfo>
 				<span>Total quantity: {cartQuantity}</span>
 				<span>Total price: {cartFullPrice.toFixed(2)}$</span>
