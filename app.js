@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const helmet = require("helmet");
+const path = require("path");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
@@ -61,7 +62,7 @@ app.all("/api/v1/*", (req, res, next) => {
 });
 // Serving the front-end files
 app.get("*", async (req, res) => {
-	res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+	res.sendFile(pa.join(__dirname, "client", "build", "index.html"));
 });
 
 // Error Middleware
