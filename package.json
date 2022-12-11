@@ -4,7 +4,7 @@
 	"description": "api for shopping app ",
 	"main": "server.js",
 	"scripts": {
-		"dev": "nodemon server.js",
+		"dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
 		"start": "node server.js",
 		"debug": "ndb server.js"
 	},
@@ -28,6 +28,7 @@
 		"xss-clean": "^0.1.1"
 	},
 	"devDependencies": {
+		"concurrently": "^7.6.0",
 		"nodemon": "^2.0.20"
 	}
 }
