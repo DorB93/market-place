@@ -18,7 +18,7 @@ const app = express();
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
-
+app.use(express.static(path.join(__dirname, "client", "build")));
 // Development login
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
@@ -56,8 +56,12 @@ app.use("/api/v1/products", productsRouter);
 app.get("/api/v1/categories", productsController.getAllCategories);
 
 // Handling Unhandled Routes - must be the last
-app.all("*", (req, res, next) => {
+app.all("/api/v1/*", (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+// Serving the front-end files
+app.get("*", async (req, res) => {
+	res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 // Error Middleware
