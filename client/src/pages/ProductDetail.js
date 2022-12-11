@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+
 import useFetch from "./../hooks/useFetch";
 import useProducts from "../hooks/useProducts";
 import Product, { BtnAddToCart } from "../components/Product";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useCart } from "../context/CartContext";
 
 const ProductWrapper = styled.div`
 	background-color: #fbfafa;
@@ -33,7 +35,6 @@ const TextDetails = styled.div`
 	flex-direction: column;
 	justify-content: space-around;
 `;
-
 const RelatedContainer = styled.section`
 	display: flex;
 	width: 90%;
@@ -41,7 +42,6 @@ const RelatedContainer = styled.section`
 	overflow: auto;
 	justify-content: center;
 `;
-
 const PriceAction = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -49,6 +49,7 @@ const PriceAction = styled.div`
 `;
 
 function ProductDetail() {
+	const { increaseItemQuantity } = useCart();
 	const { id } = useParams();
 	const productData = useFetch(`https://fakestoreapi.com/products/${id}`);
 	const sameCategory = useProducts()
@@ -70,7 +71,12 @@ function ProductDetail() {
 							<p>{productData.description}</p>
 							<PriceAction>
 								<span>Price: ${Number(productData.price).toFixed(2)}</span>
-								<BtnAddToCart>Add to cart</BtnAddToCart>
+								<BtnAddToCart
+									onClick={() => {
+										increaseItemQuantity(productData.id);
+									}}>
+									Add to cart
+								</BtnAddToCart>
 							</PriceAction>
 						</TextDetails>
 					</Details>
