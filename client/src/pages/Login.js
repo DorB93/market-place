@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
+import { useUser } from "./../context/UserContext";
 
 export const SubmitBtn = styled.button`
 	height: 35px;
@@ -25,18 +26,46 @@ export const SubmitBtn = styled.button`
 		color: rgb(71, 158, 246);
 	}
 `;
+async function loginUser(credentials) {
+	return fetch("http://localhost:4000/users/login", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(credentials),
+	}).then((data) => data.json());
+}
+
 function Login() {
+	const { setLogin } = useUser();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const user = await loginUser({
+			email,
+			password,
+		});
+		setLogin(user);
+	};
+
 	return (
 		<PageContainer>
-			<Form>
+			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>
-					<label for='email'>Email:</label>
+					<label for='email' name='email'>
+						Email:
+					</label>
 					<input
 						id='email'
 						placeholder='yourmail@example.com'
 						type='email'
 						required
+						onChange={(e) => {
+							setEmail(e.target.value);
+						}}
 					/>
 				</InputContainer>
 				<InputContainer>
@@ -46,6 +75,10 @@ function Login() {
 						id='password'
 						placeholder='shh-secret'
 						type='password'
+						name='password'
+						onChange={(e) => {
+							setPassword(e.target.value);
+						}}
 						required
 					/>
 				</InputContainer>

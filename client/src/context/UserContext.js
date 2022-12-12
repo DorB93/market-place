@@ -1,26 +1,26 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 
 // Create the user context
 const userContext = createContext();
-
+function useUser() {
+	return useContext(userContext);
+}
 // Define the initial state for the user context
 const initialState = {
-	username: null,
+	user: {},
 	isLoggedIn: false,
-	email: null,
-	role: null,
+	role: "guest",
 };
 
 // Define the reducer for the user context
-const userReducer = (state, action) => {
+const reducer = (state, action) => {
 	switch (action.type) {
 		case "LOGIN":
 			// Return the updated state when a user logs in
 			return {
 				isLoggedIn: true,
-				username: action.username,
-				email: action.email,
-				role: action.role,
+				user: action.payload.user,
+				role: action.payload.user.role,
 			};
 		case "LOGOUT":
 			// Return the initial state when a user logs out
@@ -36,15 +36,20 @@ const userReducer = (state, action) => {
 function UserProvider({ children }) {
 	// Use the useReducer hook to create a "user" state variable
 	// and a function to update it called "dispatch"
-	const [user, dispatch] = useReducer(userReducer, initialState);
+	const [user, dispatch] = useReducer(reducer, initialState);
 
 	// Return the user context provider, passing the user state and dispatch function
 	// as the value for the context
 	return (
-		<userContext.Provider value={{ user, dispatch }}>
+		<userContext.Provider
+			value={{
+				user,
+				setLogin: (user) => dispatch({ type: "LOGIN", payload: user }),
+				setLogout: () => dispatch({ type: "Logout" }),
+			}}>
 			{children}
 		</userContext.Provider>
 	);
 }
 
-export { userContext, UserProvider };
+export { userContext, UserProvider, useUser };
