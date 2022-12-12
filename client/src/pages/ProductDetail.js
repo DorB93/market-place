@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import useFetch from "./../hooks/useFetch";
 import useProducts from "../hooks/useProducts";
@@ -47,10 +47,22 @@ const PriceAction = styled.div`
 	justify-content: space-between;
 	align-items: center;
 `;
+const BackBtn = styled.button`
+	width: 80px;
+	height: 30px;
+	border-radius: 12px;
+	border: 0;
+	transition: 100ms linear all;
+	&:hover {
+		transform: scale(1.08);
+		box-shadow: 2px 2px 5px 2px rgba(40, 40, 40, 0.34);
+	}
+`;
 
 function ProductDetail() {
 	const { increaseItemQuantity } = useCart();
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const productData = useFetch(`https://fakestoreapi.com/products/${id}`);
 	const sameCategory = useProducts()
 		.filter(
@@ -77,6 +89,7 @@ function ProductDetail() {
 									}}>
 									Add to cart
 								</BtnAddToCart>
+								<BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
 							</PriceAction>
 						</TextDetails>
 					</Details>
