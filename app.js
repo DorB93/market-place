@@ -5,6 +5,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const helmet = require("helmet");
 const path = require("path");
+const cors = require("cors");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
@@ -48,6 +49,9 @@ app.use(xss());
 
 // Compressing the JSON responses
 app.use(compression());
+
+// Allow Cross-Origin Resource Sharing
+app.use(cors());
 
 // Implement Routes
 app.use("/api/v1/reviews", reviewRouter);
