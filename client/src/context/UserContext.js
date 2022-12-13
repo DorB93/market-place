@@ -2,13 +2,14 @@ import React, { createContext, useContext, useReducer } from "react";
 
 // Create the user context
 const userContext = createContext();
-function useUser() {
-	return useContext(userContext);
-}
+
 // Define the initial state for the user context
 const initialState = {
-	user: {},
 	isLoggedIn: false,
+	username: "",
+	userEmail: "",
+	userId: "",
+	userPhoto: "",
 	role: "guest",
 };
 
@@ -19,8 +20,11 @@ const reducer = (state, action) => {
 			// Return the updated state when a user logs in
 			return {
 				isLoggedIn: true,
-				user: action.payload.user,
+				username: action.payload.user.name,
+				userEmail: action.payload.user.email,
 				role: action.payload.user.role,
+				userId: action.payload.user.id,
+				userPhoto: action.payload.user.photo,
 			};
 		case "LOGOUT":
 			// Return the initial state when a user logs out
@@ -30,6 +34,10 @@ const reducer = (state, action) => {
 			return state;
 	}
 };
+
+function useUser() {
+	return useContext(userContext);
+}
 
 // Define a higher-order component that wraps the root component of your application
 // and provides the user context and reducer to all child components
@@ -44,7 +52,10 @@ function UserProvider({ children }) {
 		<userContext.Provider
 			value={{
 				user,
-				setLogin: (user) => dispatch({ type: "LOGIN", payload: user }),
+				setLogin: (user) => {
+					console.log(user);
+					dispatch({ type: "LOGIN", payload: { ...user } });
+				},
 				setLogout: () => dispatch({ type: "Logout" }),
 			}}>
 			{children}

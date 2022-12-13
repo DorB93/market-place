@@ -26,13 +26,13 @@ export const SubmitBtn = styled.button`
 		color: rgb(71, 158, 246);
 	}
 `;
-async function loginUser(credentials) {
-	return fetch("http://localhost:4000/users/login", {
+async function loginUser(userData) {
+	return fetch("http://127.0.0.1:4000/api/v1/users/login", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(credentials),
+		body: JSON.stringify(userData),
 	}).then((data) => data.json());
 }
 
@@ -47,7 +47,7 @@ function Login() {
 			email,
 			password,
 		});
-		setLogin(user);
+		setLogin(user.data);
 	};
 
 	return (

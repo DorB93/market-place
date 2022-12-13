@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { SubmitBtn } from "./Login";
+import { useUser } from "./../context/UserContext";
+
 export const PageContainer = styled.section`
 	height: 80%;
 	width: 80%;
@@ -12,7 +14,6 @@ export const PageContainer = styled.section`
 	align-items: center;
 	padding: 20px;
 `;
-
 export const Form = styled.form`
 	background-color: #dfdfdf8f;
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
@@ -25,7 +26,6 @@ export const Form = styled.form`
 	gap: 15px;
 	padding: 15px;
 `;
-
 export const InputContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -53,11 +53,40 @@ export const InputContainer = styled.div`
 		border: 0.5 solid lightgray;
 	}
 `;
+async function signupUser(userData) {
+	return fetch("http://127.0.0.1:4000/api/v1/users/signup", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(userData),
+	}).then((data) => data.json());
+}
+
 function Signup() {
+	const { setLogin } = useUser();
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
+	const [role, setRole] = useState("user");
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const user = await signupUser({
+			role,
+			passwordConfirm,
+			name,
+			email,
+			password,
+		});
+		console.log(user);
+		setLogin(user.data);
+	};
 	return (
 		<>
 			<PageContainer>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<h1>Create an Account</h1>
 					<InputContainer>
 						<label for='name'>Full Name:</label>
@@ -65,6 +94,9 @@ function Signup() {
 							id='name'
 							placeholder='Enter your full name'
 							type='text'
+							onChange={(e) => {
+								setName(e.target.value);
+							}}
 							required
 						/>
 					</InputContainer>
@@ -74,6 +106,9 @@ function Signup() {
 							id='email'
 							placeholder='yourmail@example.com'
 							type='email'
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
 							required
 						/>
 					</InputContainer>
@@ -84,6 +119,9 @@ function Signup() {
 							id='password'
 							placeholder='shh-secret'
 							type='password'
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
 							required
 						/>
 					</InputContainer>
@@ -94,12 +132,26 @@ function Signup() {
 							id='passwordConfirm'
 							placeholder='shh-secret'
 							type='password'
+							onChange={(e) => {
+								setPasswordConfirm(e.target.value);
+							}}
 							required
 						/>
 					</InputContainer>
 					<InputContainer>
 						<label for='role'>Want to join our sellers family?</label>
-						<input id='role' type='checkbox' />
+						<input
+							id='role'
+							type='checkbox'
+							onChange={(e) => {
+								console.log(e);
+								if (e.target.checked) {
+									setRole("seller");
+								} else {
+									setRole("user");
+								}
+							}}
+						/>
 					</InputContainer>
 					<InputContainer>
 						<SubmitBtn type='reset'>Reset</SubmitBtn>
