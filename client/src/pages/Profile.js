@@ -1,22 +1,28 @@
+// import styled from "styled-components";
 import React from "react";
-import { Paper, Avatar, Typography, Grid, Divider } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import ProfileNav from "../components/ProfileNav";
+import { Route, Routes } from "react-router-dom";
+import MyInfo from "../components/MyInfo";
 
 function Profile() {
+	const { user } = useUser();
 	return (
-		<Paper>
-			<Grid container justify='center' alignItems='center' spacing={3}>
-				<Grid item>
-					<Avatar />
-				</Grid>
-				<Grid item>
-					<Typography variant='h5'>Name</Typography>
-					<NavLink to='/dashboard'>Dashboard</NavLink>
-				</Grid>
-			</Grid>
-			<Divider />
-			{/* Add additional information about the user or seller here */}
-		</Paper>
+		<>
+			{user.isLoggedIn ? (
+				<>
+					<ProfileNav />
+					<Routes>
+						<Route index element={<MyInfo />} />
+						<Route path='my-orders' element={<MyInfo />} />
+						<Route path='password-update' element={<MyInfo />} />
+					</Routes>
+				</>
+			) : (
+				<h2>You are not logged in!!</h2>
+			)}
+		</>
 	);
 }
 
