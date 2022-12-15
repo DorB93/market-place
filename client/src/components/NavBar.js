@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useCart } from "../context/CartContext";
 import { NavLink } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
+import { useUser } from "./../context/UserContext";
 
 export const Nav = styled.nav`
 	position: sticky;
@@ -85,6 +86,7 @@ export const Baj = styled.div`
 `;
 
 function NavBar() {
+	const { user, setLogout } = useUser();
 	const { openCart, cartQuantity } = useCart();
 	return (
 		<>
@@ -92,14 +94,32 @@ function NavBar() {
 				<Link>
 					<NavLink to='/'>Home</NavLink>
 				</Link>
-				<HeaderBar>Welcome Guest</HeaderBar>
+				<HeaderBar>
+					Welcome{" "}
+					{user.isLoggedIn ? `Back ${user.username.split(" ")[0]}` : "Guest"}
+				</HeaderBar>
 				<UserBar>
-					<Link>
-						<NavLink to='/signup'>Sign Up</NavLink>
-					</Link>
-					<Link>
-						<NavLink to='/login'>Login</NavLink>
-					</Link>
+					{user.isLoggedIn ? (
+						<>
+							<Link>
+								<NavLink as='button' onClick={setLogout}>
+									Log Out
+								</NavLink>
+							</Link>
+							<Link>
+								<NavLink to='/my-profile'>Profile</NavLink>
+							</Link>
+						</>
+					) : (
+						<>
+							<Link>
+								<NavLink to='/signup'>Sign Up</NavLink>
+							</Link>
+							<Link>
+								<NavLink to='/login'>Login</NavLink>
+							</Link>
+						</>
+					)}
 					{cartQuantity > 0 && (
 						<CartIcon onClick={openCart}>
 							<HiShoppingCart />
