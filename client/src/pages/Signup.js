@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitBtn } from "./Login";
 import { useUser } from "./../context/UserContext";
+import ErrorAlert from "../components/ErrorAlert";
 
 export const PageContainer = styled.section`
 	height: 80%;
@@ -13,6 +14,7 @@ export const PageContainer = styled.section`
 	justify-content: center;
 	align-items: center;
 	padding: 20px;
+	position: relative;
 `;
 export const Form = styled.form`
 	background-color: #dfdfdf8f;
@@ -56,6 +58,7 @@ export const InputContainer = styled.div`
 async function signupUser(userData) {
 	return fetch("http://127.0.0.1:4000/api/v1/users/signup", {
 		method: "POST",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -70,6 +73,8 @@ function Signup() {
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [role, setRole] = useState("user");
+	const [error, setError] = useState(null);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -80,12 +85,17 @@ function Signup() {
 			email,
 			password,
 		});
-		console.log(user);
-		setLogin(user.data);
+		if (user.status === "success") {
+			setLogin(user.data);
+			navigate("/");
+		} else {
+			setError(user.message);
+		}
 	};
 	return (
 		<>
 			<PageContainer>
+				{error && <ErrorAlert message={error} />}
 				<Form onSubmit={handleSubmit}>
 					<h1>Create an Account</h1>
 					<InputContainer>

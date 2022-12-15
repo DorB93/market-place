@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
 import { useUser } from "./../context/UserContext";
+import ErrorAlert from "../components/ErrorAlert";
 
 export const SubmitBtn = styled.button`
 	height: 35px;
@@ -29,6 +31,7 @@ export const SubmitBtn = styled.button`
 async function loginUser(userData) {
 	return fetch("http://127.0.0.1:4000/api/v1/users/login", {
 		method: "POST",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -40,18 +43,28 @@ function Login() {
 	const { setLogin } = useUser();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setError(null);
 		const user = await loginUser({
 			email,
 			password,
 		});
-		setLogin(user.data);
+		console.log(user);
+		if (user.status === "success") {
+			setLogin(user.data);
+			navigate("/");
+		} else {
+			setError(user.message);
+		}
 	};
 
 	return (
 		<PageContainer>
+			{error && <ErrorAlert message={error} />}
 			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>
