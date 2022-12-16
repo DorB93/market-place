@@ -9,7 +9,7 @@ const ErrorFragment = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-const ErrorContainer = styled.div`
+const ErrorContainer = styled.h4`
 	background-color: red;
 	display: flex;
 	justify-content: center;
@@ -22,6 +22,7 @@ const ErrorContainer = styled.div`
 	border-radius: 10px;
 	border: 0;
 	z-index: 4;
+	text-align: center;
 `;
 
 function ErrorAlert({ message }) {
