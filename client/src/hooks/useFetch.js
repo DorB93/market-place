@@ -1,15 +1,19 @@
 import { useEffect, useState, useMemo } from "react";
 
-function useFetch(url) {
+function useFetch(url, options) {
 	const [data, setData] = useState([]);
-
 	useEffect(() => {
-		// console.log(`Fetching Data`);
-		fetch(url)
-			.then((res) => res.json())
-			.then((data) => setData(data));
-	}, [url]);
-
+		const fetchData = async () => {
+			try {
+				const res = await fetch(url, options);
+				const json = await res.json();
+				setData(json);
+			} catch (err) {
+				return err;
+			}
+		};
+		fetchData();
+	}, [url, options]);
 	return useMemo(() => {
 		return data;
 	}, [data]);
