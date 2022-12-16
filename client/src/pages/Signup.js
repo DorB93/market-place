@@ -78,6 +78,11 @@ function Signup() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setError(null);
+		if (password !== passwordConfirm) {
+			setError("Password & Password Confirm must match! try again!");
+			return;
+		}
 		const user = await signupUser({
 			role,
 			passwordConfirm,
