@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitBtn } from "./Login";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
+import { API_URL } from "../helper";
 
 export const PageContainer = styled.section`
 	height: 80%;
@@ -56,7 +57,7 @@ export const InputContainer = styled.div`
 	}
 `;
 async function signupUser(userData) {
-	return fetch("http://127.0.0.1:4000/api/v1/users/signup", {
+	return fetch(`${API_URL}users/signup`, {
 		method: "POST",
 		credentials: "include",
 		headers: {
@@ -106,7 +107,6 @@ function Signup() {
 					<InputContainer>
 						<label for='name'>Full Name:</label>
 						<input
-							id='name'
 							placeholder='Enter your full name'
 							type='text'
 							onChange={(e) => {
@@ -118,7 +118,6 @@ function Signup() {
 					<InputContainer>
 						<label for='email'>Email:</label>
 						<input
-							id='email'
 							placeholder='yourmail@example.com'
 							type='email'
 							onChange={(e) => {
@@ -131,7 +130,6 @@ function Signup() {
 						<label for='password'>Password:</label>
 						<input
 							minLength={8}
-							id='password'
 							placeholder='shh-secret'
 							type='password'
 							onChange={(e) => {
@@ -144,7 +142,6 @@ function Signup() {
 						<label for='passwordConfirm'>Password Confirm:</label>
 						<input
 							minLength={8}
-							id='passwordConfirm'
 							placeholder='shh-secret'
 							type='password'
 							onChange={(e) => {
@@ -156,7 +153,6 @@ function Signup() {
 					<InputContainer>
 						<label for='role'>Want to join our sellers family?</label>
 						<input
-							id='role'
 							type='checkbox'
 							onChange={(e) => {
 								console.log(e);

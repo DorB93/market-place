@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 import { useUser } from "../context/UserContext";
+import { API_URL } from "../helper";
 import { SubmitBtn } from "../pages/Login";
 import { Form, InputContainer } from "../pages/Signup";
+import ErrorAlert from "./ErrorAlert";
 
 const InfoContainer = styled.div`
 	display: flex;
@@ -14,9 +16,10 @@ const InfoContainer = styled.div`
 `;
 
 async function updateUser(data) {
-	return fetch("http://127.0.0.1:4000/api/v1/users/updateMe", {
+	// TODO - fix BUG - cookie not send to server
+	return fetch(`${API_URL}users/updateMe`, {
 		method: "POST",
-		credentials: "include",
+		credentials: true,
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -29,9 +32,11 @@ function MyInfo() {
 	const [name, setName] = useState(user.username);
 	const [email, setEmail] = useState(user.userEmail);
 	const [photo, setPhoto] = useState(null);
+	const [error, setError] = useState(null);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setError(null);
 		const updatedData = {};
 		if (name !== user.username) {
 			updatedData.name = name;
@@ -48,18 +53,20 @@ function MyInfo() {
 			});
 			if (updatedUser.status === "success") {
 				setLogin(updatedUser.data);
+			} else {
+				setError(updatedUser.message);
 			}
 		}
 	};
 
 	return (
 		<InfoContainer>
+			{error && <ErrorAlert message={error} />}
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
 				<InputContainer>
 					<label for='name'>Full Name:</label>
 					<input
-						id='name'
 						placeholder='Enter your full name'
 						type='text'
 						onChange={(e) => {
@@ -72,7 +79,6 @@ function MyInfo() {
 				<InputContainer>
 					<label for='email'>Email:</label>
 					<input
-						id='email'
 						placeholder='yourmail@example.com'
 						type='email'
 						onChange={(e) => {
@@ -86,7 +92,6 @@ function MyInfo() {
 					<label for='image'>Choose new photo </label>
 					<input
 						type='file'
-						id='photo'
 						onChange={(e) => {
 							setPhoto(e.target.files[0]);
 						}}

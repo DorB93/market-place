@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
+import { API_URL } from "../helper";
 
 export const SubmitBtn = styled.button`
 	height: 35px;
@@ -29,7 +30,7 @@ export const SubmitBtn = styled.button`
 	}
 `;
 async function loginUser(userData) {
-	return fetch("http://127.0.0.1:4000/api/v1/users/login", {
+	return fetch(`${API_URL}users/login`, {
 		method: "POST",
 		credentials: "include",
 		headers: {
@@ -72,7 +73,6 @@ function Login() {
 						Email:
 					</label>
 					<input
-						id='email'
 						placeholder='yourmail@example.com'
 						type='email'
 						required
@@ -85,7 +85,6 @@ function Login() {
 					<label for='password'>Password:</label>
 					<input
 						minLength={8}
-						id='password'
 						placeholder='shh-secret'
 						type='password'
 						name='password'
