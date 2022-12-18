@@ -88,6 +88,7 @@ export const Baj = styled.div`
 function NavBar() {
 	const { user, setLogout } = useUser();
 	const { openCart, cartQuantity } = useCart();
+
 	return (
 		<>
 			<Nav>
@@ -102,7 +103,11 @@ function NavBar() {
 					{user.isLoggedIn ? (
 						<>
 							<Link>
-								<NavLink as='button' onClick={setLogout}>
+								<NavLink
+									as='button'
+									onClick={() => {
+										setLogout();
+									}}>
 									Log Out
 								</NavLink>
 							</Link>
