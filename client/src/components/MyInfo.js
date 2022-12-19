@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
 import styled from "styled-components";
 import { useUser } from "../context/UserContext";
 import { API_URL } from "../helper";
 import { SubmitBtn } from "../pages/Login";
 import { Form, InputContainer } from "../pages/Signup";
 import ErrorAlert from "./ErrorAlert";
+import myAxios from "../api";
 
 const InfoContainer = styled.div`
 	display: flex;
@@ -15,16 +15,21 @@ const InfoContainer = styled.div`
 	padding: 30px;
 `;
 
-async function updateUser(data) {
+async function updateUser(userData) {
 	// TODO - fix BUG - cookie not send to server
-	return fetch(`${API_URL}users/updateMe`, {
-		method: "POST",
-		credentials: true,
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	}).then((data) => data.json());
+	// return fetch(`${API_URL}users/updateMe`, {
+	// 	method: "POST",
+	// 	credentials: true,
+	// 	headers: {
+	// 		"Content-Type": "application/json",
+	// 	},
+	// 	body: JSON.stringify(data),
+	// }).then((data) => data.json());
+	try {
+		return myAxios.post("/users/updateMe", userData).then((res) => res.data);
+	} catch (err) {
+		console.log(err.message);
+	}
 }
 
 function MyInfo() {

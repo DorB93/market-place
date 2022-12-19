@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+
 import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
-import { API_URL } from "../helper";
+import myAxios from "../api";
 
 export const SubmitBtn = styled.button`
 	height: 35px;
@@ -29,15 +30,13 @@ export const SubmitBtn = styled.button`
 		color: rgb(71, 158, 246);
 	}
 `;
+
 async function loginUser(userData) {
-	return fetch(`${API_URL}users/login`, {
-		method: "POST",
-		credentials: "include",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(userData),
-	}).then((data) => data.json());
+	try {
+		return myAxios.post(`/users/login`, userData).then((res) => res.data);
+	} catch (err) {
+		console.log(err.message);
+	}
 }
 
 function Login() {
