@@ -56,7 +56,7 @@ function UserProvider({ children }) {
 					console.log(user);
 					dispatch({ type: "LOGIN", payload: { ...user } });
 				},
-				setLogout: () => dispatch({ type: "Logout" }),
+				setLogout: () => dispatch({ type: "LOGOUT" }),
 			}}>
 			{children}
 		</userContext.Provider>
