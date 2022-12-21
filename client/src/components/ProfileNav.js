@@ -8,6 +8,7 @@ const NavContainer = styled.nav`
 	background-color: #dfdfdf8f;
 	display: flex;
 `;
+
 const ProfileLink = styled.div`
 	& a {
 		text-decoration: none;
@@ -30,23 +31,44 @@ const ProfileLink = styled.div`
 	}
 `;
 
-function ProfileNav() {
+const ProfileNav = () => {
 	const { user } = useUser();
+	const isSeller = user.role === "seller";
+	const isAdmin = user.role === "admin";
+
 	return (
-		<>
-			<NavContainer>
-				<ProfileLink>
-					<NavLink to={"/my-profile"}>{user.username.split(" ")[0]}</NavLink>
-				</ProfileLink>
-				<ProfileLink>
-					<NavLink to={"/my-profile/password-update"}>Change Password</NavLink>
-				</ProfileLink>
-				<ProfileLink>
-					<NavLink to={"/my-profile/my-orders"}>My Orders</NavLink>
-				</ProfileLink>
-			</NavContainer>
-		</>
+		<NavContainer>
+			<ProfileLink>
+				<NavLink to='/my-profile'>{user.username.split(" ")[0]}</NavLink>
+			</ProfileLink>
+			<ProfileLink>
+				<NavLink to='/my-profile/password-update'>Change Password</NavLink>
+			</ProfileLink>
+			<ProfileLink>
+				<NavLink to='/my-profile/my-orders'>My Orders</NavLink>
+			</ProfileLink>
+			{isSeller && (
+				<>
+					<ProfileLink>
+						<NavLink to='/my-profile/my-dashboard'>My Dashboard</NavLink>
+					</ProfileLink>
+					<ProfileLink>
+						<NavLink to='/my-profile/new-product'>New Product</NavLink>
+					</ProfileLink>
+				</>
+			)}
+			{isAdmin && (
+				<>
+					<ProfileLink>
+						<NavLink to='/my-profile/my-dashboard'>My Dashboard</NavLink>
+					</ProfileLink>
+					<ProfileLink>
+						<NavLink to='/my-profile/new-product'>New Product</NavLink>
+					</ProfileLink>
+				</>
+			)}
+		</NavContainer>
 	);
-}
+};
 
 export default ProfileNav;
