@@ -51,12 +51,17 @@ app.use(xss());
 app.use(compression());
 
 // Allow Cross-Origin Resource Sharing
-app.use(cors());
+app.use(
+	cors({
+		origin: ["http://127.0.0.1:4000", "http://127.0.0.1:3000"],
+		credentials: true,
+	})
+);
 
 // Implement Routes
+app.use("/api/v1/users", userRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
-app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productsRouter);
 app.get("/api/v1/categories", productsController.getAllCategories);
 

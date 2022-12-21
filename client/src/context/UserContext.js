@@ -20,11 +20,11 @@ const reducer = (state, action) => {
 			// Return the updated state when a user logs in
 			return {
 				isLoggedIn: true,
-				username: action.payload.user.name,
-				userEmail: action.payload.user.email,
-				role: action.payload.user.role,
-				userId: action.payload.user.id,
-				userPhoto: action.payload.user.photo,
+				username: action.payload.name,
+				userEmail: action.payload.email,
+				role: action.payload.role,
+				userId: action.payload.id,
+				userPhoto: action.payload.photo,
 			};
 		case "LOGOUT":
 			// Return the initial state when a user logs out
@@ -53,7 +53,7 @@ function UserProvider({ children }) {
 			value={{
 				user,
 				setLogin: (user) => {
-					console.log(user);
+					console.log({ user });
 					dispatch({ type: "LOGIN", payload: { ...user } });
 				},
 				setLogout: () => dispatch({ type: "LOGOUT" }),

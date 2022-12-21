@@ -26,7 +26,7 @@ function createSendToken(user, statusCode, res) {
 	res.status(statusCode).json({
 		status: "success",
 		data: {
-			user,
+			...user,
 		},
 	});
 }
@@ -70,18 +70,19 @@ async function login(req, res, next) {
 async function protect(req, res, next) {
 	try {
 		// Getting token and check if is it there
+		// console.log(req.cookies);
 		let token;
 		if (req.cookies.jwt) {
 			token = req.cookies.jwt;
 		}
-		console.log(token);
+		// console.log(token);
 		if (!token)
 			return next(
 				new AppError("You are not logged in! Please log in to ger access", 401)
 			);
 		// Verification token
 		const data = jwt.verify(token, process.env.JWT_SECRET);
-		console.log(data);
+		// console.log(data);
 		// check if user still exists
 		const freshUser = await User.findById(data.id);
 		if (!freshUser) {

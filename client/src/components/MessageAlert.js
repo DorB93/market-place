@@ -10,7 +10,7 @@ const ErrorFragment = styled.div`
 	align-items: center;
 `;
 const ErrorContainer = styled.h4`
-	background-color: red;
+	background-color: ${(props) => props.backColor};
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -25,8 +25,15 @@ const ErrorContainer = styled.h4`
 	text-align: center;
 `;
 
-function ErrorAlert({ message }) {
+function ErrorAlert({ message, type }) {
 	const [showAlert, setShowAlert] = useState(true);
+	const [color, setColor] = useState("red");
+
+	if (type === "success") {
+		setColor("green");
+	} else {
+		setColor("red");
+	}
 
 	if (!showAlert) {
 		return null;
@@ -37,7 +44,7 @@ function ErrorAlert({ message }) {
 
 	return (
 		<ErrorFragment>
-			<ErrorContainer> {message} </ErrorContainer>
+			<ErrorContainer backColor={color}> {message} </ErrorContainer>
 		</ErrorFragment>
 	);
 }

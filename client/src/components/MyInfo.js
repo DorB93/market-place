@@ -1,34 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useUser } from "../context/UserContext";
-import { API_URL } from "../helper";
+// import { API_URL } from "../helper";
 import { SubmitBtn } from "../pages/Login";
 import { Form, InputContainer } from "../pages/Signup";
-import ErrorAlert from "./ErrorAlert";
+import MessageAlert from "./MessageAlert";
 import myAxios from "../api";
 
 const InfoContainer = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 15px;
 	width: 100%;
 	padding: 30px;
 `;
 
+const ImageInputContainer = styled(InputContainer)`
+	& img {
+		height: 100px;
+		width: 100px;
+		border-radius: 50%;
+	}
+`;
+
 async function updateUser(userData) {
-	// TODO - fix BUG - cookie not send to server
-	// return fetch(`${API_URL}users/updateMe`, {
-	// 	method: "POST",
-	// 	credentials: true,
-	// 	headers: {
-	// 		"Content-Type": "application/json",
-	// 	},
-	// 	body: JSON.stringify(data),
-	// }).then((data) => data.json());
 	try {
-		return myAxios.post("/users/updateMe", userData).then((res) => res.data);
+		const res = await myAxios.patch("/users/updateMe", userData);
+		return res.data;
 	} catch (err) {
-		console.log(err.message);
+		console.error(err);
+		throw new Error(err.message);
 	}
 }
 
@@ -37,36 +40,40 @@ function MyInfo() {
 	const [name, setName] = useState(user.username);
 	const [email, setEmail] = useState(user.userEmail);
 	const [photo, setPhoto] = useState(null);
-	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
+	const [alertType, setAlertType] = useState(null);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setError(null);
-		const updatedData = {};
+		setMessage(null);
+		const formData = new FormData();
 		if (name !== user.username) {
-			updatedData.name = name;
+			formData.append("name", name);
 		}
 		if (email !== user.userEmail) {
-			updatedData.email = email;
+			formData.append("email", email);
 		}
 		if (photo) {
-			updatedData.photo = photo;
+			formData.append("photo", photo);
 		}
-		if (Object.entries(updatedData).length) {
-			const updatedUser = await updateUser(user.id, {
-				...updatedData,
-			});
+		try {
+			const updatedUser = await updateUser(formData);
 			if (updatedUser.status === "success") {
-				setLogin(updatedUser.data);
+				console.log({ updatedUser });
+				setLogin(updatedUser.data.user);
 			} else {
-				setError(updatedUser.message);
+				setAlertType(updatedUser.status);
+				setMessage(updatedUser.message);
 			}
+		} catch (err) {
+			setAlertType("error");
+			setMessage(err.message);
 		}
 	};
 
 	return (
 		<InfoContainer>
-			{error && <ErrorAlert message={error} />}
+			{message && <MessageAlert message={message} type={alertType} />}
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
 				<InputContainer>
@@ -93,17 +100,20 @@ function MyInfo() {
 						required
 					/>
 				</InputContainer>
-				<InputContainer>
-					<label for='image'>Choose new photo </label>
+				<ImageInputContainer>
+					<label for='image'>
+						<img src={`/img/users/${user.userPhoto}`} alt='user-avatar' />
+					</label>
 					<input
 						type='file'
 						onChange={(e) => {
+							console.log(e);
 							setPhoto(e.target.files[0]);
 						}}
 						name='photo'
 						accept='image/*'
 					/>
-				</InputContainer>
+				</ImageInputContainer>
 				<SubmitBtn type='submit'>Update Me</SubmitBtn>
 			</Form>
 		</InfoContainer>

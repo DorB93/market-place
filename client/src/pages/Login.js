@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-
 import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
 import { useUser } from "./../context/UserContext";
-import ErrorAlert from "../components/ErrorAlert";
+import MessageAlert from "../components/MessageAlert";
 import myAxios from "../api";
 
 export const SubmitBtn = styled.button`
@@ -43,28 +42,32 @@ function Login() {
 	const { setLogin } = useUser();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
+	const [alertType, setAlertType] = useState(null);
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setError(null);
-		const user = await loginUser({
+		setMessage(null);
+		const respond = await loginUser({
 			email,
 			password,
 		});
-		console.log(user);
-		if (user.status === "success") {
-			setLogin(user.data);
+		console.log({ respond });
+		if (respond.status === "success") {
+			setAlertType(respond.status);
+			setMessage("You logged in! :)");
+			setLogin(respond.data._doc);
 			navigate("/");
 		} else {
-			setError(user.message);
+			setAlertType(respond.status);
+			setMessage(respond.message);
 		}
 	};
 
 	return (
 		<PageContainer>
-			{error && <ErrorAlert message={error} />}
+			{message && <MessageAlert message={message} type={alertType} />}
 			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>

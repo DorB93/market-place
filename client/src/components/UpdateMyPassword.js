@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { API_URL } from "../helper";
 import { SubmitBtn } from "../pages/Login";
 import { Form, InputContainer, PageContainer } from "../pages/Signup";
-import ErrorAlert from "./ErrorAlert";
+import MessageAlert from "./MessageAlert";
 
 async function changePassword(data) {
 	return fetch(`${API_URL}users/updateMyPassword`, {
@@ -16,14 +16,15 @@ async function changePassword(data) {
 }
 
 function UpdateMyPassword() {
-	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+	const [alertType, setAlertType] = useState(null);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		setError(null);
+		setMessage(null);
 		const passwordData = {
 			password,
 			newPassword,
@@ -31,15 +32,17 @@ function UpdateMyPassword() {
 		};
 		const user = await changePassword(passwordData);
 		if (user.status === "success") {
-			alert("Success!");
+			setAlertType(user.status);
+			setMessage("Your Password has been updated successfully! :)");
 		} else {
-			setError(user.message);
+			setAlertType(user.status);
+			setMessage(user.message);
 		}
 	}
 
 	return (
 		<PageContainer>
-			{error && <ErrorAlert message={error} />}
+			{message && <MessageAlert message={message} type={alertType} />}
 			<Form onSubmit={handleSubmit}>
 				<h3>Update Your Password</h3>
 				<InputContainer>

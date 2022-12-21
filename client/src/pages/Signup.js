@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitBtn } from "./Login";
 import { useUser } from "./../context/UserContext";
-import ErrorAlert from "../components/ErrorAlert";
+import MessageAlert from "../components/MessageAlert";
 import { API_URL } from "../helper";
 
 export const PageContainer = styled.section`
@@ -74,14 +74,21 @@ function Signup() {
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [role, setRole] = useState("user");
-	const [error, setError] = useState(null);
+	const [message, setMessage] = useState(null);
+	const [alertType, setAlertType] = useState(null);
 	const navigate = useNavigate();
+
+	function wait(sec) {
+		return setTimeout(() => {
+			console.log(`Waiting ${sec} seconds...`);
+		}, 1000 * sec);
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setError(null);
+		setMessage(null);
 		if (password !== passwordConfirm) {
-			setError("Password & Password Confirm must match! try again!");
+			setMessage("Password & Password Confirm must match! try again!");
 			return;
 		}
 		const user = await signupUser({
@@ -92,16 +99,20 @@ function Signup() {
 			password,
 		});
 		if (user.status === "success") {
+			setAlertType(user.status);
+			setMessage(user.message);
 			setLogin(user.data);
+			await wait(5);
 			navigate("/");
 		} else {
-			setError(user.message);
+			setAlertType(user.status);
+			setMessage(user.message);
 		}
 	};
 	return (
 		<>
 			<PageContainer>
-				{error && <ErrorAlert message={error} />}
+				{message && <MessageAlert message={message} type={alertType} />}
 				<Form onSubmit={handleSubmit}>
 					<h1>Create an Account</h1>
 					<InputContainer>
