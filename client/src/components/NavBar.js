@@ -47,6 +47,12 @@ export const Link = styled.a`
 		text-decoration: none;
 		color: rgb(125, 125, 125);
 	}
+
+	& img {
+		height: 45px;
+		width: 45px;
+		border-radius: 50%;
+	}
 	&:hover {
 		color: black;
 	}
@@ -112,7 +118,9 @@ function NavBar() {
 								</NavLink>
 							</Link>
 							<Link>
-								<NavLink to='/my-profile'>Profile</NavLink>
+								<NavLink to='/my-profile'>
+									<img src={`/img/users/${user.userPhoto}`} alt='avatar' />
+								</NavLink>
 							</Link>
 						</>
 					) : (
