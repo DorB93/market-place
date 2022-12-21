@@ -7,6 +7,8 @@ import { useNavigate, Route, Routes } from "react-router-dom";
 import MyInfo from "../components/MyInfo";
 import UpdateMyPassword from "../components/UpdateMyPassword";
 import UserOrders from "../components/UserOrders";
+import SellerDashboard from "../components/SellerDashboard";
+import AddProduct from "../components/AddProduct";
 
 function Profile() {
 	const navigate = useNavigate();
@@ -16,7 +18,7 @@ function Profile() {
 		if (!user.isLoggedIn) {
 			navigate("/login");
 		}
-	}, [user]);
+	}, [user.isLoggedIn, navigate]);
 	return (
 		<>
 			{user.isLoggedIn ? (
@@ -26,6 +28,8 @@ function Profile() {
 						<Route index element={<MyInfo />} />
 						<Route path='my-orders' element={<UserOrders />} />
 						<Route path='password-update' element={<UpdateMyPassword />} />
+						<Route path='my-dashboard' element={<SellerDashboard />} />
+						<Route path='new-product' element={<AddProduct />} />
 					</Routes>
 				</>
 			) : (
