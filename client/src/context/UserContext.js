@@ -10,6 +10,7 @@ const initialState = {
 	userEmail: "",
 	userId: "",
 	userPhoto: "",
+	shippingAddress: {},
 	role: "guest",
 };
 
@@ -25,6 +26,7 @@ const reducer = (state, action) => {
 				role: action.payload.role,
 				userId: action.payload.id,
 				userPhoto: action.payload.photo,
+				shippingAddress: action.payload.shippingAddress,
 			};
 		case "LOGOUT":
 			// Return the initial state when a user logs out

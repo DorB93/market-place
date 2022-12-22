@@ -9,6 +9,7 @@ import UpdateMyPassword from "../components/UpdateMyPassword";
 import UserOrders from "../components/UserOrders";
 import SellerDashboard from "../components/SellerDashboard";
 import AddProduct from "../components/AddProduct";
+import MyAddress from "../components/MyAddress";
 
 function Profile() {
 	const navigate = useNavigate();
@@ -28,6 +29,7 @@ function Profile() {
 						<Route index element={<MyInfo />} />
 						<Route path='my-orders' element={<UserOrders />} />
 						<Route path='password-update' element={<UpdateMyPassword />} />
+						<Route path='address-update' element={<MyAddress />} />
 						<Route path='my-dashboard' element={<SellerDashboard />} />
 						<Route path='new-product' element={<AddProduct />} />
 					</Routes>

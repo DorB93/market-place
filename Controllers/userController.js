@@ -64,7 +64,13 @@ async function updateMe(req, res, next) {
 			);
 		}
 		// 2) Filtered out unwanted fields names that are not allowed to be updated
-		const filteredBody = filterObj(req.body, "name", "email", "photo");
+		const filteredBody = filterObj(
+			req.body,
+			"name",
+			"email",
+			"photo",
+			"shippingAddress"
+		);
 		// 3) update user doc
 		const updatedUser = await User.findByIdAndUpdate(
 			req.user._id,

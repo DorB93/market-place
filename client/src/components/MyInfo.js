@@ -7,7 +7,7 @@ import { Form, InputContainer } from "../pages/Signup";
 import MessageAlert from "./MessageAlert";
 import myAxios from "../api";
 
-const InfoContainer = styled.div`
+export const InfoContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -25,7 +25,7 @@ const ImageInputContainer = styled(InputContainer)`
 	}
 `;
 
-async function updateUser(userData) {
+export async function updateUser(userData) {
 	try {
 		const res = await myAxios.patch("/users/updateMe", userData);
 		return res.data;
@@ -60,6 +60,9 @@ function MyInfo() {
 			const updatedUser = await updateUser(formData);
 			if (updatedUser.status === "success") {
 				console.log({ updatedUser });
+				await setTimeout(() => {
+					console.log("waiting...");
+				}, 10000);
 				setLogin(updatedUser.data.user);
 			} else {
 				setAlertType(updatedUser.status);

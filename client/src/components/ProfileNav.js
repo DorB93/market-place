@@ -45,6 +45,9 @@ const ProfileNav = () => {
 				<NavLink to='/my-profile/password-update'>Change Password</NavLink>
 			</ProfileLink>
 			<ProfileLink>
+				<NavLink to='/my-profile/address-update'>MyAddress</NavLink>
+			</ProfileLink>
+			<ProfileLink>
 				<NavLink to='/my-profile/my-orders'>My Orders</NavLink>
 			</ProfileLink>
 			{isSeller && (
