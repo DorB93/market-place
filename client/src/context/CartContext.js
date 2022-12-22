@@ -39,13 +39,11 @@ export function CartProvider({ children }) {
 	function increaseItemQuantity(id) {
 		if (!cart[id]) {
 			cart[id] = 1;
-			console.log(cart[id]);
 			setCart((currCart) => {
 				return { ...currCart };
 			});
 		} else {
 			cart[id] += 1;
-			console.log(cart[id]);
 			setCart((pre) => {
 				return { ...pre };
 			});

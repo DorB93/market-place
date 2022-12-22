@@ -55,8 +55,6 @@ function Login() {
 		});
 		console.log({ respond });
 		if (respond.status === "success") {
-			setAlertType(respond.status);
-			setMessage("You logged in! :)");
 			setLogin(respond.data._doc);
 			navigate("/");
 		} else {

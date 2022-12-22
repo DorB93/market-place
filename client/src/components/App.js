@@ -11,6 +11,7 @@ import { CartProvider } from "./../context/CartContext";
 import { UserProvider } from "./../context/UserContext";
 import ForgotPassword from "../pages/ForgotPassword";
 import Profile from "../pages/Profile";
+import Checkout from "../pages/Checkout";
 
 export const AppWrapper = styled.div`
 	margin: 0;
@@ -38,6 +39,7 @@ function App() {
 							<Route path='/forgot-password' element={<ForgotPassword />} />
 							<Route path='/products/:id' element={<ProductDetail />} />
 							<Route path='/my-profile/*' element={<Profile />} />
+							<Route path='/checkout' element={<Checkout />} />
 						</Routes>
 					</>
 				</AppWrapper>

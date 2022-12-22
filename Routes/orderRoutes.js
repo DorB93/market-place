@@ -9,7 +9,7 @@ router.get("/my-customers-orders", orderController.getAllSellerOrders);
 router
 	.route("/")
 	.get(authController.restrictTo("admin"), orderController.getAllOrders)
-	.post(authController.restrictTo("user"), orderController.createOrder);
+	.post(orderController.createOrder);
 
 router
 	.route("/:id")

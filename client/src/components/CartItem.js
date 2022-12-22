@@ -14,15 +14,14 @@ const CartBtn = styled.button`
 	width: 2rem;
 `;
 export const ItemCard = styled.div`
-	height: 130px;
+	height: 150px;
 	display: grid;
 	grid-template-columns: 1fr 3fr 0.5fr;
 	color: #000;
 	width: 90%;
 	border-radius: 15px;
 	overflow: hidden;
-	padding: 1px;
-	padding-left: 5px;
+	padding: 5px;
 	margin: 7px;
 	background-color: white;
 	transition: 200ms all linear;

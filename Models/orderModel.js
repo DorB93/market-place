@@ -5,12 +5,14 @@ const User = require("./userModel");
 const orderSchema = new mongoose.Schema({
 	products: [
 		{
-			type: mongoose.Schema.ObjectId,
-			ref: Product,
-			required: [true, "Cart Must have a product!"],
+			product: {
+				type: mongoose.Schema.ObjectId,
+				ref: Product,
+				required: [true, "Cart Must have a product!"],
+			},
 			quantity: {
 				type: Number,
-				required: [],
+				required: [true, "Product must have quantity"],
 			},
 			price: {
 				type: Number,
@@ -30,6 +32,13 @@ const orderSchema = new mongoose.Schema({
 	paid: {
 		type: Boolean,
 		default: true,
+	},
+	shippingAddress: {
+		state: { type: String, required: true },
+		city: { type: String, required: true },
+		street: { type: String, required: true },
+		streetNum: { type: Number, required: true },
+		zipCode: { type: String, required: true },
 	},
 });
 

@@ -1,7 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useCart } from "../context/CartContext";
+import { useUser } from "../context/UserContext";
 import CartItem from "./CartItem";
+
+// Styled Components
 export const CartContainer = styled.div`
 	position: fixed;
 	top: 0;
@@ -25,7 +29,6 @@ export const CartContainer = styled.div`
 		text-align: center;
 	}
 `;
-
 export const BtnCloseCart = styled.button`
 	position: absolute;
 	right: 5px;
@@ -69,13 +72,11 @@ export const CartInfo = styled.div`
 	justify-content: space-around;
 	margin: 20px;
 `;
-
 export const CartBtnContainer = styled.div`
 	display: flex;
 	justify-content: space-around;
 	margin: 10px;
 `;
-
 export const CartBtn = styled.button`
 	height: 3rem;
 	width: 5rem;
@@ -94,9 +95,13 @@ export const CartBtn = styled.button`
 	}
 `;
 
+// Handlers
+
 function Cart() {
+	const { user } = useUser();
 	const { cart, cartFullPrice, cartQuantity, closeCart, removeCart, catalog } =
 		useCart();
+	const navigate = useNavigate();
 
 	const items = Object.entries(cart).map(([id, q]) => {
 		const item = catalog.find((p) => p.id === Number(id));
@@ -104,6 +109,14 @@ function Cart() {
 		return <CartItem key={item.id} item={item} />;
 	});
 
+	function checkoutHandle() {
+		closeCart();
+		if (!user.isLoggedIn) {
+			navigate("/signup");
+		} else {
+			navigate("/checkout");
+		}
+	}
 	return (
 		<CartContainer>
 			<BtnCloseCart onClick={closeCart}>X</BtnCloseCart>
@@ -114,7 +127,9 @@ function Cart() {
 				<span>Total price: {cartFullPrice.toFixed(2)}$</span>
 			</CartInfo>
 			<CartBtnContainer>
-				<CartBtn className='primary'>Checkout</CartBtn>
+				<CartBtn className='primary' onClick={checkoutHandle}>
+					Checkout
+				</CartBtn>
 				<CartBtn
 					onClick={() => {
 						removeCart();
