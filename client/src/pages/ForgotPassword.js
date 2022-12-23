@@ -9,7 +9,7 @@ function ForgotPassword() {
 			<Form>
 				<h1>Forgot Your Password?</h1>
 				<InputContainer>
-					<label for='email'>Enter your mail:</label>
+					<label htmlFor='email'>Enter your mail:</label>
 					<input
 						id='email'
 						placeholder='yourmail@example.com'

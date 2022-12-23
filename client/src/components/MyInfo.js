@@ -80,7 +80,7 @@ function MyInfo() {
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
 				<InputContainer>
-					<label for='name'>Full Name:</label>
+					<label htmlFor='name'>Full Name:</label>
 					<input
 						placeholder='Enter your full name'
 						type='text'
@@ -92,7 +92,7 @@ function MyInfo() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='email'>Email:</label>
+					<label htmlFor='email'>Email:</label>
 					<input
 						placeholder='yourmail@example.com'
 						type='email'
@@ -104,7 +104,7 @@ function MyInfo() {
 					/>
 				</InputContainer>
 				<ImageInputContainer>
-					<label for='image'>
+					<label htmlFor='image'>
 						<img src={`/img/users/${user.userPhoto}`} alt='user-avatar' />
 					</label>
 					<input

@@ -53,7 +53,7 @@ function MyAddress() {
 			<Form onSubmit={handleSubmitAddress}>
 				<h2>Your Information</h2>
 				<InputContainer>
-					<label for='state' name='state'>
+					<label htmlFor='state' name='state'>
 						State:
 					</label>
 					<input
@@ -67,7 +67,7 @@ function MyAddress() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='city' name='city'>
+					<label htmlFor='city' name='city'>
 						City:
 					</label>
 					<input
@@ -81,7 +81,7 @@ function MyAddress() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='street' name='street'>
+					<label htmlFor='street' name='street'>
 						Street:
 					</label>
 					<input
@@ -95,7 +95,7 @@ function MyAddress() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='streetNum' name='streetNum'>
+					<label htmlFor='streetNum' name='streetNum'>
 						StreetNum:
 					</label>
 					<input
@@ -109,7 +109,7 @@ function MyAddress() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='zipCode' name='zipCode'>
+					<label htmlFor='zipCode' name='zipCode'>
 						Zip Code:
 					</label>
 					<input

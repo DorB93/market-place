@@ -46,7 +46,7 @@ function UpdateMyPassword() {
 			<Form onSubmit={handleSubmit}>
 				<h3>Update Your Password</h3>
 				<InputContainer>
-					<label for='password'>Current Password:</label>
+					<label htmlFor='password'>Current Password:</label>
 					<input
 						minLength={8}
 						placeholder='shh-secret'
@@ -58,7 +58,7 @@ function UpdateMyPassword() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='password'>Password:</label>
+					<label htmlFor='password'>Password:</label>
 					<input
 						minLength={8}
 						placeholder='shh-secret'
@@ -70,7 +70,7 @@ function UpdateMyPassword() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='passwordConfirm'>Password Confirm:</label>
+					<label htmlFor='passwordConfirm'>Password Confirm:</label>
 					<input
 						placeholder='shh-secret'
 						type='password'

@@ -116,7 +116,7 @@ function Signup() {
 				<Form onSubmit={handleSubmit}>
 					<h1>Create an Account</h1>
 					<InputContainer>
-						<label for='name'>Full Name:</label>
+						<label htmlFor='name'>Full Name:</label>
 						<input
 							placeholder='Enter your full name'
 							type='text'
@@ -127,7 +127,7 @@ function Signup() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='email'>Email:</label>
+						<label htmlFor='email'>Email:</label>
 						<input
 							placeholder='yourmail@example.com'
 							type='email'
@@ -138,7 +138,7 @@ function Signup() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='password'>Password:</label>
+						<label htmlFor='password'>Password:</label>
 						<input
 							minLength={8}
 							placeholder='shh-secret'
@@ -150,7 +150,7 @@ function Signup() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='passwordConfirm'>Password Confirm:</label>
+						<label htmlFor='passwordConfirm'>Password Confirm:</label>
 						<input
 							minLength={8}
 							placeholder='shh-secret'
@@ -162,7 +162,7 @@ function Signup() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='role'>Want to join our sellers family?</label>
+						<label htmlFor='role'>Want to join our sellers family?</label>
 						<input
 							type='checkbox'
 							onChange={(e) => {

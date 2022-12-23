@@ -110,7 +110,7 @@ function Checkout() {
 				<Form>
 					<h3>Shipping Address</h3>
 					<InputContainer>
-						<label for='state' name='state'>
+						<label htmlFor='state' name='state'>
 							State:
 						</label>
 						<input
@@ -123,7 +123,7 @@ function Checkout() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='city' name='city'>
+						<label htmlFor='city' name='city'>
 							City:
 						</label>
 						<input
@@ -136,7 +136,7 @@ function Checkout() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='street' name='street'>
+						<label htmlFor='street' name='street'>
 							Street:
 						</label>
 						<input
@@ -149,7 +149,7 @@ function Checkout() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='streetNum' name='streetNum'>
+						<label htmlFor='streetNum' name='streetNum'>
 							StreetNum:
 						</label>
 						<input
@@ -162,7 +162,7 @@ function Checkout() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='zipCode' name='zipCode'>
+						<label htmlFor='zipCode' name='zipCode'>
 							Zip Code:
 						</label>
 						<input
@@ -174,7 +174,7 @@ function Checkout() {
 							value={shippingAddress.zipCode}
 						/>
 					</InputContainer>
-					<label for='change-address' name='state'>
+					<label htmlFor='change-address' name='state'>
 						Different shipping Address?
 						<input
 							id='change-address'
@@ -189,7 +189,7 @@ function Checkout() {
 				<Form onSubmit={handleOrder}>
 					<h3>Payment</h3>
 					<InputContainer>
-						<label for='state' name='state'>
+						<label htmlFor='state' name='state'>
 							Card number:
 						</label>
 						<input
@@ -199,13 +199,13 @@ function Checkout() {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label for='state' name='state'>
+						<label htmlFor='state' name='state'>
 							Exp-Date:
 						</label>
 						<input disabled={true} placeholder='MM-YY' type='text' />
 					</InputContainer>
 					<InputContainer>
-						<label for='state' name='state'>
+						<label htmlFor='state' name='state'>
 							CVV:
 						</label>
 						<input disabled={true} placeholder='****' type='text' />

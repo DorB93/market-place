@@ -69,7 +69,7 @@ function Login() {
 			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>
-					<label for='email' name='email'>
+					<label htmlFor='email' name='email'>
 						Email:
 					</label>
 					<input
@@ -82,7 +82,7 @@ function Login() {
 					/>
 				</InputContainer>
 				<InputContainer>
-					<label for='password'>Password:</label>
+					<label htmlFor='password'>Password:</label>
 					<input
 						minLength={8}
 						placeholder='shh-secret'
