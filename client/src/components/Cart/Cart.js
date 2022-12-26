@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useCart } from "../context/CartContext";
-import { useUser } from "../context/UserContext";
+import { useCart } from "../../context/CartContext";
+import { useUser } from "../../context/UserContext";
 import CartItem from "./CartItem";
 
 // Styled Components

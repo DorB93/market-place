@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../context/UserContext";
 // import { API_URL } from "../helper";
-import { SubmitBtn } from "../pages/Login";
-import { Form, InputContainer } from "../pages/Signup";
-import MessageAlert from "./MessageAlert";
-import myAxios from "../api";
+import { SubmitBtn } from "../../pages/Login";
+import { Form, InputContainer } from "../../pages/Signup";
+import MessageAlert from "../MessageAlert";
+import myAxios from "../../api";
 
 export const InfoContainer = styled.div`
 	display: flex;
@@ -35,8 +35,8 @@ export async function updateUser(userData) {
 	}
 }
 
-function MyInfo() {
-	const { user, setLogin } = useUser();
+function MyInfo({ user }) {
+	const { setLogin } = useUser();
 	const [name, setName] = useState(user.username);
 	const [email, setEmail] = useState(user.userEmail);
 	const [photo, setPhoto] = useState(null);

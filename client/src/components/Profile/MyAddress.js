@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import MessageAlert from "./MessageAlert";
+import MessageAlert from "../MessageAlert";
 import { InfoContainer, updateUser } from "./MyInfo";
-import { Form, InputContainer } from "../pages/Signup";
-import { useUser } from "../context/UserContext";
-import { SubmitBtn } from "../pages/Login";
-function MyAddress() {
-	const { user, setLogin } = useUser();
+import { Form, InputContainer } from "../../pages/Signup";
+import { useUser } from "../../context/UserContext";
+import { SubmitBtn } from "../../pages/Login";
+function MyAddress({ user }) {
+	const { setLogin } = useUser();
 	const [state, setState] = useState(null);
 	const [city, setCity] = useState(null);
 	const [street, setStreet] = useState(null);

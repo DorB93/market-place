@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoTrashOutline, IoRemove, IoAdd } from "react-icons/io5";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../context/CartContext";
 
 const CartBtn = styled.button`
 	display: flex;

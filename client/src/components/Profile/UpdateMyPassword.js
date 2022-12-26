@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { API_URL } from "../helper";
-import { SubmitBtn } from "../pages/Login";
-import { Form, InputContainer, PageContainer } from "../pages/Signup";
-import MessageAlert from "./MessageAlert";
+import { API_URL } from "../../helper";
+import { SubmitBtn } from "../../pages/Login";
+import { Form, InputContainer, PageContainer } from "../../pages/Signup";
+import MessageAlert from "../MessageAlert";
 
 async function changePassword(data) {
 	return fetch(`${API_URL}users/updateMyPassword`, {

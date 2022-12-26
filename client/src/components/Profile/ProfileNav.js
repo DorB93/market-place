@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../context/UserContext";
 
 const NavContainer = styled.nav`
 	width: 100%;
@@ -31,8 +31,7 @@ const ProfileLink = styled.div`
 	}
 `;
 
-const ProfileNav = () => {
-	const { user } = useUser();
+const ProfileNav = ({user}) => {
 	const isSeller = user.role === "seller";
 	const isAdmin = user.role === "admin";
 
