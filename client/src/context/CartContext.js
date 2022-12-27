@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
-import Cart from "../components/Cart";
+import Cart from "../components/Cart/Cart";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useProducts from "../hooks/useProducts";
 

@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import useFetch from "./../hooks/useFetch";
 import useProducts from "../hooks/useProducts";
-import Product, { BtnAddToCart } from "../components/Product";
+import Product, { BtnAddToCart } from "../components/Products/Product";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useCart } from "../context/CartContext";
 
