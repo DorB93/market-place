@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import LoadingSpinner from "./LoadingSpinner";
-import { useCart } from "../context/CartContext";
+import LoadingSpinner from "../LoadingSpinner";
+import { useCart } from "../../context/CartContext";
 
 export const ProductContainer = styled.div`
 	display: flex;

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 import Product from "./Product";
-import LoadingSpinner from "./LoadingSpinner";
-import { useFilter } from "../context/FilterContext";
+import LoadingSpinner from "../LoadingSpinner";
+import { useFilter } from "../../context/FilterContext";
 
 export const ProductsContainer = styled.section`
 	display: flex;
