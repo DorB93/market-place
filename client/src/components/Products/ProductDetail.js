@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
-import useFetch from "./../hooks/useFetch";
-import useProducts from "../hooks/useProducts";
-import Product, { BtnAddToCart } from "../components/Products/Product";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { useCart } from "../context/CartContext";
+import useFetch from "../../hooks/useFetch";
+import useProducts from "../../hooks/useProducts";
+import Product, { BtnAddToCart } from "./Product";
+import LoadingSpinner from "../LoadingSpinner";
+import { useCart } from "../../context/CartContext";
 
 const ProductWrapper = styled.div`
 	background-color: #fbfafa;
