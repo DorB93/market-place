@@ -46,7 +46,10 @@ const productSchema = new mongoose.Schema(
 			trim: true,
 			required: [true, "A product must have a description"],
 		},
-		images: [String],
+		image: {
+			type: String,
+			default: "default.jpg",
+		},
 		seller: {
 			type: mongoose.Schema.ObjectId,
 			ref: "User",
