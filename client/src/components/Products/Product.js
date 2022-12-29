@@ -84,7 +84,7 @@ export const BtnAddToCart = styled.button`
 	}
 `;
 
-const StyledLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
 	color: rgb(125, 125, 125);
 	text-decoration: none;
 	transition: 200ms all linear;

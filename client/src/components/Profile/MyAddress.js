@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import MessageAlert from "../MessageAlert";
-import { InfoContainer, updateUser } from "./MyInfo";
-import { Form, InputContainer } from "../../pages/Signup";
+import { updateUser } from "./MyInfo";
+import { Form, InputContainer, PageContainer } from "../../pages/Signup";
 import { useUser } from "../../context/UserContext";
 import { SubmitBtn } from "../../pages/Login";
 function MyAddress({ user }) {
@@ -48,7 +48,7 @@ function MyAddress({ user }) {
 		}
 	}
 	return (
-		<InfoContainer>
+		<PageContainer>
 			{message && <MessageAlert message={message} type={alertType} />}
 			<Form onSubmit={handleSubmitAddress}>
 				<h2>Your Information</h2>
@@ -124,7 +124,7 @@ function MyAddress({ user }) {
 				</InputContainer>
 				<SubmitBtn type='submit'>Update Me</SubmitBtn>
 			</Form>
-		</InfoContainer>
+		</PageContainer>
 	);
 }
 

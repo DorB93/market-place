@@ -8,7 +8,7 @@ import Product, { BtnAddToCart } from "./Product";
 import LoadingSpinner from "../LoadingSpinner";
 import { useCart } from "../../context/CartContext";
 
-const ProductWrapper = styled.div`
+export const ProductWrapper = styled.div`
 	background-color: #fbfafa;
 	width: 80%;
 	display: flex;
@@ -17,37 +17,37 @@ const ProductWrapper = styled.div`
 	justify-content: space-around;
 	gap: 15px;
 `;
-const Details = styled.section`
+export const Details = styled.section`
 	width: 80%;
 	display: flex;
 	justify-content: space-between;
 	gap: 50px;
 `;
-const ProductImg = styled.img`
+export const ProductImg = styled.img`
 	background-color: transparent;
 	min-width: 250px;
 	object-fit: contain;
 	max-height: 500px;
 `;
-const TextDetails = styled.div`
+export const TextDetails = styled.div`
 	width: 50%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 `;
-const RelatedContainer = styled.section`
+export const RelatedContainer = styled.section`
 	display: flex;
 	width: 90%;
 	flex-wrap: wrap;
 	overflow: auto;
 	justify-content: center;
 `;
-const PriceAction = styled.div`
+export const PriceAction = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 `;
-const BackBtn = styled.button`
+export const BackBtn = styled.button`
 	width: 80px;
 	height: 30px;
 	border-radius: 12px;

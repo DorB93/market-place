@@ -3,21 +3,11 @@ import styled from "styled-components";
 import { useUser } from "../../context/UserContext";
 // import { API_URL } from "../helper";
 import { SubmitBtn } from "../../pages/Login";
-import { Form, InputContainer } from "../../pages/Signup";
+import { Form, InputContainer, PageContainer } from "../../pages/Signup";
 import MessageAlert from "../MessageAlert";
 import myAxios from "../../api";
 
-export const InfoContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 15px;
-	width: 100%;
-	padding: 30px;
-`;
-
-const ImageInputContainer = styled(InputContainer)`
+export const ImageInputContainer = styled(InputContainer)`
 	& img {
 		height: 100px;
 		width: 100px;
@@ -75,7 +65,7 @@ function MyInfo({ user }) {
 	};
 
 	return (
-		<InfoContainer>
+		<PageContainer>
 			{message && <MessageAlert message={message} type={alertType} />}
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
@@ -119,7 +109,7 @@ function MyInfo({ user }) {
 				</ImageInputContainer>
 				<SubmitBtn type='submit'>Update Me</SubmitBtn>
 			</Form>
-		</InfoContainer>
+		</PageContainer>
 	);
 }
 
