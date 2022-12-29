@@ -6,7 +6,7 @@ import Store from "../pages/Store";
 import About from "../pages/About";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import ProductDetail from "../pages/ProductDetail";
+import ProductDetail from "./Products/ProductDetail";
 import { CartProvider } from "./../context/CartContext";
 import { UserProvider } from "./../context/UserContext";
 import ForgotPassword from "../pages/ForgotPassword";
