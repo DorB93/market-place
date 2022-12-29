@@ -40,6 +40,7 @@ export const InputContainer = styled.div`
 	}
 
 	& input {
+		height: fit-content;
 		width: 180px;
 		border: 0;
 		border-radius: 12px;
@@ -51,9 +52,6 @@ export const InputContainer = styled.div`
 		padding: 10px;
 		border-radius: 50%;
 		background-color: transparent;
-	}
-	& input:focus {
-		border: 0.5 solid lightgray;
 	}
 `;
 async function signupUser(userData) {

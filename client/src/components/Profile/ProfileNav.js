@@ -3,30 +3,37 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavContainer = styled.nav`
-	width: 100%;
+	width: 190px;
 	background-color: #dfdfdf8f;
 	display: flex;
-`;
-
-const ProfileLink = styled.div`
-	& a {
-		text-decoration: none;
-		color: black;
-		background-color: transparent;
-		border: 0;
-		border-right: 1px solid rgb(186, 186, 186);
-		width: fit-content;
-		min-width: 40px;
-		margin: 10px;
-		padding-left: 15px;
-		padding-right: 15px;
-		box-sizing: border-box;
-		font-size: large;
-		transition: linear all 250ms;
-		cursor: pointer;
+	flex-direction: column;
+	height: 94vh;
+	padding-left: 15px;
+	gap: 9px;
+	position: sticky;
+	top: 60px;
+	left: 0;
+	& h3 {
+		margin: 0;
 	}
-	& a:hover {
+`;
+const ProfileLink = styled(NavLink)`
+	width: 92%;
+	transition: linear all 280ms;
+	text-decoration: none;
+	color: black;
+	background-color: transparent;
+	border: 0;
+	min-width: 40px;
+	padding-left: 15px;
+	font-size: large;
+	cursor: pointer;
+	&:hover {
 		background-color: rgba(186, 186, 186, 0.835);
+	}
+	&.active {
+		background-color: rgba(186, 186, 186, 0.835);
+		font-weight: bold;
 	}
 `;
 
@@ -36,36 +43,30 @@ const ProfileNav = ({ user }) => {
 
 	return (
 		<NavContainer>
-			<ProfileLink>
-				<NavLink to='/my-profile'>{user.username.split(" ")[0]}</NavLink>
+			<h3>User</h3>
+			<ProfileLink to='/my-profile/ '>
+				{user.username.split(" ")[0]}
 			</ProfileLink>
-			<ProfileLink>
-				<NavLink to='/my-profile/password-update'>Change Password</NavLink>
+			<ProfileLink to='/my-profile/password-update'>
+				Change Password
 			</ProfileLink>
-			<ProfileLink>
-				<NavLink to='/my-profile/address-update'>MyAddress</NavLink>
-			</ProfileLink>
-			<ProfileLink>
-				<NavLink to='/my-profile/my-orders'>My Orders</NavLink>
-			</ProfileLink>
+			<ProfileLink to='/my-profile/address-update'>MyAddress</ProfileLink>
+			<ProfileLink to='/my-profile/my-orders'>My Orders</ProfileLink>
 			{isSeller && (
 				<>
-					<ProfileLink>
-						<NavLink to='/my-profile/my-dashboard'>My Dashboard</NavLink>
+					<h3>Seller</h3>
+					<ProfileLink to='/my-profile/my-dashboard'>My Dashboard</ProfileLink>
+					<ProfileLink to='/my-profile/new-product'>
+						Add New Product
 					</ProfileLink>
-					<ProfileLink>
-						<NavLink to='/my-profile/new-product'>New Product</NavLink>
-					</ProfileLink>
+					<ProfileLink to='/my-profile/my-products'>My Products</ProfileLink>
 				</>
 			)}
 			{isAdmin && (
 				<>
-					<ProfileLink>
-						<NavLink to='/my-profile/my-dashboard'>My Dashboard</NavLink>
-					</ProfileLink>
-					<ProfileLink>
-						<NavLink to='/my-profile/new-product'>New Product</NavLink>
-					</ProfileLink>
+					<h3>Admin</h3>
+					<ProfileLink to='/my-profile/my-dashboard'>My Dashboard</ProfileLink>
+					<ProfileLink to='/my-profile/new-product'>New Product</ProfileLink>
 				</>
 			)}
 		</NavContainer>

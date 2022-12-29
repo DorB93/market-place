@@ -7,7 +7,7 @@ import { FilterProvider } from "../context/FilterContext";
 
 export const StoreContainer = styled.section`
 	background-color: #fbfafa;
-	width: 100vw;
+	width: 100%;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;

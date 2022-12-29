@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { useFilter } from "../context/FilterContext";
 
 export const CategorySelector = styled.nav`
-	width: 100vw;
+	width: 100%;
 	box-sizing: border-box;
 	box-shadow: 2px 2px 5px 1px rgba(128, 128, 128, 0.193);
 	height: 30px;
@@ -12,6 +12,7 @@ export const CategorySelector = styled.nav`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	justify-self: center;
 	gap: 10px;
 `;
 
