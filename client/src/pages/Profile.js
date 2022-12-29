@@ -10,11 +10,15 @@ import UserOrders from "../components/Profile/UserOrders";
 import SellerDashboard from "../components/Seller/SellerDashboard";
 import AddProduct from "../components/Seller/AddProduct";
 import MyAddress from "../components/Profile/MyAddress";
+import MyProducts from "../components/Seller/MyProducts";
+import UploadProductPhoto from "../components/Seller/UploadProductPhoto";
+import SellerProductDetail from "../components/Seller/SellerProductDetail";
 
 const ProfileWrapper = styled.section`
 	display: flex;
 	justify-content: start;
 	width: 100%;
+	position: relative;
 `;
 
 function Profile() {
@@ -44,6 +48,15 @@ function Profile() {
 							element={<SellerDashboard user={user} />}
 						/>
 						<Route path='new-product' element={<AddProduct user={user} />} />
+						<Route path='my-products' element={<MyProducts user={user} />} />
+						<Route
+							path='my-products/:productId'
+							element={<SellerProductDetail user={user} />}
+						/>
+						<Route
+							path='upload-product-photo/:productId'
+							element={<UploadProductPhoto user={user} />}
+						/>
 					</Routes>
 				</ProfileWrapper>
 			) : (
