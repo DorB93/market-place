@@ -18,6 +18,13 @@ router
 		productsController.setSellerId,
 		productsController.createProduct
 	);
+router
+	.route("/my-products")
+	.get(
+		authController.protect,
+		authController.restrictTo("admin", "seller"),
+		productsController.getMyProducts
+	);
 
 router
 	.route("/:id")
@@ -31,7 +38,7 @@ router
 	)
 	.delete(
 		authController.protect,
-		authController.restrictTo("admin", "lead-guide"),
+		authController.restrictTo("admin", "seller"),
 		productsController.deleteProduct
 	);
 
