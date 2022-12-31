@@ -104,7 +104,7 @@ function Cart() {
 	const navigate = useNavigate();
 
 	const items = Object.entries(cart).map(([id, q]) => {
-		const item = catalog.find((p) => p.id === Number(id));
+		const item = catalog.find((p) => p.id === id);
 		if (!item) return "";
 		return <CartItem key={item.id} item={item} />;
 	});

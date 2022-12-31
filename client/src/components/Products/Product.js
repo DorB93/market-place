@@ -4,6 +4,13 @@ import styled from "styled-components";
 import LoadingSpinner from "../LoadingSpinner";
 import { useCart } from "../../context/CartContext";
 
+export const InventoryAlert = styled.span`
+	position: absolute;
+	bottom: 3px;
+	left: 3px;
+	color: red;
+	z-index: 4;
+`;
 export const ProductContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -82,6 +89,14 @@ export const BtnAddToCart = styled.button`
 		color: rgb(71, 158, 246);
 		border: rgb(71, 158, 246) 1px;
 	}
+	&:disabled {
+		background-color: gray;
+	}
+	&:disabled:hover {
+		box-shadow: none;
+		color: white;
+		border: none;
+	}
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -99,17 +114,21 @@ function Product({ product }) {
 	const [isLoading, setIsLoading] = useState(true);
 
 	return (
-		<ProductContainer>
+		<ProductContainer disabled={!product.inventory}>
+			{product.inventory < 7 && product.inventory > 0 && (
+				<InventoryAlert>Only {product.inventory} left...</InventoryAlert>
+			)}
+			{product.inventory === 0 && <InventoryAlert>Out of stock</InventoryAlert>}
 			{isLoading && <LoadingSpinner />}
 			<img
-				src={product.image}
-				alt={product.title}
+				src={`/img/products/${product.image}`}
+				alt={product.name}
 				onLoad={() => setIsLoading(false)}
 				onError={() => setIsLoading(false)}
 				loading='lazy'
 			/>
 			<ProductMinDetails>
-				<h3>{product.title}</h3>
+				<h3>{product.name}</h3>
 				<span>
 					<StyledLink to={url}>Click for more..</StyledLink>
 				</span>
@@ -117,7 +136,8 @@ function Product({ product }) {
 				<BtnAddToCart
 					onClick={() => {
 						increaseItemQuantity(product.id);
-					}}>
+					}}
+					disabled={!product.inventory}>
 					Add to cart
 				</BtnAddToCart>
 			</ProductMinDetails>

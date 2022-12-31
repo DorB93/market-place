@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useFetch from "../hooks/useFetch";
 import { useFilter } from "../context/FilterContext";
+import myAxios from "../api";
 
 export const CategorySelector = styled.nav`
 	width: 100%;
@@ -37,10 +37,20 @@ export const CategoryOption = styled.div`
 `;
 
 function Filter() {
-	const categories = [
-		"All",
-		...useFetch("https://fakestoreapi.com/products/categories"),
-	];
+	const [categories, satCategories] = useState(["All"]);
+	useEffect(() => {
+		async function getData() {
+			try {
+				await myAxios.get("categories").then((res) => {
+					const { data } = res.data.data;
+					satCategories(["All", ...data]);
+				});
+			} catch (err) {
+				alert(err.message);
+			}
+		}
+		getData();
+	}, []);
 	const { selectFilter } = useFilter();
 	const selection = categories.map((atr) => (
 		<CategoryOption key={atr} title={atr} onClick={() => selectFilter(atr)}>

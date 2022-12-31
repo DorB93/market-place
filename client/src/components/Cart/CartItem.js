@@ -93,10 +93,10 @@ function CartItem({ item }) {
 	return (
 		<ItemCard>
 			<ImageContainer>
-				<img src={item.image} alt={item.title} />
+				<img src={`/img/products/${item.image}`} alt={item.name} />
 			</ImageContainer>
 			<ItemDetails>
-				<h3>{item.title}</h3>
+				<h3>{item.name}</h3>
 				<ItemQuantity>
 					<CartBtn
 						onClick={() => {
