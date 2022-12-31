@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import myAxios from "../../api";
-import useFetch from "../../hooks/useFetch";
 import { StoreContainer } from "../../pages/Store";
 import { CategoryOption, CategorySelector } from "../Filter";
 import LoadingSpinner from "../LoadingSpinner";

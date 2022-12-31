@@ -1,16 +1,28 @@
-import useFetch from "./useFetch";
+import { useState, useMemo, useEffect } from "react";
+import myAxios from "../api";
 
-export class Product {
+export class ClProduct {
 	#discountFormula = 0.95;
 	#price;
-	constructor(id, category, price, title, image, rating, description) {
+	constructor(
+		id,
+		category,
+		price,
+		title,
+		image,
+		description,
+		seller,
+		inventory
+	) {
 		this.id = id;
 		this.category = category;
+		this.category = category;
 		this.#price = price;
-		this.title = title;
+		this.name = title;
 		this.image = image;
-		this.rating = rating;
 		this.description = description;
+		this.inventory = inventory;
+		this.seller = seller?.id ? seller.id : seller;
 	}
 	getPrice() {
 		return this.category === "electronics"
@@ -18,12 +30,40 @@ export class Product {
 			: this.#price;
 	}
 }
+
 function useProducts() {
-	const productsList = useFetch("https://fakestoreapi.com/products");
-	return productsList.map(
-		({ id, category, price, title, image, rating, description }) =>
-			new Product(id, category, price, title, image, rating, description)
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		async function getProducts() {
+			try {
+				await myAxios.get("products").then((res) => {
+					console.log({ res });
+					setProducts(res.data.data);
+				});
+			} catch (err) {
+				return err;
+			}
+		}
+		getProducts();
+	}, []);
+
+	const productsList = products.map(
+		({ id, category, price, name, image, description, seller, inventory }) =>
+			new ClProduct(
+				id,
+				category,
+				price,
+				name,
+				image,
+				description,
+				seller,
+				inventory
+			)
 	);
+	return useMemo(() => {
+		return productsList;
+	}, [productsList]);
 }
 
 export default useProducts;

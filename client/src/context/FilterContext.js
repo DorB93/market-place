@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext } from "react";
-// import useFetch from "../hooks/useFetch";
 
 const FilterContext = createContext({});
 
