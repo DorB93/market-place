@@ -18,27 +18,22 @@ const upload = multer({
 	storage: multerStorage,
 	fileFilter: multerFilter,
 });
-const uploadProductImages = upload.fields([{ name: "images", maxCount: 3 }]);
+const uploadProductImages = upload.single("image");
 
 async function resizeProductImages(req, res, next) {
 	try {
-		if (!req.files.images) return next();
-		// Images
-		req.body.images = [];
-
-		await Promise.all(
-			req.files.images.map(async (file, i) => {
-				const filename = `product-${req.params.id}-${i + 1}.jpeg`;
-
-				await sharp(file.buffer)
-					.resize(2000, 1333)
-					.toFormat("jpeg")
-					.jpeg({ quality: 90 })
-					.toFile(`public/img/products/${filename}`);
-
-				req.body.images.push(filename);
-			})
-		);
+		console.log(req.file);
+		console.log(req.params);
+		if (!req.file?.fieldname) {
+			return next();
+		}
+		const filename = `product-${req.params.id}.jpeg`;
+		await sharp(req.file.buffer)
+			.resize(2000, 1333)
+			.toFormat("jpeg")
+			.jpeg({ quality: 90 })
+			.toFile(`client/public/img/products/${filename}`);
+		req.body.image = filename;
 
 		next();
 	} catch (err) {
@@ -56,9 +51,7 @@ async function getAllCategories(req, res, next) {
 		res.status(200).json({
 			status: "success",
 			results: categories.length,
-			data: {
-				categories,
-			},
+			data: { data: [...categories] },
 		});
 	} catch (err) {}
 }
@@ -68,11 +61,25 @@ const createProduct = factory.createOne(Product);
 const updateProduct = factory.updateOne(Product);
 const deleteProduct = factory.deleteOne(Product);
 
+async function getMyProducts(req, res, next) {
+	try {
+		const doc = await Product.find({ seller: req.user._id });
+		res.status(200).json({
+			status: "success",
+			data: {
+				...doc,
+			},
+		});
+	} catch (err) {
+		next(err);
+	}
+}
 module.exports = {
 	getAllCategories,
 	getAllProducts,
 	setSellerId,
 	getProduct,
+	getMyProducts,
 	createProduct,
 	updateProduct,
 	deleteProduct,

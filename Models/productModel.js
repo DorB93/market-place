@@ -33,6 +33,10 @@ const productSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		ratingsAverage: {
+			type: Number,
+			default: 0,
+		},
 		price: {
 			type: Number,
 			required: [true, "A product must have a price"],
@@ -71,11 +75,6 @@ productSchema.virtual("reviews", {
 	foreignField: "product",
 	localField: "_id",
 	justOne: false,
-});
-
-productSchema.pre("save", function (next) {
-	this.slug = slugify(this.name, { lower: true });
-	next();
 });
 
 productSchema.pre(/^find/, function (next) {
