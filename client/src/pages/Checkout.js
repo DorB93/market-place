@@ -42,7 +42,14 @@ const ItemsContainer = styled.div`
 
 function Checkout() {
 	const { user } = useUser();
-	const { cart, removeCart, catalog, cartFullPrice, cartQuantity } = useCart();
+	const {
+		updateCatalog,
+		cart,
+		removeCart,
+		catalog,
+		cartFullPrice,
+		cartQuantity,
+	} = useCart();
 	const [shippingAddress, setShippingAddress] = useState({
 		state: "",
 		city: "",
@@ -60,7 +67,7 @@ function Checkout() {
 	}, [user]);
 
 	const items = Object.entries(cart).map(([id, q]) => {
-		const item = catalog.find((p) => p.id === Number(id));
+		const item = catalog.find((p) => p.id === id);
 		if (!item) return "";
 		return <CartItem key={item.id} item={item} />;
 	});
@@ -69,11 +76,12 @@ function Checkout() {
 		setIsLoading(true);
 		try {
 			const products = Object.entries(cart).map(([id, q]) => {
-				const item = catalog.find((p) => p.id === Number(id));
+				const item = catalog.find((p) => p.id === id);
 				return {
 					product: id,
 					quantity: q,
 					price: item.getPrice(),
+					seller: item.seller,
 				};
 			});
 
@@ -82,6 +90,7 @@ function Checkout() {
 				.then((res) => res.data);
 			if (order.status === "success") {
 				removeCart();
+				updateCatalog();
 				navigate("/");
 			}
 		} catch (err) {
