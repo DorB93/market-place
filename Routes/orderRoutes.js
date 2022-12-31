@@ -5,7 +5,7 @@ const router = express.Router();
 router.use(authController.protect);
 
 router.get("/my-customers-orders", orderController.getAllSellerOrders);
-
+router.get("/my-orders", orderController.getMyOrders);
 router
 	.route("/")
 	.get(authController.restrictTo("admin"), orderController.getAllOrders)

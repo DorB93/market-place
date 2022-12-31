@@ -28,6 +28,10 @@ const orderSchema = new mongoose.Schema({
 				type: Number,
 				require: [true, "Product must have a price"],
 			},
+			received: {
+				type: Boolean,
+				default: false,
+			},
 		},
 	],
 	user: {
@@ -52,11 +56,12 @@ const orderSchema = new mongoose.Schema({
 	},
 });
 
+// orderSchema.pre(/^find/, function (next) {
+// 	this.populate("user").populate("product");
+// 	next();
+// });
 orderSchema.pre(/^find/, function (next) {
-	this.populate("user").populate({
-		path: "product",
-		select: ["name", "seller"],
-	});
+	this.populate("products.product").populate("user");
 	next();
 });
 

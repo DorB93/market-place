@@ -59,6 +59,10 @@ const productSchema = new mongoose.Schema(
 			ref: "User",
 			required: [true, "A product must have a seller"],
 		},
+		active: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	{
 		toJSON: { virtuals: true },
@@ -88,7 +92,6 @@ productSchema.pre(/^find/, function (next) {
 if (mongoose.models.Product) {
 	delete mongoose.models.Product;
 }
-
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

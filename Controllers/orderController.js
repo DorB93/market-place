@@ -26,6 +26,19 @@ const getAllSellerOrders = async function (req, res, next) {
 	}
 };
 
+const getMyOrders = async function (req, res, next) {
+	try {
+		const doc = await Order.find({ user: req.user._id });
+		res.status(200).json({
+			status: "success",
+			results: doc.length,
+			data: [...doc],
+		});
+	} catch (err) {
+		next(err);
+	}
+};
+
 module.exports = {
 	getUserIdToReq,
 	getAllSellerOrders,
@@ -34,4 +47,5 @@ module.exports = {
 	createOrder,
 	updateOrder,
 	deleteOrder,
+	getMyOrders,
 };
