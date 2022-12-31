@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import useProducts from "../../hooks/useProducts";
 import Product from "./Product";
 import LoadingSpinner from "../LoadingSpinner";
 import { useFilter } from "../../context/FilterContext";

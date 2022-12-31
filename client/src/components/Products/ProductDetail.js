@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
-import useFetch from "../../hooks/useFetch";
-import useProducts from "../../hooks/useProducts";
 import Product, { BtnAddToCart } from "./Product";
 import LoadingSpinner from "../LoadingSpinner";
 import { useCart } from "../../context/CartContext";
+import myAxios from "../../api";
 
 export const ProductWrapper = styled.div`
 	background-color: #fbfafa;
@@ -60,15 +59,29 @@ export const BackBtn = styled.button`
 `;
 
 function ProductDetail() {
-	const { increaseItemQuantity } = useCart();
+	const { increaseItemQuantity, catalog } = useCart();
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const productData = useFetch(`https://fakestoreapi.com/products/${id}`);
-	const sameCategory = useProducts()
+	const [productData, setProductData] = useState({});
+	const sameCategory = catalog
 		.filter(
 			(p) => p.id !== productData.id && p.category === productData.category
 		)
 		.map((p) => <Product key={p.id} product={p} />);
+
+	useEffect(() => {
+		async function getProductData() {
+			try {
+				await myAxios.get(`products/${id}`).then((res) => {
+					console.log({ res });
+					setProductData(res.data.data._doc);
+				});
+			} catch (err) {
+				alert(err.message);
+			}
+		}
+		getProductData();
+	}, [id]);
 	return (
 		<>
 			{productData.length === 0 ? (
