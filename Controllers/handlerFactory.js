@@ -24,13 +24,14 @@ exports.updateOne = (Model) =>
 				new: true,
 				runValidators: true,
 			});
+			// console.log({ doc });
 			if (!doc) {
 				return next(new AppError("No document found with that ID", 404));
 			}
 			res.status(200).json({
 				status: "success",
 				data: {
-					data: doc,
+					...doc,
 				},
 			});
 		} catch (err) {
@@ -45,7 +46,7 @@ exports.createOne = (Model) =>
 			res.status(201).json({
 				status: "success",
 				data: {
-					data: doc,
+					...doc,
 				},
 			});
 		} catch (err) {
@@ -66,7 +67,7 @@ exports.getOne = (Model, popOptions) =>
 			res.status(200).json({
 				status: "success",
 				data: {
-					data: doc,
+					...doc,
 				},
 			});
 		} catch (err) {
@@ -81,9 +82,7 @@ exports.getAll = (Model) =>
 			res.status(200).json({
 				status: "success",
 				results: doc.length,
-				data: {
-					data: doc,
-				},
+				data: [...doc],
 			});
 		} catch (err) {
 			next(err);
