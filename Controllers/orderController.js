@@ -7,7 +7,10 @@ const getOrder = factory.getOne(Order);
 const createOrder = factory.createOne(Order);
 const updateOrder = factory.updateOne(Order);
 const deleteOrder = factory.deleteOne(Order);
-
+const getUserIdToReq = function (req, res, next) {
+	req.body.user = req.user._id;
+	next();
+};
 const getAllSellerOrders = async function (req, res, next) {
 	try {
 		const doc = await Order.find({ seller: req.user._id });
@@ -24,6 +27,7 @@ const getAllSellerOrders = async function (req, res, next) {
 };
 
 module.exports = {
+	getUserIdToReq,
 	getAllSellerOrders,
 	getAllOrders,
 	getOrder,
