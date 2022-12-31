@@ -13,6 +13,16 @@ const orderSchema = new mongoose.Schema({
 			quantity: {
 				type: Number,
 				required: [true, "Product must have quantity"],
+				validate: {
+					validator: async function (value) {
+						const productInventory = await Product.findById(
+							this.product
+						).select("inventory");
+						return value <= productInventory.inventory;
+					},
+					message:
+						"The quantity of the product cannot be bigger than the inventory that in the stock",
+				},
 			},
 			price: {
 				type: Number,
@@ -47,6 +57,25 @@ orderSchema.pre(/^find/, function (next) {
 		path: "product",
 		select: ["name", "seller"],
 	});
+	next();
+});
+
+orderSchema.pre("save", async function (next) {
+	const order = this;
+
+	// Update the inventory of each product in the order
+	for (const product of order.products) {
+		const productInventory = await Product.findById(product.product).select(
+			"inventory bought"
+		);
+		const newInventory = productInventory.inventory - product.quantity;
+		const newBought = productInventory.bought + product.quantity;
+		await Product.findByIdAndUpdate(product.product, {
+			inventory: newInventory,
+			bought: newBought,
+		});
+	}
+
 	next();
 });
 
