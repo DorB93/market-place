@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useCart } from "../context/CartContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
 import { useUser } from "./../context/UserContext";
 
@@ -93,8 +93,8 @@ export const Baj = styled.div`
 
 function NavBar() {
 	const { user, setLogout } = useUser();
-	const { openCart, cartQuantity } = useCart();
-
+	const { openCart, cartQuantity, removeCart } = useCart();
+	const navigate = useNavigate();
 	return (
 		<>
 			<Nav>
@@ -112,7 +112,9 @@ function NavBar() {
 								<NavLink
 									as='button'
 									onClick={() => {
+										removeCart();
 										setLogout();
+										navigate("/");
 									}}>
 									Log Out
 								</NavLink>
