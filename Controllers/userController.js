@@ -2,7 +2,7 @@ const multer = require("multer");
 const sharp = require("sharp");
 
 const AppError = require("../utils/appError");
-const User = require("./../models/userModel");
+const User = require("./../Models/userModel");
 const factory = require("./handlerFactory");
 
 const multerStorage = multer.memoryStorage();

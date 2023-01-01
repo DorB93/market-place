@@ -1,4 +1,4 @@
-const Order = require("../models/orderModel");
+const Order = require("../Models/orderModel");
 // const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 

@@ -2,7 +2,7 @@ require("dotenv").config({ path: "./.env", override: true });
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const AppError = require("../utils/appError");
-const User = require("./../models/userModel");
+const User = require("./../Models/userModel");
 const sendEmail = require("../utils/email");
 
 function createSendToken(user, statusCode, res) {
