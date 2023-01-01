@@ -10,7 +10,7 @@ const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 
 const productsController = require("./Controllers/productsController");
-const errorMiddleware = require("./controllers/errorController");
+const errorMiddleware = require("./Controllers/errorController");
 const AppError = require("./utils/appError");
 const reviewRouter = require("./Routes/reviewsRoutes");
 const orderRouter = require("./Routes/orderRoutes");
