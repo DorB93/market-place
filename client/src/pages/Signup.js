@@ -73,7 +73,6 @@ function Signup() {
 	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [role, setRole] = useState("user");
 	const [message, setMessage] = useState(null);
-	const [alertType, setAlertType] = useState(null);
 	const navigate = useNavigate();
 
 	function wait(sec) {
@@ -83,34 +82,31 @@ function Signup() {
 	}
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setMessage(null);
-		if (password !== passwordConfirm) {
-			setMessage("Password & Password Confirm must match! try again!");
-			return;
-		}
-		const user = await signupUser({
-			role,
-			passwordConfirm,
-			name,
-			email,
-			password,
-		});
-		if (user.status === "success") {
-			setAlertType(user.status);
-			setMessage(user.message);
+		try {
+			e.preventDefault();
+			setMessage(null);
+			if (password !== passwordConfirm) {
+				setMessage("Password & Password Confirm must match! try again!");
+				return;
+			}
+			const user = await signupUser({
+				role,
+				passwordConfirm,
+				name,
+				email,
+				password,
+			});
 			setLogin(user.data);
 			await wait(5);
 			navigate("/");
-		} else {
-			setAlertType(user.status);
-			setMessage(user.message);
+		} catch (err) {
+			setMessage(err.response.data.message);
 		}
 	};
 	return (
 		<>
 			<PageContainer>
-				{message && <MessageAlert message={message} type={alertType} />}
+				{message && <MessageAlert message={message} />}
 				<Form onSubmit={handleSubmit}>
 					<h1>Create an Account</h1>
 					<InputContainer>

@@ -43,29 +43,30 @@ function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState(null);
-	const [alertType, setAlertType] = useState(null);
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setMessage(null);
-		const respond = await loginUser({
-			email,
-			password,
-		});
-		console.log({ respond });
-		if (respond.status === "success") {
-			setLogin(respond.data._doc);
-			navigate("/");
-		} else {
-			setAlertType(respond.status);
-			setMessage(respond.message);
+		try {
+			e.preventDefault();
+			setMessage(null);
+			const respond = await loginUser({
+				email,
+				password,
+			});
+			console.log({ respond });
+			if (respond.status === "success") {
+				setLogin(respond.data._doc);
+				navigate("/");
+			}
+		} catch (err) {
+			console.log({ err });
+			setMessage(err.response.data.message);
 		}
 	};
 
 	return (
 		<PageContainer>
-			{message && <MessageAlert message={message} type={alertType} />}
+			{message && <MessageAlert message={message} />}
 			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>
