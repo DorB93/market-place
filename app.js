@@ -71,7 +71,7 @@ app.all("/api/v1/*", (req, res, next) => {
 });
 // Serving the front-end files
 app.get("*", async (req, res) => {
-	res.sendFile(pa.join(__dirname, "client", "build", "index.html"));
+	res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 // Error Middleware
