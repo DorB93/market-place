@@ -1,13 +1,13 @@
 {
 	"name": "shop-server",
 	"version": "1.0.0",
-	"description": "api for shopping app ",
-	"main": "server.js",
+	"description": "api for shopping app",
+	"main": "index.js",
 	"scripts": {
-		"dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
-		"start": "node server.js",
+		"dev": "concurrently \"nodemon index.js\" \"cd client && npm start\"",
+		"start": "node index.js",
 		"build": "npm i && cd client && npm i && npm build",
-		"debug": "ndb server.js"
+		"debug": "ndb index.js"
 	},
 	"author": "Dor Bezalel",
 	"license": "ISC",
