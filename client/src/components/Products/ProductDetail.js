@@ -64,9 +64,7 @@ function ProductDetail() {
 	const navigate = useNavigate();
 	const [productData, setProductData] = useState({});
 	const sameCategory = catalog
-		.filter(
-			(p) => p.id !== productData.id && p.category === productData.category
-		)
+		.filter((p) => p.id !== id && p.category === productData.category)
 		.map((p) => <Product key={p.id} product={p} />);
 
 	useEffect(() => {
@@ -90,7 +88,10 @@ function ProductDetail() {
 				<ProductWrapper>
 					<h1>{productData.title}</h1>
 					<Details>
-						<ProductImg src={productData.image} alt={productData.title} />
+						<ProductImg
+							src={`/img/products/${productData.image}`}
+							alt={productData.title}
+						/>
 						<TextDetails>
 							<h3>Category: {productData.category}</h3>
 							<p>{productData.description}</p>
