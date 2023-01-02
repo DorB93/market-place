@@ -20,9 +20,11 @@ function sendErrorProd(err, res) {
 		// Programing or other unknown error: we don't want to leak error details
 	} else {
 		// Send generic message
+		console.log({ err });
 		res.status(500).json({
 			status: "error",
 			message: err.message,
+			err,
 		});
 	}
 }
