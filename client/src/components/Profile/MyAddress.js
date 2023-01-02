@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import MessageAlert from "../MessageAlert";
+import ErrorAlert from "../ErrorAlert";
 import { updateUser } from "./MyInfo";
 import { Form, InputContainer, PageContainer } from "../../pages/Signup";
 import { useUser } from "../../context/UserContext";
@@ -12,11 +12,9 @@ function MyAddress({ user }) {
 	const [street, setStreet] = useState(null);
 	const [streetNum, setStreetNum] = useState(null);
 	const [zipCode, setZipCode] = useState(null);
-	const [message, setMessage] = useState(null);
-	const [alertType, setAlertType] = useState(null);
+	const [errorMessage, setErrorMessage] = useState(null);
 
 	useEffect(() => {
-		console.log(user);
 		if (user.shippingAddress) {
 			setState(user.shippingAddress.state);
 			setCity(user.shippingAddress.city);
@@ -28,7 +26,7 @@ function MyAddress({ user }) {
 
 	async function handleSubmitAddress(e) {
 		e.preventDefault();
-		setMessage(null);
+		setErrorMessage(null);
 		const shippingAddress = {
 			state,
 			city,
@@ -43,13 +41,12 @@ function MyAddress({ user }) {
 			}, 10000);
 			setLogin(updatedUser.data.user);
 		} catch (err) {
-			setAlertType("error");
-			setMessage(err.message);
+			setErrorMessage(err.message);
 		}
 	}
 	return (
 		<PageContainer>
-			{message && <MessageAlert message={message} type={alertType} />}
+			{errorMessage && <ErrorAlert message={errorMessage} />}
 			<Form onSubmit={handleSubmitAddress}>
 				<h2>Your Information</h2>
 				<InputContainer>

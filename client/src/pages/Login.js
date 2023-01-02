@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PageContainer, Form, InputContainer } from "./Signup";
 import { useUser } from "./../context/UserContext";
-import MessageAlert from "../components/MessageAlert";
+import ErrorAlert from "../components/ErrorAlert";
 import myAxios from "../api";
 
 export const SubmitBtn = styled.button`
@@ -66,7 +66,7 @@ function Login() {
 
 	return (
 		<PageContainer>
-			{message && <MessageAlert message={message} />}
+			{message && <ErrorAlert message={message} />}
 			<Form onSubmit={handleSubmit}>
 				<h1>Log In</h1>
 				<InputContainer>

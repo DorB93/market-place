@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useUser } from "../../context/UserContext";
-// import { API_URL } from "../helper";
 import { SubmitBtn } from "../../pages/Login";
 import { Form, InputContainer, PageContainer } from "../../pages/Signup";
-import MessageAlert from "../MessageAlert";
+import ErrorAlert from "../ErrorAlert";
 import myAxios from "../../api";
+import { PreviewContainer } from "../Seller/UploadProductPhoto";
 
 export const ImageInputContainer = styled(InputContainer)`
 	& img {
@@ -30,8 +30,8 @@ function MyInfo({ user }) {
 	const [name, setName] = useState(user.username);
 	const [email, setEmail] = useState(user.userEmail);
 	const [photo, setPhoto] = useState(null);
+	const [preview, setPreview] = useState(null);
 	const [message, setMessage] = useState(null);
-	const [alertType, setAlertType] = useState(null);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -54,19 +54,15 @@ function MyInfo({ user }) {
 					console.log("waiting...");
 				}, 10000);
 				setLogin(updatedUser.data.user);
-			} else {
-				setAlertType(updatedUser.status);
-				setMessage(updatedUser.message);
 			}
 		} catch (err) {
-			setAlertType("error");
 			setMessage(err.message);
 		}
 	};
 
 	return (
 		<PageContainer>
-			{message && <MessageAlert message={message} type={alertType} />}
+			{message && <ErrorAlert message={message} />}
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
 				<InputContainer>
@@ -100,13 +96,26 @@ function MyInfo({ user }) {
 					<input
 						type='file'
 						onChange={(e) => {
-							console.log(e);
-							setPhoto(e.target.files[0]);
+							const file = e.target.files[0];
+							setPhoto(file);
+							const reader = new FileReader();
+							reader.readAsDataURL(file);
+							reader.onloadend = () => {
+								setPreview(reader.result);
+								console.log(preview);
+							};
 						}}
 						name='photo'
 						accept='image/*'
 					/>
 				</ImageInputContainer>
+				{preview ? (
+					<PreviewContainer>
+						<img src={preview} alt='Preview' />
+					</PreviewContainer>
+				) : (
+					<span>No image selected</span>
+				)}
 				<SubmitBtn type='submit'>Update Me</SubmitBtn>
 			</Form>
 		</PageContainer>

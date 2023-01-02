@@ -1,48 +1,48 @@
 import React, { useState } from "react";
-import { API_URL } from "../../helper";
+import myAxios from "../../api";
 import { SubmitBtn } from "../../pages/Login";
 import { Form, InputContainer, PageContainer } from "../../pages/Signup";
-import MessageAlert from "../MessageAlert";
+import ErrorAlert from "../ErrorAlert";
+import SuccessAlert from "../SuccessAlert";
 
 async function changePassword(data) {
-	return fetch(`${API_URL}users/updateMyPassword`, {
-		method: "PATCH",
-		credentials: true,
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	}).then((data) => data.json());
+	return myAxios
+		.patch("users/updateMyPassword", data)
+		.then((res) => [res.data.data._doc, res.status]);
 }
 
 function UpdateMyPassword() {
-	const [message, setMessage] = useState(null);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const [okMessage, setOkMessage] = useState(null);
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-	const [alertType, setAlertType] = useState(null);
 
 	async function handleSubmit(e) {
-		e.preventDefault();
-		setMessage(null);
-		const passwordData = {
-			password,
-			newPassword,
-			newPasswordConfirm,
-		};
-		const user = await changePassword(passwordData);
-		if (user.status === "success") {
-			setAlertType(user.status);
-			setMessage("Your Password has been updated successfully! :)");
-		} else {
-			setAlertType(user.status);
-			setMessage(user.message);
+		try {
+			e.preventDefault();
+			setErrorMessage(null);
+			setOkMessage(null);
+			const passwordData = {
+				password,
+				newPassword,
+				newPasswordConfirm,
+			};
+			const [user, status] = await changePassword(passwordData);
+			if (status === 200) {
+				setOkMessage(
+					`${user.name} your Password has been updated successfully! :)`
+				);
+			}
+		} catch (err) {
+			setErrorMessage(err.message);
 		}
 	}
 
 	return (
 		<PageContainer>
-			{message && <MessageAlert message={message} type={alertType} />}
+			{errorMessage && <ErrorAlert message={errorMessage} />}
+			{okMessage && <SuccessAlert message={okMessage} />}
 			<Form onSubmit={handleSubmit}>
 				<h3>Update Your Password</h3>
 				<InputContainer>

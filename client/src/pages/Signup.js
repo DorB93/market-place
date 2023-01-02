@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitBtn } from "./Login";
 import { useUser } from "./../context/UserContext";
-import MessageAlert from "../components/MessageAlert";
+import MessageAlert from "../components/ErrorAlert";
 import { API_URL } from "../helper";
+import myAxios from "../api";
 
 export const PageContainer = styled.section`
 	height: 80%;
@@ -55,14 +56,17 @@ export const InputContainer = styled.div`
 	}
 `;
 async function signupUser(userData) {
-	return fetch(`${API_URL}users/signup`, {
-		method: "POST",
-		credentials: "include",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(userData),
-	}).then((data) => data.json());
+	return myAxios
+		.post("users/signup", userData)
+		.then((res) => res.data.data._doc);
+	// return fetch(`${API_URL}/users/signup`, {
+	// 	method: "POST",
+	// 	credentials: "include",
+	// 	headers: {
+	// 		"Content-Type": "application/json",
+	// 	},
+	// 	body: JSON.stringify(userData),
+	// }).then((data) => data.json());
 }
 
 function Signup() {
@@ -96,11 +100,11 @@ function Signup() {
 				email,
 				password,
 			});
-			setLogin(user.data);
+			setLogin(user);
 			await wait(5);
 			navigate("/");
 		} catch (err) {
-			setMessage(err.response.data.message);
+			setMessage(err.data.data.message);
 		}
 	};
 	return (
