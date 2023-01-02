@@ -12,9 +12,13 @@ process.on("uncaughtException", (err) => {
 console.log(process.env.NODE_ENV);
 
 // Connect to MongoDB database
-mongoose.connect("mongodb://127.0.0.1:27017/BSM").then(() => {
-	console.log("MongoDB connected successfully!");
-});
+mongoose
+	.connect(
+		`mongodb+srv://Dor2081:${process.env.MONGO_ATLAS_PASSWORD}@bsm.vlluoqa.mongodb.net/?retryWrites=true&w=majority`
+	)
+	.then(() => {
+		console.log("MongoDB connected successfully!");
+	});
 
 // START THE SERVER
 const port = process.env.PORT || 8000;
