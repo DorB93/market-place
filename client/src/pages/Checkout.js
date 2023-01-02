@@ -60,6 +60,7 @@ function Checkout() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [disable, setDisable] = useState(false);
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (user.shippingAddress) {
 			setShippingAddress(user.shippingAddress);
@@ -71,6 +72,7 @@ function Checkout() {
 		if (!item) return "";
 		return <CartItem key={item.id} item={item} />;
 	});
+
 	const handleOrder = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
@@ -86,7 +88,11 @@ function Checkout() {
 			});
 
 			const order = await myAxios
-				.post("/orders", { products, shippingAddress })
+				.post("/orders", {
+					products,
+					shippingAddress,
+					totalCost: cartFullPrice,
+				})
 				.then((res) => res.data);
 			if (order.status === "success") {
 				removeCart();

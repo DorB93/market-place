@@ -2,18 +2,33 @@ import React from "react";
 import styled from "styled-components";
 import { IoCheckmarkCircle, IoCloseCircleOutline } from "react-icons/io5";
 import { ProductContainer } from "../Products/Product";
+import { useNavigate } from "react-router-dom";
+const Navigator = styled.span`
+	cursor: pointer;
+	transition: 250ms all linear;
 
+	&:hover {
+		color: rgb(71, 158, 246);
+		text-shadow: 3px 5px 7px rgba(8, 61, 64, 0.8);
+	}
+`;
 const OrderContainer = styled(ProductContainer)`
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 450px, 100px;
+	grid-template-rows: 1fr, 7fr, 2fr;
 	height: 500px;
 	width: 400px;
 	justify-items: center;
 	align-content: space-between;
 	background-color: rgba(231, 231, 231, 0.777);
+	& footer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: end;
+	}
 `;
-const Footer = styled.footer`
+export const Footer = styled.footer`
 	justify-items: end;
 	display: flex;
 	justify-content: center;
@@ -24,11 +39,12 @@ const Footer = styled.footer`
 const ProductsOrder = styled.div`
 	display: grid;
 	width: 100%;
+	height: 100%;
 	/* flex-direction: column;
 	align-items: center; */
 	overflow: auto;
 	justify-items: center;
-
+	align-items: start;
 	&::-webkit-scrollbar {
 		width: 7px;
 	}
@@ -67,6 +83,8 @@ const ProductOrderContainer = styled(ProductContainer)`
 `;
 
 function OrderItem({ order }) {
+	const navigate = useNavigate();
+
 	const orderAt = `${order.createAt.split("T")[0]}, ${order.createAt
 		.split("T")[1]
 		.slice(0, 5)} `;
@@ -80,7 +98,7 @@ function OrderItem({ order }) {
 				<Footer>
 					<span>
 						Received:
-						{p.product.received ? (
+						{p.received ? (
 							<IoCheckmarkCircle style={{ color: "green" }} />
 						) : (
 							<IoCloseCircleOutline style={{ color: "red" }} />
@@ -92,8 +110,17 @@ function OrderItem({ order }) {
 	));
 	return (
 		<OrderContainer>
+			<Navigator
+				onClick={() => {
+					navigate(`${order._id}`);
+				}}>
+				For more information...
+			</Navigator>
 			<ProductsOrder>{products}</ProductsOrder>
-			<span>Ordered at: {orderAt}</span>
+			<footer>
+				<span>Total Cost: ${order.totalCost.toFixed(2)}</span>
+				<span>Ordered at: {orderAt}</span>
+			</footer>
 		</OrderContainer>
 	);
 }

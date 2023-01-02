@@ -13,6 +13,7 @@ import MyAddress from "../components/Profile/MyAddress";
 import MyProducts from "../components/Seller/MyProducts";
 import UploadProductPhoto from "../components/Seller/UploadProductPhoto";
 import SellerProductDetail from "../components/Seller/SellerProductDetail";
+import OrderDetail from "../components/Profile/OrderDetail";
 
 const ProfileWrapper = styled.section`
 	display: flex;
@@ -38,6 +39,10 @@ function Profile() {
 					<Routes>
 						<Route index element={<MyInfo user={user} />} />
 						<Route path='my-orders' element={<UserOrders user={user} />} />
+						<Route
+							path='my-orders/:orderId'
+							element={<OrderDetail user={user} />}
+						/>
 						<Route
 							path='password-update'
 							element={<UpdateMyPassword user={user} />}
