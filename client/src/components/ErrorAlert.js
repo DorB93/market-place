@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const ErrorFragment = styled.div`
+export const AlertFragment = styled.div`
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -9,7 +9,7 @@ const ErrorFragment = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-const ErrorContainer = styled.h4`
+export const AlertContainer = styled.h4`
 	background-color: red;
 	display: flex;
 	justify-content: center;
@@ -36,9 +36,9 @@ function ErrorAlert({ message }) {
 	}, 6000);
 
 	return (
-		<ErrorFragment>
-			<ErrorContainer> {message} </ErrorContainer>
-		</ErrorFragment>
+		<AlertFragment>
+			<AlertContainer> {message} </AlertContainer>
+		</AlertFragment>
 	);
 }
 

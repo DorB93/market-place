@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_URL } from "./helper";
 
 const myAxios = axios.create({
 	withCredentials: true,
-	baseURL: `http://127.0.0.1:4000/api/v1`,
+	baseURL: `${API_URL}`,
 });
 
 export default myAxios;
