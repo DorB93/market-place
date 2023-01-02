@@ -58,14 +58,6 @@ async function signupUser(userData) {
 	return myAxios
 		.post("users/signup", userData)
 		.then((res) => res.data.data._doc);
-	// return fetch(`${API_URL}/users/signup`, {
-	// 	method: "POST",
-	// 	credentials: "include",
-	// 	headers: {
-	// 		"Content-Type": "application/json",
-	// 	},
-	// 	body: JSON.stringify(userData),
-	// }).then((data) => data.json());
 }
 
 function Signup() {
