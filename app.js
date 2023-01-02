@@ -70,7 +70,7 @@ app.all("/api/v1/*", (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 // Serving the front-end files
-app.get("*", async (req, res) => {
+app.get("/", async (req, res) => {
 	res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 

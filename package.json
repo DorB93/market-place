@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
 		"start": "node server.js",
-		"build": "npm install; cd client && npm build",
+		"build": "npm install; cd client && npm i && npm build",
 		"debug": "ndb server.js"
 	},
 	"author": "Dor Bezalel",
