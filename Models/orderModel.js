@@ -43,6 +43,10 @@ const orderSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now(),
 	},
+	totalCost: {
+		type: Number,
+		require: true,
+	},
 	paid: {
 		type: Boolean,
 		default: true,
@@ -62,6 +66,7 @@ const orderSchema = new mongoose.Schema({
 // });
 orderSchema.pre(/^find/, function (next) {
 	this.populate("products.product").populate("user");
+	// .populate("products.product.seller");
 	next();
 });
 
