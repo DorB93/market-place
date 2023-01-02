@@ -8,7 +8,8 @@ import { useCart } from "../context/CartContext";
 import { useUser } from "../context/UserContext";
 import { SubmitBtn } from "./Login";
 import { Form, InputContainer } from "./Signup";
-
+import ErrorAlert from "../components/ErrorAlert";
+import SuccessAlert from "../components/SuccessAlert";
 const PageWrapper = styled.div`
 	display: flex;
 	width: 100%;
@@ -59,6 +60,8 @@ function Checkout() {
 	});
 	const [isLoading, setIsLoading] = useState(false);
 	const [disable, setDisable] = useState(false);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const [successMessage, setSuccessMessage] = useState(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -75,6 +78,8 @@ function Checkout() {
 
 	const handleOrder = async (e) => {
 		e.preventDefault();
+		setErrorMessage(null);
+		setSuccessMessage(null);
 		setIsLoading(true);
 		try {
 			const products = Object.entries(cart).map(([id, q]) => {
@@ -94,6 +99,7 @@ function Checkout() {
 					totalCost: cartFullPrice,
 				})
 				.then((res) => res.data);
+			setSuccessMessage("Order completed successfully! :)");
 			if (order.status === "success") {
 				removeCart();
 				updateCatalog();
@@ -101,6 +107,7 @@ function Checkout() {
 			}
 		} catch (err) {
 			console.log({ err });
+			setErrorMessage(err.response.data.message);
 		}
 		setIsLoading(false);
 	};
@@ -110,6 +117,8 @@ function Checkout() {
 	};
 	return (
 		<PageWrapper>
+			{errorMessage && <ErrorAlert message={errorMessage} />}
+			{successMessage && <SuccessAlert message={successMessage} />}
 			<SectionContainer>
 				<h2>Cart</h2>
 				<ItemsContainer>
