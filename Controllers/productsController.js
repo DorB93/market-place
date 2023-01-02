@@ -22,16 +22,14 @@ const uploadProductImages = upload.single("image");
 
 async function resizeProductImages(req, res, next) {
 	try {
-		console.log(req.file);
-		console.log(req.params);
 		if (!req.file?.fieldname) {
 			return next();
 		}
 		const filename = `product-${req.params.id}.jpeg`;
 		await sharp(req.file.buffer)
-			.resize(2000, 1333)
+			.resize({ width: 2000, height: 2000, fit: sharp.fit.fill })
 			.toFormat("jpeg")
-			.jpeg({ quality: 90 })
+			.jpeg({ quality: 100 })
 			.toFile(`client/public/img/products/${filename}`);
 		req.body.image = filename;
 
