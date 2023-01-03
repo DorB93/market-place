@@ -35,11 +35,13 @@ function MyProducts() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		getMyProducts().then((res) => {
 			setProducts(res);
+			setIsLoading(false);
 		});
 	}, []);
-	console.log(products);
+
 	const myCategories = Array.from(
 		new Set(products.map((product) => product.category))
 	).map((atr) => (
@@ -68,11 +70,17 @@ function MyProducts() {
 	));
 	return (
 		<StoreContainer>
-			<SellerCategoryNav>
-				<h4>My Categories:</h4>
-				{myCategories}
-			</SellerCategoryNav>
-			<ProductsContainer>{myProducts}</ProductsContainer>
+			{isLoading ? (
+				<LoadingSpinner />
+			) : (
+				<>
+					<SellerCategoryNav>
+						<h4>My Categories:</h4>
+						{myCategories}
+					</SellerCategoryNav>
+					<ProductsContainer>{myProducts}</ProductsContainer>
+				</>
+			)}
 		</StoreContainer>
 	);
 }

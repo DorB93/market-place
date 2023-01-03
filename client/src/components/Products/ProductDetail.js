@@ -63,26 +63,30 @@ function ProductDetail() {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [productData, setProductData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 	const sameCategory = catalog
 		.filter((p) => p.id !== id && p.category === productData.category)
 		.map((p) => <Product key={p.id} product={p} />);
 
 	useEffect(() => {
+		setIsLoading(true);
 		async function getProductData() {
 			try {
 				await myAxios.get(`products/${id}`).then((res) => {
 					console.log({ res });
 					setProductData(res.data.data._doc);
+					setIsLoading(false);
 				});
 			} catch (err) {
 				alert(err.message);
+				setIsLoading(false);
 			}
 		}
 		getProductData();
 	}, [id]);
 	return (
 		<>
-			{productData.length === 0 ? (
+			{isLoading ? (
 				<LoadingSpinner />
 			) : (
 				<ProductWrapper>
