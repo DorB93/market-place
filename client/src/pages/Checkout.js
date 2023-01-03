@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import myAxios from "../api";
@@ -10,6 +10,7 @@ import { SubmitBtn } from "./Login";
 import { Form, InputContainer } from "./Signup";
 import ErrorAlert from "../components/ErrorAlert";
 import SuccessAlert from "../components/SuccessAlert";
+import { updateUser } from "../components/Profile/MyInfo";
 const PageWrapper = styled.div`
 	display: flex;
 	width: 100%;
@@ -51,22 +52,25 @@ function Checkout() {
 		cartFullPrice,
 		cartQuantity,
 	} = useCart();
-	const [shippingAddress, setShippingAddress] = useState({
-		state: "",
-		city: "",
-		street: "",
-		streetNum: "",
-		zipCode: "",
-	});
 	const [isLoading, setIsLoading] = useState(false);
 	const [disable, setDisable] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 	const navigate = useNavigate();
-
+	const stateRef = useRef("");
+	const cityRef = useRef("");
+	const streetRef = useRef("");
+	const streetNumRef = useRef("");
+	const postCodeRef = useRef("");
 	useEffect(() => {
-		if (user.shippingAddress) {
-			setShippingAddress(user.shippingAddress);
+		if (user.shippingAddress?.state) {
+			stateRef.current.value = user.shippingAddress.state;
+			cityRef.current.value = user.shippingAddress.city;
+			streetRef.current.value = user.shippingAddress.street;
+			streetNumRef.current.value = user.shippingAddress.streetNum;
+			postCodeRef.current.value = user.shippingAddress.zipCode;
+		} else {
+			setDisable(false);
 		}
 	}, [user]);
 
@@ -91,7 +95,17 @@ function Checkout() {
 					seller: item.seller,
 				};
 			});
+			console.log({ stateRef });
+			const shippingAddress = {
+				state: stateRef.current.value,
+				city: cityRef.current.value,
+				street: streetRef.current.value,
+				streetNum: streetNumRef.current.value,
+				zipCode: postCodeRef.current.value,
+			};
 
+			console.log({ shippingAddress });
+			await updateUser(shippingAddress);
 			const order = await myAxios
 				.post("/orders", {
 					products,
@@ -111,10 +125,7 @@ function Checkout() {
 		}
 		setIsLoading(false);
 	};
-	const handleAddressChange = (e) => {
-		const { name, value } = e.target;
-		setShippingAddress({ ...shippingAddress, [name]: value });
-	};
+
 	return (
 		<PageWrapper>
 			{errorMessage && <ErrorAlert message={errorMessage} />}
@@ -142,8 +153,7 @@ function Checkout() {
 							placeholder='Israel'
 							type='text'
 							required
-							onChange={handleAddressChange}
-							value={shippingAddress.state}
+							ref={stateRef}
 						/>
 					</InputContainer>
 					<InputContainer>
@@ -155,8 +165,7 @@ function Checkout() {
 							placeholder='Tel-Aviv'
 							type='city'
 							required
-							onChange={handleAddressChange}
-							value={shippingAddress.city}
+							ref={cityRef}
 						/>
 					</InputContainer>
 					<InputContainer>
@@ -168,8 +177,7 @@ function Checkout() {
 							placeholder='Hertsel'
 							type='street'
 							required
-							onChange={handleAddressChange}
-							value={shippingAddress.street}
+							ref={streetRef}
 						/>
 					</InputContainer>
 					<InputContainer>
@@ -181,8 +189,7 @@ function Checkout() {
 							placeholder='32'
 							type='number'
 							required
-							onChange={handleAddressChange}
-							value={shippingAddress.streetNum}
+							ref={streetNumRef}
 						/>
 					</InputContainer>
 					<InputContainer>
@@ -194,8 +201,7 @@ function Checkout() {
 							placeholder='12345678'
 							type='test'
 							required
-							onChange={handleAddressChange}
-							value={shippingAddress.zipCode}
+							ref={postCodeRef}
 						/>
 					</InputContainer>
 					<label htmlFor='change-address' name='state'>
