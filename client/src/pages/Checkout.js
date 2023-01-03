@@ -11,6 +11,7 @@ import { Form, InputContainer } from "./Signup";
 import ErrorAlert from "../components/ErrorAlert";
 import SuccessAlert from "../components/SuccessAlert";
 import { updateUser } from "../components/Profile/MyInfo";
+import LoadingSpinner from "../components/LoadingSpinner";
 const PageWrapper = styled.div`
 	display: flex;
 	width: 100%;
@@ -63,6 +64,7 @@ function Checkout() {
 	const streetNumRef = useRef("");
 	const postCodeRef = useRef("");
 	useEffect(() => {
+		setIsLoading(true);
 		if (user.shippingAddress?.state) {
 			stateRef.current.value = user.shippingAddress.state;
 			cityRef.current.value = user.shippingAddress.city;
@@ -72,7 +74,8 @@ function Checkout() {
 		} else {
 			setDisable(false);
 		}
-	}, [user]);
+		setIsLoading(false);
+	}, []);
 
 	const items = Object.entries(cart).map(([id, q]) => {
 		const item = catalog.find((p) => p.id === id);
@@ -104,7 +107,6 @@ function Checkout() {
 				zipCode: postCodeRef.current.value,
 			};
 
-			console.log({ shippingAddress });
 			await updateUser(shippingAddress);
 			const order = await myAxios
 				.post("/orders", {
@@ -114,6 +116,7 @@ function Checkout() {
 				})
 				.then((res) => res.data);
 			setSuccessMessage("Order completed successfully! :)");
+			setIsLoading(false);
 			if (order.status === "success") {
 				removeCart();
 				updateCatalog();
@@ -130,121 +133,127 @@ function Checkout() {
 		<PageWrapper>
 			{errorMessage && <ErrorAlert message={errorMessage} />}
 			{successMessage && <SuccessAlert message={successMessage} />}
-			<SectionContainer>
-				<h2>Cart</h2>
-				<ItemsContainer>
-					<CartContents>{items}</CartContents>
-					<CartInfo>
-						<span>Total quantity: {cartQuantity}</span>
-						<span>Total price: {cartFullPrice.toFixed(2)}$</span>
-					</CartInfo>
-				</ItemsContainer>
-			</SectionContainer>
-			<SectionContainer>
-				<h2>Details</h2>
-				<Form>
-					<h3>Shipping Address</h3>
-					<InputContainer>
-						<label htmlFor='state' name='state'>
-							State:
-						</label>
-						<input
-							disabled={disable}
-							placeholder='Israel'
-							type='text'
-							required
-							ref={stateRef}
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='city' name='city'>
-							City:
-						</label>
-						<input
-							disabled={disable}
-							placeholder='Tel-Aviv'
-							type='city'
-							required
-							ref={cityRef}
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='street' name='street'>
-							Street:
-						</label>
-						<input
-							disabled={disable}
-							placeholder='Hertsel'
-							type='street'
-							required
-							ref={streetRef}
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='streetNum' name='streetNum'>
-							StreetNum:
-						</label>
-						<input
-							disabled={disable}
-							placeholder='32'
-							type='number'
-							required
-							ref={streetNumRef}
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='zipCode' name='zipCode'>
-							Zip Code:
-						</label>
-						<input
-							disabled={disable}
-							placeholder='12345678'
-							type='test'
-							required
-							ref={postCodeRef}
-						/>
-					</InputContainer>
-					<label htmlFor='change-address' name='state'>
-						Different shipping Address?
-						<input
-							id='change-address'
-							type='checkbox'
-							onChange={(e) => {
-								setDisable(!e.target.value);
-							}}
-							value={disable}
-						/>
-					</label>
-				</Form>
-				<Form onSubmit={handleOrder}>
-					<h3>Payment</h3>
-					<InputContainer>
-						<label htmlFor='state' name='state'>
-							Card number:
-						</label>
-						<input
-							disabled={true}
-							placeholder='XXXX-XXXX-XXXX-XXXX'
-							type='text'
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='state' name='state'>
-							Exp-Date:
-						</label>
-						<input disabled={true} placeholder='MM-YY' type='text' />
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='state' name='state'>
-							CVV:
-						</label>
-						<input disabled={true} placeholder='****' type='text' />
-					</InputContainer>
-					<SubmitBtn type='submit' disabled={isLoading}>
-						Complete Checkout
-					</SubmitBtn>
-				</Form>
-			</SectionContainer>
+			{isLoading ? (
+				<LoadingSpinner />
+			) : (
+				<>
+					<SectionContainer>
+						<h2>Cart</h2>
+						<ItemsContainer>
+							<CartContents>{items}</CartContents>
+							<CartInfo>
+								<span>Total quantity: {cartQuantity}</span>
+								<span>Total price: {cartFullPrice.toFixed(2)}$</span>
+							</CartInfo>
+						</ItemsContainer>
+					</SectionContainer>
+					<SectionContainer>
+						<h2>Details</h2>
+						<Form>
+							<h3>Shipping Address</h3>
+							<InputContainer>
+								<label htmlFor='state' name='state'>
+									State:
+								</label>
+								<input
+									disabled={disable}
+									placeholder='Israel'
+									type='text'
+									required
+									ref={stateRef}
+								/>
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='city' name='city'>
+									City:
+								</label>
+								<input
+									disabled={disable}
+									placeholder='Tel-Aviv'
+									type='city'
+									required
+									ref={cityRef}
+								/>
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='street' name='street'>
+									Street:
+								</label>
+								<input
+									disabled={disable}
+									placeholder='Hertsel'
+									type='street'
+									required
+									ref={streetRef}
+								/>
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='streetNum' name='streetNum'>
+									StreetNum:
+								</label>
+								<input
+									disabled={disable}
+									placeholder='32'
+									type='number'
+									required
+									ref={streetNumRef}
+								/>
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='zipCode' name='zipCode'>
+									Zip Code:
+								</label>
+								<input
+									disabled={disable}
+									placeholder='12345678'
+									type='test'
+									required
+									ref={postCodeRef}
+								/>
+							</InputContainer>
+							<label htmlFor='change-address' name='state'>
+								Different shipping Address?
+								<input
+									id='change-address'
+									type='checkbox'
+									onChange={(e) => {
+										setDisable(!e.target.value);
+									}}
+									value={disable}
+								/>
+							</label>
+						</Form>
+						<Form onSubmit={handleOrder}>
+							<h3>Payment</h3>
+							<InputContainer>
+								<label htmlFor='state' name='state'>
+									Card number:
+								</label>
+								<input
+									disabled={true}
+									placeholder='XXXX-XXXX-XXXX-XXXX'
+									type='text'
+								/>
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='state' name='state'>
+									Exp-Date:
+								</label>
+								<input disabled={true} placeholder='MM-YY' type='text' />
+							</InputContainer>
+							<InputContainer>
+								<label htmlFor='state' name='state'>
+									CVV:
+								</label>
+								<input disabled={true} placeholder='****' type='text' />
+							</InputContainer>
+							<SubmitBtn type='submit' disabled={isLoading}>
+								Complete Checkout
+							</SubmitBtn>
+						</Form>
+					</SectionContainer>
+				</>
+			)}
 		</PageWrapper>
 	);
 }
