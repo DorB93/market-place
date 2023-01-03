@@ -14,10 +14,7 @@ router
 router
 	.route("/:id")
 	.get(orderController.getOrder)
-	.patch(
-		authController.restrictTo("admin", "user"),
-		orderController.updateOrder
-	)
+	.patch(orderController.updateOrder)
 	.delete(
 		authController.restrictTo("admin", "user"),
 		orderController.deleteOrder

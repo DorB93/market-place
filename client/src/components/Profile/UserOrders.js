@@ -30,9 +30,11 @@ function UserOrders() {
 			satLoading(false);
 		});
 	}, []);
-	const content = orders.length
-		? orders.map((order) => <OrderItem key={order._id} order={order} />)
-		: "";
+	const content = orders.length ? (
+		orders.map((order) => <OrderItem key={order._id} order={order} />)
+	) : (
+		<h3>You haven't made any order yet...</h3>
+	);
 	return (
 		<OrdersContainer>{loading ? <LoadingSpinner /> : content}</OrdersContainer>
 	);

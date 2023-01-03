@@ -122,7 +122,8 @@ function OrderDetail() {
 					setLoading(false);
 				});
 		} catch (err) {
-			setErrorMessage(err.data.message);
+			console.log({ err });
+			setErrorMessage(err.response.data.message);
 			setLoading(false);
 		}
 	}
