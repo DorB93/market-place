@@ -46,9 +46,9 @@ function UploadProductPhoto() {
 
 	useEffect(() => {
 		getProduct(productId).then((res) => {
-			console.log({ res });
+			
 			setProduct(res.data._doc);
-			console.log({ product });
+			
 		});
 	}, []);
 
@@ -56,12 +56,12 @@ function UploadProductPhoto() {
 		e.preventDefault();
 		const formData = new FormData();
 		if (image) {
-			console.log(image);
+			
 			formData.append("image", image);
 		}
 		try {
 			const productData = await updateData(productId, formData);
-			console.log({ productData });
+		
 			if (productData.status === "success") {
 				navigate("my-profile/my-products");
 			}
@@ -90,7 +90,7 @@ function UploadProductPhoto() {
 								reader.readAsDataURL(file);
 								reader.onloadend = () => {
 									setPreview(reader.result);
-									console.log(preview);
+							
 								};
 							}}
 							name='image'

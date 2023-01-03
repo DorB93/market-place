@@ -98,7 +98,6 @@ function Checkout() {
 					seller: item.seller,
 				};
 			});
-			console.log({ stateRef });
 			const shippingAddress = {
 				state: stateRef.current.value,
 				city: cityRef.current.value,
@@ -123,7 +122,6 @@ function Checkout() {
 				navigate("/");
 			}
 		} catch (err) {
-			console.log({ err });
 			setErrorMessage(err.response.data.message);
 		}
 		setIsLoading(false);

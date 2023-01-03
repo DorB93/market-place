@@ -104,7 +104,7 @@ function OrderDetail() {
 		const val = e.target.checked;
 		order.products[i].received = val;
 		setOrder({ ...order });
-		console.log({ order });
+		
 	}
 
 	async function handleSubmit(e) {
@@ -122,7 +122,7 @@ function OrderDetail() {
 					setLoading(false);
 				});
 		} catch (err) {
-			console.log({ err });
+			
 			setErrorMessage(err.response.data.message);
 			setLoading(false);
 		}

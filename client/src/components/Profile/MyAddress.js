@@ -42,7 +42,6 @@ function MyAddress({ user }) {
 		try {
 			const updatedUser = await updateUser({ shippingAddress });
 			await setTimeout(() => {
-				console.log("waiting...");
 			}, 10000);
 			setLogin(updatedUser.data.user);
 			setIsLoading(false);

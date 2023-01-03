@@ -38,7 +38,6 @@ function useProducts() {
 		async function getProducts() {
 			try {
 				await myAxios.get("products").then((res) => {
-					console.log({ res });
 					setProducts(res.data.data);
 				});
 			} catch (err) {

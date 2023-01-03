@@ -12,10 +12,9 @@ const OrdersContainer = styled(ProductsContainer)`
 export async function getOrders() {
 	try {
 		const res = await myAxios.get("orders/my-orders");
-		console.log({ res });
+
 		return res.data;
 	} catch (err) {
-		console.error({ err });
 		throw new Error(err.message);
 	}
 }
@@ -25,7 +24,6 @@ function UserOrders() {
 	useEffect(() => {
 		satLoading(true);
 		getOrders().then((res) => {
-			console.log({ res });
 			setOrders(res.data);
 			satLoading(false);
 		});

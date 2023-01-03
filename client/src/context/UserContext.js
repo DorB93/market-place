@@ -55,7 +55,6 @@ function UserProvider({ children }) {
 			value={{
 				user,
 				setLogin: (user) => {
-					console.log({ user });
 					dispatch({ type: "LOGIN", payload: { ...user } });
 				},
 				setLogout: () => dispatch({ type: "LOGOUT" }),

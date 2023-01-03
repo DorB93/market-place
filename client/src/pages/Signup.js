@@ -155,7 +155,6 @@ function Signup() {
 						<input
 							type='checkbox'
 							onChange={(e) => {
-								console.log(e);
 								if (e.target.checked) {
 									setRole("seller");
 								} else {

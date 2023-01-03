@@ -20,7 +20,6 @@ export async function updateUser(userData) {
 		const res = await myAxios.patch("/users/updateMe", userData);
 		return res.data;
 	} catch (err) {
-		console.error(err);
 		throw new Error(err.message);
 	}
 }
@@ -49,7 +48,6 @@ function MyInfo({ user }) {
 		try {
 			const updatedUser = await updateUser(formData);
 			if (updatedUser.status === "success") {
-				console.log({ updatedUser });
 				await setTimeout(() => {
 					console.log("waiting...");
 				}, 10000);
@@ -102,7 +100,7 @@ function MyInfo({ user }) {
 							reader.readAsDataURL(file);
 							reader.onloadend = () => {
 								setPreview(reader.result);
-								console.log(preview);
+								
 							};
 						}}
 						name='photo'

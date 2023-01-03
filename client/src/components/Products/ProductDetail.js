@@ -73,7 +73,6 @@ function ProductDetail() {
 		async function getProductData() {
 			try {
 				await myAxios.get(`products/${id}`).then((res) => {
-					console.log({ res });
 					setProductData(res.data.data._doc);
 					setIsLoading(false);
 				});

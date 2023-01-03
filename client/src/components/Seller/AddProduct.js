@@ -63,7 +63,7 @@ function AddProduct() {
 					description,
 				})
 				.then((res) => res.data);
-			console.log({ newProduct });
+
 			if (newProduct.status === "success") {
 				setProductData({
 					productName: "",

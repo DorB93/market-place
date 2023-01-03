@@ -20,7 +20,6 @@ function sendErrorProd(err, res) {
 		// Programing or other unknown error: we don't want to leak error details
 	} else {
 		// Send generic message
-		console.log({ err });
 		res.status(500).json({
 			status: "error",
 			message: err.message,
@@ -58,7 +57,6 @@ function errorMiddleware(err, req, res, next) {
 	err.statusCode = err.statusCode || 500;
 	err.status = err.status || "error";
 
-	console.log(err.name);
 	if (process.env.NODE_ENV === "development") {
 		sendErrorDev(err, res);
 	} else if (process.env.NODE_ENV === "production") {

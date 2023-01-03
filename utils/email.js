@@ -13,7 +13,6 @@ const sendEmail = async (options) => {
 				pass: process.env.EMAIL_PASSWORD,
 			},
 		});
-		// console.log(transporter);
 		//Define the email options
 		const mailOptions = {
 			from: "Dor Bezalel <dor.netcraft@gmail.com>",
@@ -21,7 +20,6 @@ const sendEmail = async (options) => {
 			subject: options.subject,
 			text: options.message,
 		};
-		// console.log(mailOptions);
 		//Actually send email
 		await transporter.sendMail(mailOptions);
 	} catch (error) {}

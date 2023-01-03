@@ -8,7 +8,7 @@ function useAxiosFetch(url, options) {
 		try {
 			const res = await myAxios(url, options);
 			const json = res.data.data;
-			console.log({ json });
+
 			setData(json);
 		} catch (err) {
 			return err;

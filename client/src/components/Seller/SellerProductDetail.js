@@ -68,8 +68,8 @@ function SellerProductDetail() {
 		if (description !== product.description)
 			formData.append("description", description);
 		if (image) formData.append("image", image);
-		const res = await updateData(productId, formData);
-		console.log({ res });
+		await updateData(productId, formData);
+		
 		navigate("/my-profile/my-products");
 	}
 

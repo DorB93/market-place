@@ -31,14 +31,6 @@ export const SubmitBtn = styled.button`
 	}
 `;
 
-async function loginUser(userData) {
-	try {
-		return myAxios.post(`/users/login`, userData).then((res) => res.data);
-	} catch (err) {
-		console.log(err.message);
-	}
-}
-
 function Login() {
 	const { setLogin } = useUser();
 	const [email, setEmail] = useState("");
@@ -47,6 +39,13 @@ function Login() {
 	const [isLoading, satIsLoading] = useState(false);
 	const navigate = useNavigate();
 
+	async function loginUser(userData) {
+		try {
+			return myAxios.post(`/users/login`, userData).then((res) => res.data);
+		} catch (err) {
+			throw err;
+		}
+	}
 	const handleSubmit = async (e) => {
 		try {
 			e.preventDefault();

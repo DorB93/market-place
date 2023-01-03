@@ -15,7 +15,7 @@ export const ProductsContainer = styled.section`
 function Products() {
 	const { catalog } = useCart();
 	const { filter } = useFilter();
-	// console.log({ catalog });
+
 	const products = catalog
 		.filter((product) => {
 			if (filter === "All") return product;
