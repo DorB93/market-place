@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
+const Invoice = require("./invoiceModel");
 const Product = require("./productModel");
-const User = require("./userModel");
 
 const orderSchema = new mongoose.Schema({
 	products: [
 		{
 			product: {
 				type: mongoose.Schema.ObjectId,
-				ref: Product,
+				ref: "Product",
 				required: [true, "Cart Must have a product!"],
 			},
 			quantity: {
@@ -32,11 +32,16 @@ const orderSchema = new mongoose.Schema({
 				type: Boolean,
 				default: false,
 			},
+			seller: {
+				type: mongoose.Schema.ObjectId,
+				ref: "User",
+				required: [true, "A Product Must belong to a Seller!"],
+			},
 		},
 	],
 	user: {
 		type: mongoose.Schema.ObjectId,
-		ref: User,
+		ref: "User",
 		required: [true, "Cart Must belong to a user!"],
 	},
 	createAt: {
@@ -88,7 +93,43 @@ orderSchema.pre("save", async function (next) {
 
 	next();
 });
-
+orderSchema.pre("save", async function (next) {
+	const order = this;
+	const sellersProducts = order.products.reduce(
+		(acc, { product, quantity, received, price, seller }) => {
+			if (acc[seller]) {
+				acc[seller].push({ product, received, price, quantity });
+			} else {
+				acc[seller] = [{ product, received, price, quantity }];
+			}
+			return acc;
+		},
+		{}
+	);
+	const arrInvoicesPromises = Object.entries(sellersProducts).map(
+		async ([seller, products]) => {
+			const total = products.reduce(
+				(sum, { price, quantity }) => sum + price * quantity,
+				0
+			);
+			const { shippingAddress, user } = order;
+			try {
+				const sellerInvoice = await Invoice.create({
+					seller,
+					products,
+					user,
+					shippingAddress,
+					total,
+				});
+				return sellerInvoice;
+			} catch (err) {
+				return err;
+			}
+		}
+	);
+	await Promise.all(arrInvoicesPromises);
+	next();
+});
 const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;
