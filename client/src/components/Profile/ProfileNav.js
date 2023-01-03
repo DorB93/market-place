@@ -29,11 +29,14 @@ const ProfileLink = styled(NavLink)`
 	font-size: large;
 	cursor: pointer;
 	&:hover {
-		background-color: rgba(186, 186, 186, 0.835);
+		/* background-color: rgba(186, 186, 186, 0.835); */
+		transform: scale(1.1) translateX(5px);
 	}
 	&.active {
-		background-color: rgba(186, 186, 186, 0.835);
+		/* background-color: rgba(186, 186, 186, 0.835); */
 		font-weight: bold;
+		text-shadow: 6px 6px 5px rgba(77, 77, 77, 0.64);
+		transform: scale(1.1) translateX(5px);
 	}
 `;
 
