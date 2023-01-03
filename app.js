@@ -16,6 +16,7 @@ const reviewRouter = require("./Routes/reviewsRoutes");
 const orderRouter = require("./Routes/orderRoutes");
 const userRouter = require("./Routes/userRoutes");
 const productsRouter = require("./Routes/productsRoutes");
+const invoiceRouter = require("./Routes/invoiceRoutes");
 const app = express();
 
 // Body parser, reading data from body into req.body
@@ -53,6 +54,11 @@ app.use(compression());
 // Allow Cross-Origin Resource Sharing
 app.use(
 	cors({
+		origin: [
+			"http://127.0.0.1:4000",
+			"http://127.0.0.1:3000",
+			"https://bsm.onrender.com/",
+		],
 		credentials: true,
 	})
 );
@@ -62,6 +68,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/products", productsRouter);
+app.use("/api/v1/invoices", invoiceRouter);
 app.get("/api/v1/categories", productsController.getAllCategories);
 
 // Handling Unhandled Routes - must be the last
