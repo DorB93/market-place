@@ -48,7 +48,7 @@ const TimePriceOrder = styled.div`
 const BtnGotItems = styled(SubmitBtn)`
 	height: fit-content;
 `;
-const AddressContainer = styled(TimePriceOrder)`
+export const AddressContainer = styled(TimePriceOrder)`
 	width: 200px;
 `;
 const OrdersProducts = styled.section`
@@ -104,7 +104,6 @@ function OrderDetail() {
 		const val = e.target.checked;
 		order.products[i].received = val;
 		setOrder({ ...order });
-		
 	}
 
 	async function handleSubmit(e) {
@@ -122,7 +121,6 @@ function OrderDetail() {
 					setLoading(false);
 				});
 		} catch (err) {
-			
 			setErrorMessage(err.response.data.message);
 			setLoading(false);
 		}

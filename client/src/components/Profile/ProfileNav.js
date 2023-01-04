@@ -58,7 +58,9 @@ const ProfileNav = ({ user }) => {
 			{isSeller && (
 				<>
 					<h3>Seller</h3>
-					<ProfileLink to='/my-profile/my-dashboard'>My Dashboard</ProfileLink>
+					<ProfileLink to='/my-profile/manage-orders'>
+						Manage Orders
+					</ProfileLink>
 					<ProfileLink to='/my-profile/new-product'>
 						Add New Product
 					</ProfileLink>

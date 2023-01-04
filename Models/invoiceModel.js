@@ -27,10 +27,6 @@ const invoiceSchema = new mongoose.Schema(
 					type: Boolean,
 					default: false,
 				},
-				sent: {
-					type: Boolean,
-					default: false,
-				},
 			},
 		],
 		user: {
@@ -48,6 +44,14 @@ const invoiceSchema = new mongoose.Schema(
 		total: {
 			type: Number,
 			required: true,
+		},
+		createAt: {
+			type: Date,
+			default: Date.now(),
+		},
+		sent: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{

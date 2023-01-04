@@ -7,7 +7,7 @@ import { useNavigate, Route, Routes } from "react-router-dom";
 import MyInfo from "../components/Profile/MyInfo";
 import UpdateMyPassword from "../components/Profile/UpdateMyPassword";
 import UserOrders from "../components/Profile/UserOrders";
-import SellerDashboard from "../components/Seller/SellerDashboard";
+import ManageOrders from "../components/Seller/ManageOrders";
 import AddProduct from "../components/Seller/AddProduct";
 import MyAddress from "../components/Profile/MyAddress";
 import MyProducts from "../components/Seller/MyProducts";
@@ -49,8 +49,8 @@ function Profile() {
 						/>
 						<Route path='address-update' element={<MyAddress user={user} />} />
 						<Route
-							path='my-dashboard'
-							element={<SellerDashboard user={user} />}
+							path='manage-orders'
+							element={<ManageOrders user={user} />}
 						/>
 						<Route path='new-product' element={<AddProduct user={user} />} />
 						<Route path='my-products' element={<MyProducts user={user} />} />

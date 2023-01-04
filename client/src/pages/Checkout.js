@@ -62,7 +62,7 @@ function Checkout() {
 	const cityRef = useRef("");
 	const streetRef = useRef("");
 	const streetNumRef = useRef("");
-	const postCodeRef = useRef("");
+	const zipCodeRef = useRef("");
 	useEffect(() => {
 		setIsLoading(true);
 		if (user.shippingAddress?.state) {
@@ -70,7 +70,7 @@ function Checkout() {
 			cityRef.current.value = user.shippingAddress.city;
 			streetRef.current.value = user.shippingAddress.street;
 			streetNumRef.current.value = user.shippingAddress.streetNum;
-			postCodeRef.current.value = user.shippingAddress.zipCode;
+			zipCodeRef.current.value = user.shippingAddress.zipCode;
 		} else {
 			setDisable(false);
 		}
@@ -103,7 +103,7 @@ function Checkout() {
 				city: cityRef.current.value,
 				street: streetRef.current.value,
 				streetNum: streetNumRef.current.value,
-				zipCode: postCodeRef.current.value,
+				zipCode: zipCodeRef.current.value,
 			};
 
 			await updateUser(shippingAddress);
@@ -206,7 +206,7 @@ function Checkout() {
 									placeholder='12345678'
 									type='test'
 									required
-									ref={postCodeRef}
+									ref={zipCodeRef}
 								/>
 							</InputContainer>
 							<label htmlFor='change-address' name='state'>
