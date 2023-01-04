@@ -19,7 +19,8 @@ This is a full-stack application that allows users to buy and sell items with ea
 you can visit here to see the site working: https://bsm.onrender.com/
 
 Here some screenshots from the site
-![image](https://user-images.githubusercontent.com/99673204/210637533-e6e16745-ff53-40d0-b4ca-2c8dbb78d1fc.png)
-![image](https://user-images.githubusercontent.com/99673204/210637624-a556824a-26da-4f07-bc89-210cbcaf9a19.png)
-![image](https://user-images.githubusercontent.com/99673204/210637709-674be45a-83f6-429c-a03a-edd89f1ca044.png)
-![image](https://user-images.githubusercontent.com/99673204/210637927-d4a28e8b-9e02-40cb-b1a3-1a7fc1e3b1b3.png)
+![image](https://user-images.githubusercontent.com/99673204/210638356-318f7392-dfb1-4d43-93d4-e5e08de6901a.png)
+![image](https://user-images.githubusercontent.com/99673204/210638422-203dd3cd-42b4-42b2-8a0a-fc36b3542edd.png)
+![image](https://user-images.githubusercontent.com/99673204/210638475-c2ba87ae-7c9a-4fc8-9fcf-48b20c7a37c7.png)
+![image](https://user-images.githubusercontent.com/99673204/210638505-38cb6b5b-5114-4534-8e8d-c60e0bffa538.png)
+![image](https://user-images.githubusercontent.com/99673204/210638597-08e83ad7-1fde-4793-9615-5e1bcf5dc6aa.png)
