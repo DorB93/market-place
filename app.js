@@ -54,11 +54,6 @@ app.use(compression());
 // Allow Cross-Origin Resource Sharing
 app.use(
 	cors({
-		origin: [
-			"http://127.0.0.1:4000",
-			"http://127.0.0.1:3000",
-			"https://bsm.onrender.com/",
-		],
 		credentials: true,
 	})
 );
