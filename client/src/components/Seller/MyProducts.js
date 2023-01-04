@@ -50,7 +50,7 @@ function MyProducts() {
 		</CategoryOption>
 	));
 	const myProducts = products.map((product) => (
-		<ProductContainer>
+		<ProductContainer key={product._id}>
 			{isLoading && <LoadingSpinner />}
 			<img
 				src={`/img/products/${product.image}`}
