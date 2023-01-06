@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { SubmitBtn } from "../../pages/Login";
-import { Form, InputContainer, PageContainer } from "../../pages/Signup";
-import { ProductImg } from "../Products/ProductDetail";
-import { ImageInputContainer } from "../Profile/MyInfo";
-import {
-	BtnContainer,
-	getProduct,
-	PreviewContainer,
-	updateData,
-} from "./UploadProductPhoto";
 
-const ProductImage = styled(ProductImg)`
-	width: 60%;
-	object-fit: contain;
-`;
+import {
+	Form,
+	SubmitBtn,
+	InputContainer,
+	PageContainer,
+	PreviewContainer,
+	ImageInputContainer,
+	BtnContainer,
+	ProductImage,
+} from "../StyleComponents";
+
+import { getProduct, updateData } from "./UploadProductPhoto";
 
 function SellerProductDetail() {
 	const navigate = useNavigate();
@@ -69,7 +66,7 @@ function SellerProductDetail() {
 			formData.append("description", description);
 		if (image) formData.append("image", image);
 		await updateData(productId, formData);
-		
+
 		navigate("/my-profile/my-products");
 	}
 

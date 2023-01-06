@@ -1,35 +1,16 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import styled from "styled-components";
-import { PageContainer, Form, InputContainer } from "./Signup";
+import {
+	PageContainer,
+	Form,
+	InputContainer,
+	SubmitBtn,
+} from "../components/StyleComponents";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
 import myAxios from "../api";
 import LoadingSpinner from "../components/LoadingSpinner";
-
-export const SubmitBtn = styled.button`
-	height: 35px;
-	font-size: 15px;
-	border-radius: 40px;
-	background-color: lightgray;
-	transition: all linear 250ms;
-	border: 0;
-	width: 100px;
-
-	&[type="submit"] {
-		color: white;
-		background-color: rgb(71, 158, 246);
-	}
-	&:hover {
-		transform: scale(1.05);
-	}
-	&:hover[type="submit"] {
-		background-color: white;
-		box-shadow: 2px 2px 2px 2px rgba(71, 159, 246, 0.453);
-		color: rgb(71, 158, 246);
-	}
-`;
 
 function Login() {
 	const { setLogin } = useUser();

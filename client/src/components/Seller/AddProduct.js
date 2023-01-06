@@ -2,31 +2,13 @@ import React, { useState } from "react";
 // import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import myAxios from "../../api";
-import { Form, PageContainer, InputContainer } from "../../pages/Signup";
-import { SubmitBtn } from "../../pages/Login";
-/*
-	{
-		name: {
-			type: String,
-		},
-		category: {
-			type: String,
-		},
-		inventory: {
-			type: Number,
-		},
-		price: {
-			type: Number,
-		},
-		summary: {
-			type: String,
-		},
-		description: {
-			type: String,
-		},
-		images: [String],
-		},
-	},*/
+import {
+	SubmitBtn,
+	Form,
+	PageContainer,
+	InputContainer,
+} from "../StyleComponents";
+
 function AddProduct() {
 	const [productData, setProductData] = useState({
 		name: "",

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import myAxios from "../../api";
-import { SubmitBtn } from "../../pages/Login";
-import { Form, InputContainer, PageContainer } from "../../pages/Signup";
+import {
+	Form,
+	SubmitBtn,
+	InputContainer,
+	PageContainer,
+} from "../StyleComponents";
 import ErrorAlert from "../ErrorAlert";
 import LoadingSpinner from "../LoadingSpinner";
 import SuccessAlert from "../SuccessAlert";

@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import myAxios from "../../api";
 import LoadingSpinner from "../LoadingSpinner";
 import OrderItem from "./OrderItem";
-import { ProductsContainer } from "../Products/Products";
-import styled from "styled-components";
+import { OrdersContainer } from "../StyleComponents";
 
-const OrdersContainer = styled(ProductsContainer)`
-	width: 100%;
-`;
 
 export async function getOrders() {
 	try {

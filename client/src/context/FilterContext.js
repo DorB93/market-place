@@ -21,27 +21,3 @@ export function FilterProvider({ children }) {
 		</FilterContext.Provider>
 	);
 }
-/*
-
-const CategoryContext = createContext({});
-
-export function useCategory() {
-	return useContext(CategoryContext);
-}
-
-export function CategoryProvider({ children }) {
-	const [category, setCategory] = useState("All");
-	const selectCategory = (category) => {
-		setCategory(category);
-	};
-	return (
-		<CategoryContext.Provider
-			value={{
-				category,
-				selectCategory,
-			}}>
-			{children}
-		</CategoryContext.Provider>
-	);
-}
- */

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { AlertFragment, AlertContainer } from "./ErrorAlert";
 
-const SuccessContainer = styled(AlertContainer)`
-	background-color: green;
-	font-weight: normal;
-`;
+import { AlertFragment, SuccessContainer } from "./StyleComponents";
+
 function SuccessAlert({ message }) {
 	const [showAlert, setShowAlert] = useState(true);
 

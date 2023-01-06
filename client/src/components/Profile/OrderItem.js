@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoCheckmarkCircle, IoCloseCircleOutline } from "react-icons/io5";
-import { ProductContainer } from "../Products/Product";
+import { ProductContainer } from "../StyleComponents";
 import { useNavigate } from "react-router-dom";
 const Navigator = styled.span`
 	cursor: pointer;

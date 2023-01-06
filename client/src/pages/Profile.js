@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import React, { useEffect } from "react";
-// import { NavLink } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
+
 import { useUser } from "../context/UserContext";
 import ProfileNav from "../components/Profile/ProfileNav";
-import { useNavigate, Route, Routes } from "react-router-dom";
 import MyInfo from "../components/Profile/MyInfo";
 import UpdateMyPassword from "../components/Profile/UpdateMyPassword";
 import UserOrders from "../components/Profile/UserOrders";
@@ -14,13 +13,7 @@ import MyProducts from "../components/Seller/MyProducts";
 import UploadProductPhoto from "../components/Seller/UploadProductPhoto";
 import SellerProductDetail from "../components/Seller/SellerProductDetail";
 import OrderDetail from "../components/Profile/OrderDetail";
-
-const ProfileWrapper = styled.section`
-	display: flex;
-	justify-content: start;
-	width: 100%;
-	position: relative;
-`;
+import { ProfileWrapper } from "../components/StyleComponents";
 
 function Profile() {
 	const navigate = useNavigate();

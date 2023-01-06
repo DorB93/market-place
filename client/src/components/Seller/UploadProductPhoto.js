@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import myAxios from "../../api";
-import { Form, PageContainer, InputContainer } from "../../pages/Signup";
-import { SubmitBtn } from "../../pages/Login";
-import { ImageInputContainer } from "../Profile/MyInfo";
-import styled from "styled-components";
+import {
+	Form,
+	SubmitBtn,
+	PageContainer,
+	PreviewContainer,
+	BtnContainer,
+	ImageInputContainer,
+} from "../StyleComponents";
 
-export const PreviewContainer = styled(InputContainer)`
-	display: flex;
-	justify-content: center;
-	align-items: color-interpolation-filters;
-	& img {
-		height: 465px;
-		width: 419px;
-		object-fit: contain;
-	}
-`;
-export const BtnContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-`;
 export async function getProduct(id) {
 	try {
 		const res = await myAxios.get(`products/${id}`);
@@ -46,9 +34,7 @@ function UploadProductPhoto() {
 
 	useEffect(() => {
 		getProduct(productId).then((res) => {
-			
 			setProduct(res.data._doc);
-			
 		});
 	}, []);
 
@@ -56,12 +42,11 @@ function UploadProductPhoto() {
 		e.preventDefault();
 		const formData = new FormData();
 		if (image) {
-			
 			formData.append("image", image);
 		}
 		try {
 			const productData = await updateData(productId, formData);
-		
+
 			if (productData.status === "success") {
 				navigate("my-profile/my-products");
 			}
@@ -90,7 +75,6 @@ function UploadProductPhoto() {
 								reader.readAsDataURL(file);
 								reader.onloadend = () => {
 									setPreview(reader.result);
-							
 								};
 							}}
 							name='image'

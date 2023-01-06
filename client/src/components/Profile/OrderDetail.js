@@ -1,81 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { IoCheckmarkCircle, IoCloseCircleOutline } from "react-icons/io5";
+
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import myAxios from "../../api";
-import { SubmitBtn } from "../../pages/Login";
-import { Form, PageContainer } from "../../pages/Signup";
 import ErrorAlert from "../ErrorAlert";
 import SuccessAlert from "../SuccessAlert";
 import LoadingSpinner from "../LoadingSpinner";
-import { ProductContainer, ProductMinDetails } from "../Products/Product";
-
-const OrderContainer = styled(Form)`
-	width: 700px;
-	display: flex;
-	flex-direction: column;
-	& h3 {
-		margin: 0;
-	}
-`;
-const DetailContainer = styled.div`
-	display: flex;
-	justify-content: space-around;
-	background-color: white;
-	border-radius: 12px;
-	width: 600px;
-`;
-
-const ProductOdContainer = styled(ProductContainer)`
-	width: 600px;
-`;
-const ReceivedProduct = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-const TimePriceOrder = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 10px;
-	padding: 5px;
-	& h3 {
-		align-self: center;
-		margin: 0;
-	}
-`;
-const BtnGotItems = styled(SubmitBtn)`
-	height: fit-content;
-`;
-export const AddressContainer = styled(TimePriceOrder)`
-	width: 200px;
-`;
-const OrdersProducts = styled.section`
-	height: 70%;
-	overflow: auto;
-	flex-shrink: 0;
-	max-height: 60vh;
-	overflow: auto;
-	box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
-	-webkit-box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
-	-moz-box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
-	border-radius: 15px;
-	&::-webkit-scrollbar {
-		width: 7px;
-	}
-
-	&::-webkit-scrollbar-track {
-		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
-	}
-
-	&::-webkit-scrollbar-thumb {
-		overflow: hidden;
-		background-color: gray;
-		outline: 0.5px solid rgba(255, 255, 255, 0.444);
-		border-radius: 12px;
-	}
-`;
+import {
+	PageContainer,
+	ProductMinDetails,
+	AddressContainer,
+	BtnGotItems,
+	DetailContainer,
+	OrderContainer,
+	OrdersProducts,
+	ProductOdContainer,
+	ReceivedProduct,
+	TimePriceOrder,
+} from "../StyleComponents";
 
 async function getOrderData(id) {
 	try {

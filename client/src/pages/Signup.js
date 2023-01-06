@@ -1,59 +1,15 @@
 import React, { useState } from "react";
 
-import styled from "styled-components";
-import { NavLink, useNavigate } from "react-router-dom";
-import { SubmitBtn } from "./Login";
+import { Form, NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
 import myAxios from "../api";
+import {
+	InputContainer,
+	PageContainer,
+	SubmitBtn,
+} from "../components/StyleComponents";
 
-export const PageContainer = styled.section`
-	height: 80%;
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
-	position: relative;
-`;
-export const Form = styled.form`
-	background-color: #dfdfdf8f;
-	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-	height: 80%;
-	width: 455px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 12px;
-	gap: 15px;
-	padding: 15px;
-`;
-export const InputContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 80%;
-
-	& label {
-		color: black;
-	}
-
-	& input {
-		height: fit-content;
-		width: 180px;
-		border: 0;
-		border-radius: 12px;
-		padding: 10px;
-		box-shadow: 1px 1px 5px 2px rgba(128, 128, 128, 0.193);
-	}
-	& input[type="checkbox"] {
-		width: 20px;
-		padding: 10px;
-		border-radius: 50%;
-		background-color: transparent;
-	}
-`;
 async function signupUser(userData) {
 	return myAxios
 		.post("users/signup", userData)

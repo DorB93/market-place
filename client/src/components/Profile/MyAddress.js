@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import ErrorAlert from "../ErrorAlert";
 import { updateUser } from "./MyInfo";
-import { Form, InputContainer, PageContainer } from "../../pages/Signup";
+import {
+	Form,
+	InputContainer,
+	SubmitBtn,
+	PageContainer,
+} from "../StyleComponents";
 import { useUser } from "../../context/UserContext";
-import { SubmitBtn } from "../../pages/Login";
 import LoadingSpinner from "../LoadingSpinner";
 
 function MyAddress({ user }) {
@@ -41,8 +45,7 @@ function MyAddress({ user }) {
 		};
 		try {
 			const updatedUser = await updateUser({ shippingAddress });
-			await setTimeout(() => {
-			}, 10000);
+			await setTimeout(() => {}, 10000);
 			setLogin(updatedUser.data.user);
 			setIsLoading(false);
 		} catch (err) {

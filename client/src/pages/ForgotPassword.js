@@ -1,8 +1,11 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
-// import styled from "styled-components";
-import { PageContainer, Form, InputContainer } from "./Signup";
-import { SubmitBtn } from "./Login";
+
+import {
+	PageContainer,
+	Form,
+	InputContainer,SubmitBtn
+} from "./../components/StyleComponents";
+
 function ForgotPassword() {
 	return (
 		<PageContainer>

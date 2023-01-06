@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+
 import { useUser } from "../../context/UserContext";
-import { SubmitBtn } from "../../pages/Login";
-import { Form, InputContainer, PageContainer } from "../../pages/Signup";
+
+import {
+	Form,
+	SubmitBtn,
+	PreviewContainer,
+	InputContainer,
+	PageContainer,
+	ImageInputContainer,
+} from "../StyleComponents";
 import ErrorAlert from "../ErrorAlert";
 import myAxios from "../../api";
-import { PreviewContainer } from "../Seller/UploadProductPhoto";
-
-export const ImageInputContainer = styled(InputContainer)`
-	& img {
-		height: 100px;
-		width: 100px;
-		border-radius: 50%;
-	}
-`;
 
 export async function updateUser(userData) {
 	try {
@@ -100,7 +98,6 @@ function MyInfo({ user }) {
 							reader.readAsDataURL(file);
 							reader.onloadend = () => {
 								setPreview(reader.result);
-								
 							};
 						}}
 						name='photo'

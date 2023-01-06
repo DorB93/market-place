@@ -1,16 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import Product from "./Product";
 import LoadingSpinner from "../LoadingSpinner";
 import { useFilter } from "../../context/FilterContext";
 import { useCart } from "../../context/CartContext";
-
-export const ProductsContainer = styled.section`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
-`;
+import { ProductsContainer } from "../StyleComponents";
 
 function Products() {
 	const { catalog } = useCart();

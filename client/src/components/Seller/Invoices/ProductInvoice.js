@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductContainer, ProductMinDetails } from "../../Products/Product";
+import { ProductContainer, ProductMinDetails } from "../../StyleComponents";
 function ProductInvoice({ product, quantity, price, sent }) {
 	return (
 		<>

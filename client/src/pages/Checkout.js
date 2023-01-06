@@ -1,47 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import myAxios from "../api";
-import { CartContents, CartInfo } from "../components/Cart/Cart";
 import CartItem from "../components/Cart/CartItem";
 import { useCart } from "../context/CartContext";
 import { useUser } from "../context/UserContext";
-import { SubmitBtn } from "./Login";
-import { Form, InputContainer } from "./Signup";
+
 import ErrorAlert from "../components/ErrorAlert";
 import SuccessAlert from "../components/SuccessAlert";
 import { updateUser } from "../components/Profile/MyInfo";
 import LoadingSpinner from "../components/LoadingSpinner";
-const PageWrapper = styled.div`
-	display: flex;
-	width: 100%;
-	justify-content: space-evenly;
-`;
-const SectionContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 20px;
-	max-height: 82vh;
-`;
-const ItemsContainer = styled.div`
-	height: 88%;
-	transition: all 500ms linear;
-	display: flex;
-	flex-direction: column;
-
-	justify-content: space-evenly;
-	background-color: #dfdfdf8f;
-	width: 455px;
-	border-radius: 10px;
-	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-
-	& h2,
-	h3 {
-		text-align: center;
-	}
-`;
+import {
+	ItemsContainer,
+	PageWrapper,
+	SectionContainer,
+	CartContents,
+	CartInfo,
+	Form,
+	InputContainer,
+	SubmitBtn,
+} from "../components/StyleComponents";
 
 function Checkout() {
 	const { user } = useUser();
