@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Form, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "./../context/UserContext";
 import ErrorAlert from "../components/ErrorAlert";
 import myAxios from "../api";
@@ -8,6 +8,7 @@ import {
 	InputContainer,
 	PageContainer,
 	SubmitBtn,
+	Form,
 } from "../components/StyleComponents";
 
 async function signupUser(userData) {

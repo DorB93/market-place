@@ -17,7 +17,7 @@ function Products() {
 		.map((p) => <Product key={p.id} product={p} />);
 	return (
 		<>
-			<ProductsContainer>
+			<ProductsContainer container spacing={3}>
 				{products.length === 0 ? <LoadingSpinner /> : products}
 			</ProductsContainer>
 		</>

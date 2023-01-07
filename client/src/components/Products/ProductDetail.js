@@ -16,6 +16,7 @@ import {
 	RelatedContainer,
 	TextDetails,
 } from "../StyleComponents";
+import { AddShoppingCart } from "@mui/icons-material";
 
 function ProductDetail() {
 	const { increaseItemQuantity, catalog } = useCart();
@@ -60,17 +61,23 @@ function ProductDetail() {
 							<PriceAction>
 								<span>Price: ${Number(productData.price).toFixed(2)}</span>
 								<BtnAddToCart
+									variant='contained'
+									color='primary'
 									onClick={() => {
-										increaseItemQuantity(productData.id);
+										increaseItemQuantity(id);
 									}}>
-									Add to cart
+									<AddShoppingCart />
 								</BtnAddToCart>
-								<BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
+								<BackBtn variant='text' onClick={() => navigate(-1)}>
+									Back
+								</BackBtn>
 							</PriceAction>
 						</TextDetails>
 					</Details>
 					<h3>More from this category:</h3>
-					<RelatedContainer>{sameCategory}</RelatedContainer>
+					<RelatedContainer container spacing={3} xs={{ gap: 3 }}>
+						{sameCategory}
+					</RelatedContainer>
 				</ProductWrapper>
 			)}
 		</>

@@ -1,6 +1,5 @@
 import React from "react";
-
-import { IoTrashOutline, IoRemove, IoAdd } from "react-icons/io5";
+import { Delete, Add, Remove } from "@mui/icons-material";
 import { useCart } from "../../context/CartContext";
 import {
 	CartBtnItem,
@@ -27,29 +26,36 @@ function CartItem({ item }) {
 				<h3>{item.name}</h3>
 				<ItemQuantity>
 					<CartBtnItem
+						fontSize='large'
+						color='primary'
+						aria-label='add'
 						onClick={() => {
 							increaseItemQuantity(item.id);
 						}}
 						className='btn btn-qControl'>
-						<IoAdd />
+						<Add />
 					</CartBtnItem>
 					<span>{getItemQuantity(item.id)}</span>
 					<CartBtnItem
+						fontSize='large'
+						aria-label='decrease'
+						color='primary'
 						onClick={() => {
 							decreaseItemQuantity(item.id);
 						}}
 						className='btn btn-qControl'>
-						<IoRemove />
+						<Remove />
 					</CartBtnItem>
 					<span>Price: ${Number(item.getPrice()).toFixed(2)}</span>
 				</ItemQuantity>
 			</ItemDetails>
 			<RemoveItem>
 				<CartBtnItem
+					color='error'
 					onClick={() => {
 						removeItem(item.id);
 					}}>
-					<IoTrashOutline />
+					<Delete />
 				</CartBtnItem>
 			</RemoveItem>
 		</ItemCard>

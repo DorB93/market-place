@@ -37,7 +37,9 @@ function Cart() {
 	}
 	return (
 		<CartContainer>
-			<BtnCloseCart onClick={closeCart}>X</BtnCloseCart>
+			<BtnCloseCart variant='outlined' color='error' onClick={closeCart}>
+				X
+			</BtnCloseCart>
 			<h2>Cart</h2>
 			<CartContents>{items}</CartContents>
 			<CartInfo>
@@ -45,15 +47,16 @@ function Cart() {
 				<span>Total price: {cartFullPrice.toFixed(2)}$</span>
 			</CartInfo>
 			<CartBtnContainer>
-				<CartBtn className='primary' onClick={checkoutHandle}>
+				<CartBtn variant='contained' color='primary' onClick={checkoutHandle}>
 					Checkout
 				</CartBtn>
 				<CartBtn
+					variant='contained'
 					onClick={() => {
 						removeCart();
 						closeCart();
 					}}
-					className='secondary'>
+					color='secondary'>
 					Reset
 				</CartBtn>
 			</CartBtnContainer>

@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 import myAxios from "../../api";
@@ -45,23 +46,25 @@ function MyProducts() {
 		</CategoryOption>
 	));
 	const myProducts = products.map((product) => (
-		<ProductContainer key={product._id}>
-			{isLoading && <LoadingSpinner />}
-			<img
-				src={`/img/products/${product.image}`}
-				alt={product.title}
-				onLoad={() => setIsLoading(false)}
-				onError={() => setIsLoading(false)}
-				loading='lazy'
-			/>
-			<ProductMinDetails>
-				<h3>{product.name}</h3>
-				<span>
-					<StyledLink to={`${product._id}`}>Click for more..</StyledLink>
-				</span>
-				<span>Price: ${Number(product.price).toFixed(2)}</span>
-			</ProductMinDetails>
-		</ProductContainer>
+		<Grid item>
+			<ProductContainer key={product._id}>
+				{isLoading && <LoadingSpinner />}
+				<img
+					src={`/img/products/${product.image}`}
+					alt={product.title}
+					onLoad={() => setIsLoading(false)}
+					onError={() => setIsLoading(false)}
+					loading='lazy'
+				/>
+				<ProductMinDetails>
+					<h3>{product.name}</h3>
+					<span>
+						<StyledLink to={`${product._id}`}>Click for more..</StyledLink>
+					</span>
+					<span>Price: ${Number(product.price).toFixed(2)}</span>
+				</ProductMinDetails>
+			</ProductContainer>
+		</Grid>
 	));
 	return (
 		<StoreContainer>
@@ -73,7 +76,9 @@ function MyProducts() {
 						<h4>My Categories:</h4>
 						{myCategories}
 					</SellerCategoryNav>
-					<ProductsContainer>{myProducts}</ProductsContainer>
+					<ProductsContainer container spacing={3}>
+						{myProducts}
+					</ProductsContainer>
 				</>
 			)}
 		</StoreContainer>
