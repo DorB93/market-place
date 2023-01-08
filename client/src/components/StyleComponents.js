@@ -2,12 +2,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
 	AppBar,
+	Box,
 	Button,
-	Card,
 	Container,
 	Grid,
 	IconButton,
 	Paper,
+	TextField,
 } from "@mui/material";
 
 ////////////////// Manage Orders ///////////////
@@ -53,9 +54,9 @@ export const ConfirmAction = styled.div`
 `;
 
 ////////////////////// sign up //////////////////
-export const PageContainer = styled.section`
-	height: 80%;
-	width: 80%;
+export const PageContainer = styled(Container)`
+	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -63,48 +64,28 @@ export const PageContainer = styled.section`
 	padding: 20px;
 	position: relative;
 `;
-export const Form = styled.form`
+export const Form = styled(Box)`
 	background-color: #dfdfdf8f;
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-	height: 80%;
-	width: 455px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	border-radius: 12px;
+	height: fit-content;
 	gap: 15px;
 	padding: 15px;
+	margin-bottom: 15px;
+	& h2 {
+		align-self: center;
+	}
 `;
-export const InputContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 80%;
-
-	& label {
-		color: black;
-	}
-
-	& input {
-		height: fit-content;
-		width: 180px;
-		border: 0;
-		border-radius: 12px;
-		padding: 10px;
-		box-shadow: 1px 1px 5px 2px rgba(128, 128, 128, 0.193);
-	}
-	& input[type="checkbox"] {
-		width: 20px;
-		padding: 10px;
-		border-radius: 50%;
-		background-color: transparent;
-	}
+export const InputContainer = styled(TextField)`
+	background-color: white;
+	width: 90%;
 `;
 
 //////////////// Login /////////////////////////
 export const SubmitBtn = styled(Button)`
-	font-size: 15px;
-	background-color: lightgray;
 	transition: all linear 250ms;
 	border: 0;
 
@@ -115,21 +96,17 @@ export const SubmitBtn = styled(Button)`
 	&:hover {
 		transform: scale(1.05);
 	}
-	&:hover[type="submit"] {
-		background-color: white;
-		box-shadow: 2px 2px 2px 2px rgba(71, 159, 246, 0.453);
-		color: rgb(71, 158, 246);
-	}
 `;
 
 ///////////////// Filter ///////////////////
-export const CategorySelector = styled.nav`
+export const CategorySelector = styled(Box)`
 	width: 100%;
 	box-sizing: border-box;
 	box-shadow: 2px 2px 5px 1px rgba(128, 128, 128, 0.193);
-	height: 30px;
+	height: fit-content;
 	background-color: #dfdfdf8f;
-	display: flex;
+
+	/* display: flex; */
 	justify-content: flex-start;
 	align-items: center;
 	justify-self: center;
@@ -169,28 +146,30 @@ export const ProductsContainer = styled(Grid)`
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
+	width: 100%;
 `;
 
 /////////////////// Product //////////////////////
 export const InventoryAlert = styled.span`
 	position: absolute;
-	bottom: 3px;
-	left: 3px;
+	top: 7px;
+	left: 7px;
 	color: red;
 	z-index: 4;
 `;
 export const ProductContainer = styled(Paper)`
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	/* box-shadow: 2px 2px 5px 3px rgba(40, 40, 40, 0.34); */
-	width: 300px;
-	height: 250px;
+	width: 200px;
+	height: 320px;
 	font-size: 15px;
 	border-radius: 10px;
 	box-sizing: border-box;
 	color: rgb(125, 125, 125);
 	overflow: hidden;
-	padding: 15px;
+	padding: 10px;
 	background-color: white;
 	transition: all linear 200ms;
 	position: relative;
@@ -200,9 +179,9 @@ export const ProductContainer = styled(Paper)`
 	}
 
 	& img {
-		width: 50%;
+		width: 80%;
 		object-fit: contain;
-		justify-self: center;
+		align-self: center;
 	}
 `;
 export const ProductMinDetails = styled.div`
@@ -297,8 +276,8 @@ export const BackBtn = styled(Button)`
 	}
 `;
 
-//////////////////// Cart  ////////////////
-export const CartContainer = styled.div`
+////////////////////  Cart  ////////////////
+export const CartContainer = styled(Box)`
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -309,8 +288,8 @@ export const CartContainer = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	background: rgba(179, 179, 179, 0.987);
-	z-index: 3;
-	width: 380px;
+	z-index: 6;
+	/* width: 380px; */
 	border-radius: 10px;
 	box-shadow: 3px 3px 5px 2px rgba(110, 110, 110, 0.868);
 	transition: all 500ms linear;
@@ -533,12 +512,12 @@ export const Nav = styled(AppBar)`
 	justify-content: space-between;
 	align-items: center;
 	/* height: 60px; */
-	width: 100vw;
+	width: 100%;
 	padding: 5px;
 	background-color: rgb(255, 255, 255);
-	margin-bottom: 3px;
+	margin-bottom: 7px;
 	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-	z-index: 1;
+	z-index: 5;
 	font-size: 20px;
 	color: rgb(125, 125, 125);
 `;

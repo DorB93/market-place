@@ -5,7 +5,6 @@ import {
 	BtnAddToCart,
 	InventoryAlert,
 	ProductContainer,
-	ProductMinDetails,
 	StyledLink,
 } from "../StyleComponents";
 import { AddShoppingCart } from "@mui/icons-material";
