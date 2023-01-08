@@ -39,7 +39,7 @@ function Signup() {
 			e.preventDefault();
 			setMessage(null);
 			if (password !== passwordConfirm) {
-				setMessage("Password & Password Confirm must match! try again!");
+				setMessage("Password &  Password Confirm must match! try again!");
 				return;
 			}
 			const user = await signupUser({
