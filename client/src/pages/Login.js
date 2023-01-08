@@ -52,34 +52,37 @@ function Login() {
 				<LoadingSpinner />
 			) : (
 				<>
-					<Form onSubmit={handleSubmit}>
-						<h1>Log In</h1>
-						<InputContainer>
-							<label htmlFor='email' name='email'>
-								Email:
-							</label>
-							<input
-								placeholder='yourmail@example.com'
-								type='email'
-								required
-								onChange={(e) => {
-									setEmail(e.target.value);
-								}}
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='password'>Password:</label>
-							<input
-								minLength={8}
-								placeholder='shh-secret'
-								type='password'
-								name='password'
-								onChange={(e) => {
-									setPassword(e.target.value);
-								}}
-								required
-							/>
-						</InputContainer>
+					<Form
+						component='form'
+						autoComplete='off'
+						onSubmit={handleSubmit}
+						sx={{
+							width: {
+								xs: "100%",
+								sm: 400,
+							},
+						}}>
+						<h2>Log In</h2>
+						<InputContainer
+							size='small'
+							required
+							type='email'
+							id='email'
+							label='Email:'
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
+						/>
+						<InputContainer
+							size='small'
+							label='Password:'
+							type='password'
+							minLength={8}
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
+							required
+						/>
 						<SubmitBtn type='submit'>Login</SubmitBtn>
 						<p>
 							Forgot your password?{" "}

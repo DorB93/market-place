@@ -10,6 +10,7 @@ import {
 	SubmitBtn,
 	Form,
 } from "../components/StyleComponents";
+import { Box } from "@mui/material";
 
 async function signupUser(userData) {
 	return myAxios
@@ -59,55 +60,66 @@ function Signup() {
 		<>
 			<PageContainer>
 				{message && <ErrorAlert message={message} />}
-				<Form onSubmit={handleSubmit}>
-					<h1>Create an Account</h1>
-					<InputContainer>
-						<label htmlFor='name'>Full Name:</label>
-						<input
-							placeholder='Enter your full name'
-							type='text'
-							onChange={(e) => {
-								setName(e.target.value);
-							}}
-							required
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='email'>Email:</label>
-						<input
-							placeholder='yourmail@example.com'
-							type='email'
-							onChange={(e) => {
-								setEmail(e.target.value);
-							}}
-							required
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='password'>Password:</label>
-						<input
-							minLength={8}
-							placeholder='shh-secret'
-							type='password'
-							onChange={(e) => {
-								setPassword(e.target.value);
-							}}
-							required
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label htmlFor='passwordConfirm'>Password Confirm:</label>
-						<input
-							minLength={8}
-							placeholder='shh-secret'
-							type='password'
-							onChange={(e) => {
-								setPasswordConfirm(e.target.value);
-							}}
-							required
-						/>
-					</InputContainer>
-					<InputContainer>
+				<Form
+					component='form'
+					autoComplete='off'
+					onSubmit={handleSubmit}
+					sx={{
+						width: {
+							xs: "100%",
+							sm: 400,
+						},
+					}}>
+					<h2>Create an Account</h2>
+					<InputContainer
+						size='small'
+						required
+						id='fullName'
+						label='Full Name:'
+						onChange={(e) => {
+							setName(e.target.value);
+						}}
+					/>
+					<InputContainer
+						size='small'
+						required
+						type='email'
+						id='email'
+						label='Email:'
+						onChange={(e) => {
+							setEmail(e.target.value);
+						}}
+					/>
+					<InputContainer
+						size='small'
+						label='Password:'
+						type='password'
+						minLength={8}
+						onChange={(e) => {
+							setPassword(e.target.value);
+						}}
+						error={password !== passwordConfirm || password.length < 8}
+						helperText={
+							password !== passwordConfirm
+								? "Both of the passwords must match!"
+								: password.length < 8
+								? "Password must contained 8 cha"
+								: ""
+						}
+						required
+					/>
+					<InputContainer
+						size='small'
+						label='Password Confirm:'
+						minLength={8}
+						type='password'
+						onChange={(e) => {
+							setPasswordConfirm(e.target.value);
+						}}
+						required
+					/>
+
+					<Box>
 						<label htmlFor='role'>Want to join our sellers family?</label>
 						<input
 							type='checkbox'
@@ -119,11 +131,11 @@ function Signup() {
 								}
 							}}
 						/>
-					</InputContainer>
-					<InputContainer>
+					</Box>
+					<Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
 						<SubmitBtn type='reset'>Reset</SubmitBtn>
 						<SubmitBtn type='submit'>Submit</SubmitBtn>
-					</InputContainer>
+					</Box>
 				</Form>
 				<p>
 					Already have an account? <NavLink to='/login'>click here</NavLink>

@@ -43,16 +43,16 @@ function Checkout() {
 	useEffect(() => {
 		setIsLoading(true);
 		if (user.shippingAddress?.state) {
-			stateRef.current.value = user.shippingAddress.state;
-			cityRef.current.value = user.shippingAddress.city;
-			streetRef.current.value = user.shippingAddress.street;
-			streetNumRef.current.value = user.shippingAddress.streetNum;
-			zipCodeRef.current.value = user.shippingAddress.zipCode;
+			stateRef.current = user.shippingAddress.state;
+			cityRef.current = user.shippingAddress.city;
+			streetRef.current = user.shippingAddress.street;
+			streetNumRef.current = user.shippingAddress.streetNum;
+			zipCodeRef.current = user.shippingAddress.zipCode;
 		} else {
 			setDisable(false);
 		}
 		setIsLoading(false);
-	}, []);
+	}, [user]);
 
 	const items = Object.entries(cart).map(([id, q]) => {
 		const item = catalog.find((p) => p.id === id);
@@ -65,6 +65,12 @@ function Checkout() {
 		setErrorMessage(null);
 		setSuccessMessage(null);
 		setIsLoading(true);
+
+		console.log({ stateRef });
+		console.log({ cityRef });
+		console.log({ streetRef });
+		console.log({ streetNumRef });
+		console.log({ zipCodeRef });
 		try {
 			const products = Object.entries(cart).map(([id, q]) => {
 				const item = catalog.find((p) => p.id === id);
@@ -76,11 +82,11 @@ function Checkout() {
 				};
 			});
 			const shippingAddress = {
-				state: stateRef.current.value,
-				city: cityRef.current.value,
-				street: streetRef.current.value,
-				streetNum: streetNumRef.current.value,
-				zipCode: zipCodeRef.current.value,
+				state: stateRef.current,
+				city: cityRef.current,
+				street: streetRef.current,
+				streetNum: streetNumRef.current,
+				zipCode: zipCodeRef.current,
 			};
 
 			await updateUser(shippingAddress);
@@ -124,105 +130,102 @@ function Checkout() {
 					</SectionContainer>
 					<SectionContainer>
 						<h2>Details</h2>
-						<Form>
+						<Form
+							component='div'
+							sx={{
+								width: {
+									xs: "500px",
+								},
+							}}>
 							<h3>Shipping Address</h3>
-							<InputContainer>
-								<label htmlFor='state' name='state'>
-									State:
-								</label>
-								<input
-									disabled={disable}
-									placeholder='Israel'
-									type='text'
-									required
-									ref={stateRef}
-								/>
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='city' name='city'>
-									City:
-								</label>
-								<input
-									disabled={disable}
-									placeholder='Tel-Aviv'
-									type='city'
-									required
-									ref={cityRef}
-								/>
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='street' name='street'>
-									Street:
-								</label>
-								<input
-									disabled={disable}
-									placeholder='Hertsel'
-									type='street'
-									required
-									ref={streetRef}
-								/>
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='streetNum' name='streetNum'>
-									StreetNum:
-								</label>
-								<input
-									disabled={disable}
-									placeholder='32'
-									type='number'
-									required
-									ref={streetNumRef}
-								/>
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='zipCode' name='zipCode'>
-									Zip Code:
-								</label>
-								<input
-									disabled={disable}
-									placeholder='12345678'
-									type='test'
-									required
-									ref={zipCodeRef}
-								/>
-							</InputContainer>
-							<label htmlFor='change-address' name='state'>
-								Different shipping Address?
-								<input
-									id='change-address'
-									type='checkbox'
-									onChange={(e) => {
-										setDisable(!e.target.value);
-									}}
-									value={disable}
-								/>
-							</label>
+							<InputContainer
+								size='small'
+								id='state'
+								label='State:'
+								onChange={(e) => (stateRef.current = e.target.value)}
+								defaultValue={stateRef.current}
+							/>
+							<InputContainer
+								size='small'
+								id='city'
+								label='City:'
+								onChange={(e) => (cityRef.current = e.target.value)}
+								defaultValue={cityRef.current}
+								type='text'
+							/>
+							<InputContainer
+								size='small'
+								id='street'
+								label='Street:'
+								onChange={(e) => (streetRef.current = e.target.value)}
+								defaultValue={streetRef.current}
+							/>
+							<InputContainer
+								size='small'
+								id='streetNum'
+								label='StreetNum:'
+								type='number'
+								onChange={(e) => (streetNumRef.current = e.target.value)}
+								defaultValue={streetNumRef.current}
+							/>
+							<InputContainer
+								size='small'
+								id='zipCode'
+								label='Post Code:'
+								onChange={(e) => (zipCodeRef.current = e.target.value)}
+								defaultValue={zipCodeRef.current}
+								type='text'
+							/>
 						</Form>
-						<Form onSubmit={handleOrder}>
+						<Form
+							component='div'
+							sx={{
+								width: {
+									xs: "500px",
+								},
+							}}>
 							<h3>Payment</h3>
-							<InputContainer>
-								<label htmlFor='state' name='state'>
-									Card number:
-								</label>
-								<input
-									disabled={true}
-									placeholder='XXXX-XXXX-XXXX-XXXX'
-									type='text'
-								/>
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='state' name='state'>
-									Exp-Date:
-								</label>
-								<input disabled={true} placeholder='MM-YY' type='text' />
-							</InputContainer>
-							<InputContainer>
-								<label htmlFor='state' name='state'>
-									CVV:
-								</label>
-								<input disabled={true} placeholder='****' type='text' />
-							</InputContainer>
-							<SubmitBtn type='submit' disabled={isLoading}>
+							<InputContainer
+								disabled
+								size='small'
+								id='expDate'
+								label='Expiry date'
+								fullWidth
+								autoComplete='cc-exp'
+								defaultValue='MM/YY'
+							/>
+							<InputContainer
+								disabled
+								size='small'
+								id='cardNumber'
+								label='Card number'
+								fullWidth
+								autoComplete='cc-number'
+								defaultValue='XXXX-XXXX-XXXX-XXXX'
+							/>
+							<InputContainer
+								disabled
+								size='small'
+								id='cardName'
+								label='Name on card'
+								fullWidth
+								autoComplete='cc-name'
+								defaultValue='Your Name'
+							/>
+							<InputContainer
+								disabled
+								size='small'
+								id='cvv'
+								label='CVV'
+								fullWidth
+								autoComplete='cc-csc'
+								defaultValue='###'
+							/>
+
+							<SubmitBtn
+								onClick={handleOrder}
+								type='submit'
+								disabled={isLoading}>
 								Complete Checkout
 							</SubmitBtn>
 						</Form>

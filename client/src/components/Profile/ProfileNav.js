@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { NavContainer, ProfileLink } from "../StyleComponents";
 
 const ProfileNav = ({ user }) => {

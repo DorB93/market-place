@@ -36,7 +36,7 @@ function Cart() {
 		}
 	}
 	return (
-		<CartContainer>
+		<CartContainer width={{ xs: "100%", sm: "380px" }}>
 			<BtnCloseCart variant='outlined' color='error' onClick={closeCart}>
 				X
 			</BtnCloseCart>
