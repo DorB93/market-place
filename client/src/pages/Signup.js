@@ -60,16 +60,7 @@ function Signup() {
 		<>
 			<PageContainer>
 				{message && <ErrorAlert message={message} />}
-				<Form
-					component='form'
-					autoComplete='off'
-					onSubmit={handleSubmit}
-					sx={{
-						width: {
-							xs: "100%",
-							sm: 400,
-						},
-					}}>
+				<Form onSubmit={handleSubmit}>
 					<h2>Create an Account</h2>
 					<InputContainer
 						size='small'

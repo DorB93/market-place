@@ -1,7 +1,7 @@
 import NavBar from "./NavBar";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 import Store from "../pages/Store";
 import About from "../pages/About";
@@ -44,6 +44,7 @@ function App() {
 			<UserProvider>
 				<CartProvider>
 					<AppWrapper>
+						<CssBaseline />
 						<NavBar />
 						<>
 							<Routes>

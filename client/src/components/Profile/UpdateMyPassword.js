@@ -58,41 +58,41 @@ function UpdateMyPassword() {
 				<>
 					<Form onSubmit={handleSubmit}>
 						<h3>Update Your Password</h3>
-						<InputContainer>
-							<label htmlFor='password'>Current Password:</label>
-							<input
-								minLength={8}
-								placeholder='shh-secret'
-								type='password'
-								onChange={(e) => {
-									setPassword(e.target.value);
-								}}
-								required
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='password'>Password:</label>
-							<input
-								minLength={8}
-								placeholder='shh-secret'
-								type='password'
-								onChange={(e) => {
-									setNewPassword(e.target.value);
-								}}
-								required
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='passwordConfirm'>Password Confirm:</label>
-							<input
-								placeholder='shh-secret'
-								type='password'
-								onChange={(e) => {
-									setNewPasswordConfirm(e.target.value);
-								}}
-								required
-							/>
-						</InputContainer>
+						<InputContainer
+							size='small'
+							label='Current Password:'
+							type='password'
+							minLength={8}
+							onChange={(e) => {
+								setPassword(e.target.value);
+							}}
+							required
+						/>
+						<InputContainer
+							size='small'
+							label='New Password:'
+							type='password'
+							minLength={8}
+							onChange={(e) => {
+								setNewPassword(e.target.value);
+							}}
+							required
+						/>
+						<InputContainer
+							size='small'
+							label='New Password Confirm:'
+							minLength={8}
+							type='password'
+							onChange={(e) => {
+								setNewPasswordConfirm(e.target.value);
+							}}
+							error={newPassword !== newPasswordConfirm}
+							helperText={
+								newPassword !== newPasswordConfirm &&
+								"Both of the passwords must match!"
+							}
+							required
+						/>
 						<SubmitBtn type='submit'>Update</SubmitBtn>
 					</Form>
 				</>

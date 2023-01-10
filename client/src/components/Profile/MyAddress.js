@@ -62,76 +62,64 @@ function MyAddress({ user }) {
 				<>
 					<Form onSubmit={handleSubmitAddress}>
 						<h2>Your Information</h2>
-						<InputContainer>
-							<label htmlFor='state' name='state'>
-								State:
-							</label>
-							<input
-								placeholder={state || "Israel"}
-								type='text'
-								required
-								onChange={(e) => {
-									setState(e.target.value);
-								}}
-								value={state}
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='city' name='city'>
-								City:
-							</label>
-							<input
-								placeholder={city || "Tel-Aviv"}
-								type='city'
-								required
-								onChange={(e) => {
-									setCity(e.target.value);
-								}}
-								value={city}
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='street' name='street'>
-								Street:
-							</label>
-							<input
-								placeholder={`${street}`}
-								type='street'
-								required
-								onChange={(e) => {
-									setStreet(e.target.value);
-								}}
-								value={street}
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='streetNum' name='streetNum'>
-								StreetNum:
-							</label>
-							<input
-								placeholder='32'
-								type='number'
-								required
-								onChange={(e) => {
-									setStreetNum(e.target.value);
-								}}
-								value={streetNum}
-							/>
-						</InputContainer>
-						<InputContainer>
-							<label htmlFor='zipCode' name='zipCode'>
-								Zip Code:
-							</label>
-							<input
-								placeholder='12345678'
-								type='test'
-								required
-								onChange={(e) => {
-									setZipCode(e.target.value);
-								}}
-								value={zipCode}
-							/>
-						</InputContainer>
+						<InputContainer
+							size='small'
+							id='state'
+							label='State:'
+							onChange={(e) => {
+								setState(e.target.value);
+							}}
+							required
+							type='text'
+							defaultValue={state}
+						/>
+
+						<InputContainer
+							size='small'
+							type='text'
+							id='city'
+							required
+							onChange={(e) => {
+								setCity(e.target.value);
+							}}
+							defaultValue={city}
+							label='City:'
+						/>
+
+						<InputContainer
+							size='small'
+							id='street'
+							label='Street:'
+							defaultValue={street}
+							required
+							onChange={(e) => {
+								setStreet(e.target.value);
+							}}
+						/>
+
+						<InputContainer
+							size='small'
+							id='streetNum'
+							label='StreetNum:'
+							required
+							onChange={(e) => {
+								setStreetNum(e.target.value);
+							}}
+							defaultValue={streetNum}
+							type='number'
+						/>
+
+						<InputContainer
+							size='small'
+							id='zipCode'
+							label='Post Code:'
+							required
+							onChange={(e) => {
+								setZipCode(e.target.value);
+							}}
+							defaultValue={zipCode}
+						/>
+
 						<SubmitBtn type='submit'>Update Me</SubmitBtn>
 					</Form>
 				</>

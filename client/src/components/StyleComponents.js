@@ -11,6 +11,13 @@ import {
 	TextField,
 } from "@mui/material";
 
+/*
+const StyledAvatar = ({ children, ...props }) => (
+    <Avatar sx={{ height: '70px', width: '70px' }} {...props}>
+        {children}
+    </Avatar>
+);
+*/
 ////////////////// Manage Orders ///////////////
 export const DashboardContainer = styled.div`
 	width: 85vw;
@@ -64,21 +71,31 @@ export const PageContainer = styled(Container)`
 	padding: 20px;
 	position: relative;
 `;
-export const Form = styled(Box)`
-	background-color: #dfdfdf8f;
-	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 12px;
-	height: fit-content;
-	gap: 15px;
-	padding: 15px;
-	margin-bottom: 15px;
-	& h2 {
-		align-self: center;
-	}
-`;
+export const Form = ({ children, ...props }) => (
+	<Box
+		component='form'
+		autoComplete='off'
+		sx={{
+			width: {
+				xs: "100%",
+				sm: 400,
+			},
+		}}
+		display='flex'
+		flexDirection='column'
+		alignItems='center'
+		borderRadius='12px'
+		backgroundColor='#dfdfdf8f'
+		height='fit-content'
+		gap='15px'
+		padding='15px'
+		marginBottom='15px'
+		boxShadow='2px 2px 5px 5px rgba(128, 128, 128, 0.193)'
+		{...props}>
+		{children}
+	</Box>
+);
+
 export const InputContainer = styled(TextField)`
 	background-color: white;
 	width: 90%;
@@ -584,13 +601,11 @@ export const Baj = styled.div`
 `;
 
 ///////////////// UploadProductPhoto ////////////////
-export const PreviewContainer = styled(InputContainer)`
+export const PreviewContainer = styled(Container)`
 	display: flex;
 	justify-content: center;
-	align-items: color-interpolation-filters;
+	background-color: transparent;
 	& img {
-		height: 465px;
-		width: 419px;
 		object-fit: contain;
 	}
 `;
@@ -729,7 +744,7 @@ export const OrdersContainer = styled(ProductsContainer)`
 `;
 
 ////////////////// profileNav /////////////////////
-export const NavContainer = styled.nav`
+export const NavContainer = styled(Container)`
 	width: 190px;
 	background-color: #dfdfdf8f;
 	display: flex;

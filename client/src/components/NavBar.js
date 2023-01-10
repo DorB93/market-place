@@ -5,7 +5,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { useCart } from "../context/CartContext";
 import { useUser } from "./../context/UserContext";
 import { Baj, CartIcon, Link, Nav, UserBar } from "./StyleComponents";
-import { Box, Container, Toolbar } from "@mui/material";
+import { Avatar, Box, Container, Toolbar } from "@mui/material";
 import { Storefront } from "@mui/icons-material";
 
 function NavBar() {
@@ -40,10 +40,12 @@ function NavBar() {
 											</NavLink>
 										</Link>
 										<Link>
-											<NavLink to='/my-profile'>
-												<img
+											<NavLink to='/my-profile/'>
+												<Avatar
+													sx={{ width: 56, height: 56, margin: 0 }}
 													src={`/img/users/${user.userPhoto}`}
-													alt='avatar'
+													alt='Avatar'
+													sizes='60px'
 												/>
 											</NavLink>
 										</Link>

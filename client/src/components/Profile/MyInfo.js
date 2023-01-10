@@ -8,10 +8,10 @@ import {
 	PreviewContainer,
 	InputContainer,
 	PageContainer,
-	ImageInputContainer,
 } from "../StyleComponents";
 import ErrorAlert from "../ErrorAlert";
 import myAxios from "../../api";
+import { Avatar, CssBaseline } from "@mui/material";
 
 export async function updateUser(userData) {
 	try {
@@ -61,34 +61,27 @@ function MyInfo({ user }) {
 			{message && <ErrorAlert message={message} />}
 			<Form onSubmit={handleSubmit}>
 				<h2>Your Information</h2>
-				<InputContainer>
-					<label htmlFor='name'>Full Name:</label>
-					<input
-						placeholder='Enter your full name'
-						type='text'
-						onChange={(e) => {
-							setName(e.target.value);
-						}}
-						value={name}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='email'>Email:</label>
-					<input
-						placeholder='yourmail@example.com'
-						type='email'
-						onChange={(e) => {
-							setEmail(e.target.value);
-						}}
-						value={email}
-						required
-					/>
-				</InputContainer>
-				<ImageInputContainer>
-					<label htmlFor='image'>
-						<img src={`/img/users/${user.userPhoto}`} alt='user-avatar' />
-					</label>
+				<InputContainer
+					size='small'
+					id='fullName'
+					label='Full Name:'
+					onChange={(e) => {
+						setName(e.target.value);
+					}}
+					defaultValue={name}
+				/>
+				<InputContainer
+					size='small'
+					type='email'
+					id='email'
+					label='Email:'
+					onChange={(e) => {
+						setEmail(e.target.value);
+					}}
+					defaultValue={email}
+				/>
+				<SubmitBtn component='label'>
+					Upload New Image
 					<input
 						type='file'
 						onChange={(e) => {
@@ -102,11 +95,16 @@ function MyInfo({ user }) {
 						}}
 						name='photo'
 						accept='image/*'
+						hidden
 					/>
-				</ImageInputContainer>
+				</SubmitBtn>
 				{preview ? (
 					<PreviewContainer>
-						<img src={preview} alt='Preview' />
+						<Avatar
+							sx={{ width: 56, height: 56 }}
+							src={preview}
+							alt='Preview'
+						/>
 					</PreviewContainer>
 				) : (
 					<span>No image selected</span>
