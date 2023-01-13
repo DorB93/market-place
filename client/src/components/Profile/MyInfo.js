@@ -11,7 +11,7 @@ import {
 } from "../StyleComponents";
 import ErrorAlert from "../ErrorAlert";
 import myAxios from "../../api";
-import { Avatar, CssBaseline } from "@mui/material";
+import { Avatar } from "@mui/material";
 
 export async function updateUser(userData) {
 	try {

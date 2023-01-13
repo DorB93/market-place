@@ -60,7 +60,11 @@ function SellerDashboard() {
 		data
 			.filter((invoice) => !invoice.sent)
 			.map((invoice) => (
-				<SellerInvoice alertBefore={alertBefore} invoice={invoice} />
+				<SellerInvoice
+					key={invoice._id}
+					alertBefore={alertBefore}
+					invoice={invoice}
+				/>
 			));
 
 	return (

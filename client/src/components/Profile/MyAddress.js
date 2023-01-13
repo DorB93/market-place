@@ -61,7 +61,7 @@ function MyAddress({ user }) {
 			) : (
 				<>
 					<Form onSubmit={handleSubmitAddress}>
-						<h2>Your Information</h2>
+						<h2>Your Address</h2>
 						<InputContainer
 							size='small'
 							id='state'

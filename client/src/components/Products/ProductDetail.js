@@ -35,6 +35,7 @@ function ProductDetail() {
 				await myAxios.get(`products/${id}`).then((res) => {
 					setProductData(res.data.data._doc);
 					setIsLoading(false);
+					console.log(res.data.data._doc);
 				});
 			} catch (err) {
 				alert(err.message);
@@ -61,12 +62,17 @@ function ProductDetail() {
 							<PriceAction>
 								<span>Price: ${Number(productData.price).toFixed(2)}</span>
 								<BtnAddToCart
+									disabled={productData.inventory === 0}
 									variant='contained'
 									color='primary'
 									onClick={() => {
 										increaseItemQuantity(id);
 									}}>
-									<AddShoppingCart />
+									{productData.inventory === 0 ? (
+										`Out of stock`
+									) : (
+										<AddShoppingCart />
+									)}
 								</BtnAddToCart>
 								<BackBtn variant='text' onClick={() => navigate(-1)}>
 									Back

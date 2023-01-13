@@ -21,8 +21,9 @@ export const AppWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	min-width: 320px;
-	width: 99vw;
+	width: 100%;
 	box-sizing: border-box;
+	position: relative;
 `;
 const theme = createTheme({
 	palette: {
@@ -54,7 +55,7 @@ function App() {
 								<Route path='/signup' element={<Signup />} />
 								<Route path='/forgot-password' element={<ForgotPassword />} />
 								<Route path='/products/:id' element={<ProductDetail />} />
-								<Route path='/my-profile/*' element={<Profile />} />
+								<Route path='/my-profile/*' element={<Profile />}></Route>
 								<Route path='/checkout' element={<Checkout />} />
 							</Routes>
 						</>

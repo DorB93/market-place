@@ -52,8 +52,8 @@ function Product({ product }) {
 						onClick={() => {
 							increaseItemQuantity(product.id);
 						}}
-						disabled={!product.inventory}>
-						<AddShoppingCart />
+						disabled={product.inventory === 0}>
+						{product.inventory === 0 ? `Out of stock` : <AddShoppingCart />}
 					</BtnAddToCart>
 				</Box>
 			</ProductContainer>

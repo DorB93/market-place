@@ -9,6 +9,7 @@ import {
 	IconButton,
 	Paper,
 	TextField,
+	Toolbar,
 } from "@mui/material";
 
 /*
@@ -20,16 +21,16 @@ const StyledAvatar = ({ children, ...props }) => (
 */
 ////////////////// Manage Orders ///////////////
 export const DashboardContainer = styled.div`
-	width: 85vw;
-	display: flex;
+	width: 100%;
+	display: grid;
 	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+	justify-content: space-evenly;
+	align-items: center;
 	gap: 20px;
 `;
-export const InvoicesContainer = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+export const InvoicesContainer = styled(Grid)`
+	/* display: grid; */
+	/* grid-template-columns: 1fr 1fr; */
 	gap: 15px;
 `;
 export const ConfirmActionContainer = styled.div`
@@ -480,11 +481,13 @@ export const ItemsContainer = styled.div`
 `;
 
 ///////////////////////// Profile //////////////////////
-export const ProfileWrapper = styled.section`
+export const ProfileWrapper = styled(Container)`
 	display: flex;
-	justify-content: start;
-	width: 100%;
+	justify-content: center;
+	height: 100%;
+	width: 100vw;
 	position: relative;
+	margin: 0;
 `;
 
 //////////////////// ErrorAlert ////////////////////
@@ -519,25 +522,35 @@ export const SuccessContainer = styled(AlertContainer)`
 `;
 
 //////////////////////// NavBar   /////////////////
-export const Nav = styled(AppBar)`
-	position: sticky;
-	align-self: center;
-	margin: 0;
-	top: 0;
-	display: flex;
-	box-sizing: border-box;
-	justify-content: space-between;
-	align-items: center;
-	/* height: 60px; */
-	width: 100%;
-	padding: 5px;
-	background-color: rgb(255, 255, 255);
-	margin-bottom: 7px;
-	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
-	z-index: 5;
-	font-size: 20px;
-	color: rgb(125, 125, 125);
-`;
+/*
+const StyledAvatar = ({ children, ...props }) => (
+    <Avatar sx={{ height: '70px', width: '70px' }} {...props}>
+        {children}
+    </Avatar>
+);
+*/
+
+export const Nav = ({ children, ...props }) => (
+	<AppBar
+		position='sticky'
+		margin={0}
+		display='flex'
+		justifyContent='space-between'
+		alignItems='center'
+		sx={{
+			backgroundColor: "rgb(255, 255, 255)",
+			boxShadow: "2px 2px 5px 5px rgba(128, 128, 128, 0.193)",
+			padding: "5px",
+			width: "100%",
+			alignSelf: "center",
+		}}
+		{...props}>
+		<Container maxWidth='xl'>
+			<Toolbar disableGutters>{children}</Toolbar>
+		</Container>
+	</AppBar>
+);
+
 export const UserBar = styled.div`
 	display: flex;
 	align-items: center;
@@ -745,16 +758,18 @@ export const OrdersContainer = styled(ProductsContainer)`
 
 ////////////////// profileNav /////////////////////
 export const NavContainer = styled(Container)`
-	width: 190px;
-	background-color: #dfdfdf8f;
-	display: flex;
-	flex-direction: column;
-	height: 94vh;
-	padding-left: 15px;
-	gap: 9px;
 	position: sticky;
 	top: 60px;
 	left: 0;
+	bottom: 0;
+	width: 190px;
+	margin: 0;
+	background-color: #dfdfdf8f;
+	display: flex;
+	flex-direction: column;
+	height: 95vh;
+	padding-left: 15px;
+	gap: 9px;
 	& h3 {
 		margin: 0;
 	}
