@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import myAxios from "../../api";
 import LoadingSpinner from "../LoadingSpinner";
-import OrderItem from "./OrderItem";
 import { OrdersContainer } from "../StyleComponents";
-
+import OrderTableDetail from "./OrderTableDetail";
+import {
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@mui/material";
 
 export async function getOrders() {
 	try {
@@ -24,13 +32,33 @@ function UserOrders() {
 			satLoading(false);
 		});
 	}, []);
-	const content = orders.length ? (
-		orders.map((order) => <OrderItem key={order._id} order={order} />)
+
+	const tableContent = orders.length ? (
+		orders.map((order) => <OrderTableDetail key={order._id} order={order} />)
 	) : (
 		<h3>You haven't made any order yet...</h3>
 	);
+	const table = (
+		<TableContainer component={Paper}>
+			<Table>
+				<TableHead>
+					<TableRow>
+						<TableCell>Ordered At</TableCell>
+						<TableCell>Total Cost</TableCell>
+						<TableCell>
+							Received /<br /> Total Quantity
+						</TableCell>
+						<TableCell>View Order</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>{tableContent}</TableBody>
+			</Table>
+		</TableContainer>
+	);
 	return (
-		<OrdersContainer>{loading ? <LoadingSpinner /> : content}</OrdersContainer>
+		<>
+			<OrdersContainer>{loading ? <LoadingSpinner /> : table}</OrdersContainer>
+		</>
 	);
 }
 

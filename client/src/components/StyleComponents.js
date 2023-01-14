@@ -752,8 +752,9 @@ export const ImageInputContainer = styled(InputContainer)`
 `;
 
 ////////// UserOrder /////////////////
-export const OrdersContainer = styled(ProductsContainer)`
+export const OrdersContainer = styled(Container)`
 	width: 100%;
+	padding: 20px;
 `;
 
 ////////////////// profileNav /////////////////////
@@ -794,5 +795,14 @@ export const ProfileLink = styled(NavLink)`
 		font-weight: bold;
 		text-shadow: 6px 6px 5px rgba(77, 77, 77, 0.64);
 		transform: scale(1.1) translateX(5px);
+	}
+`;
+export const Navigator = styled.span`
+	cursor: pointer;
+	transition: 250ms all linear;
+
+	&:hover {
+		color: rgb(71, 158, 246);
+		text-shadow: 3px 5px 7px rgba(8, 61, 64, 0.8);
 	}
 `;
