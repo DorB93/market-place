@@ -8,7 +8,6 @@ import {
 	InputContainer,
 	PageContainer,
 	PreviewContainer,
-	ImageInputContainer,
 	BtnContainer,
 	ProductImage,
 } from "../StyleComponents";

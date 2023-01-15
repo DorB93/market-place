@@ -67,33 +67,39 @@ function MyProducts() {
 		})
 		.map((product) => <SellerProductRow product={product} />);
 	return (
-		<StoreContainer>
-			{isLoading ? (
-				<LoadingSpinner />
-			) : (
-				<>
-					<SellerCategoryNav>
-						<h4>My Categories:</h4>
-						{myCategories}
-					</SellerCategoryNav>
-					<TableContainer component={Container}>
-						<Table>
-							<TableHead>
-								<TableRow>
-									<TableCell align='center'>ID</TableCell>
-									<TableCell align='center'>Image</TableCell>
-									<TableCell align='center'>Name</TableCell>
-									<TableCell align='center'>Price</TableCell>
-									<TableCell align='center'>Inventory</TableCell>
-									<TableCell align='center'>Action</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>{productsRows}</TableBody>
-						</Table>
-					</TableContainer>
-				</>
-			)}
-		</StoreContainer>
+		<div style={{ paddingTop: "25px" }}>
+			<StoreContainer>
+				{isLoading ? (
+					<LoadingSpinner />
+				) : (
+					<>
+						<SellerCategoryNav>
+							<h4>My Categories:</h4>
+							{myCategories}
+						</SellerCategoryNav>
+						<TableContainer sx={{ maxHeight: 500 }} component={Container}>
+							<Table stickyHeader>
+								<TableHead>
+									<TableRow>
+										<TableCell
+											sx={{ display: { xs: "none", md: "table-cell" } }}
+											align='center'>
+											ID
+										</TableCell>
+										<TableCell align='center'>Image</TableCell>
+										<TableCell align='center'>Name</TableCell>
+										<TableCell align='center'>Price</TableCell>
+										<TableCell align='center'>Inventory</TableCell>
+										<TableCell align='center'>Action</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>{productsRows}</TableBody>
+							</Table>
+						</TableContainer>
+					</>
+				)}
+			</StoreContainer>
+		</div>
 	);
 }
 

@@ -17,7 +17,7 @@ function MyAddress({ user }) {
 	const [city, setCity] = useState(null);
 	const [street, setStreet] = useState(null);
 	const [streetNum, setStreetNum] = useState(null);
-	const [zipCode, setZipCode] = useState(null);
+	const [postCode, setPostCode] = useState(null);
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -27,7 +27,7 @@ function MyAddress({ user }) {
 			setCity(user.shippingAddress.city);
 			setStreet(user.shippingAddress.street);
 			setStreetNum(user.shippingAddress.streetNum);
-			setZipCode(user.shippingAddress.zipCode);
+			setPostCode(user.shippingAddress.postCode);
 		}
 		setIsLoading(false);
 	}, [user]);
@@ -41,7 +41,7 @@ function MyAddress({ user }) {
 			city,
 			street,
 			streetNum,
-			zipCode,
+			postCode,
 		};
 		try {
 			const updatedUser = await updateUser({ shippingAddress });
@@ -115,9 +115,9 @@ function MyAddress({ user }) {
 							label='Post Code:'
 							required
 							onChange={(e) => {
-								setZipCode(e.target.value);
+								setPostCode(e.target.value);
 							}}
-							defaultValue={zipCode}
+							defaultValue={postCode}
 						/>
 
 						<SubmitBtn type='submit'>Update Me</SubmitBtn>

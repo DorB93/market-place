@@ -22,7 +22,7 @@ function SellerProductRow({ product }) {
 				<TableCell align='center'>{inventory}</TableCell>
 				<TableCell align='center'>
 					<Tooltip title='Edit' placement='top' arrow>
-						<Fab color='primary' size='small'>
+						<Fab sx={{ zIndex: 0 }} color='primary' size='small'>
 							<EditIcon
 								color='white'
 								onClick={() => {

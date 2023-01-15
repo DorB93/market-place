@@ -40,7 +40,7 @@ function OrderDetail() {
 			setOrder(res);
 			setLoading(false);
 		});
-	}, []);
+	}, [orderId]);
 
 	function handleChange(e, i) {
 		const val = e.target.checked;
@@ -144,7 +144,7 @@ function OrderDetail() {
 							</span>
 
 							<span>
-								<strong>ZipCode:</strong> {order.shippingAddress.zipCode}
+								<strong>Post Code:</strong> {order.shippingAddress.postCode}
 							</span>
 						</AddressContainer>
 					</DetailContainer>

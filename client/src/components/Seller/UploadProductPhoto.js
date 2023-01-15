@@ -36,7 +36,7 @@ function UploadProductPhoto() {
 		getProduct(productId).then((res) => {
 			setProduct(res.data._doc);
 		});
-	}, []);
+	}, [productId]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

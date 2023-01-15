@@ -39,7 +39,7 @@ function Checkout() {
 	const cityRef = useRef("");
 	const streetRef = useRef("");
 	const streetNumRef = useRef("");
-	const zipCodeRef = useRef("");
+	const postCodeRef = useRef("");
 	useEffect(() => {
 		setIsLoading(true);
 		if (user.shippingAddress?.state) {
@@ -47,7 +47,7 @@ function Checkout() {
 			cityRef.current = user.shippingAddress.city;
 			streetRef.current = user.shippingAddress.street;
 			streetNumRef.current = user.shippingAddress.streetNum;
-			zipCodeRef.current = user.shippingAddress.zipCode;
+			postCodeRef.current = user.shippingAddress.postCode;
 		} else {
 			setDisable(false);
 		}
@@ -66,11 +66,11 @@ function Checkout() {
 		setSuccessMessage(null);
 		setIsLoading(true);
 
-		console.log({ stateRef });
-		console.log({ cityRef });
-		console.log({ streetRef });
-		console.log({ streetNumRef });
-		console.log({ zipCodeRef });
+		// console.log({ stateRef });
+		// console.log({ cityRef });
+		// console.log({ streetRef });
+		// console.log({ streetNumRef });
+		// console.log({ postCodeRef });
 		try {
 			const products = Object.entries(cart).map(([id, q]) => {
 				const item = catalog.find((p) => p.id === id);
@@ -86,7 +86,7 @@ function Checkout() {
 				city: cityRef.current,
 				street: streetRef.current,
 				streetNum: streetNumRef.current,
-				zipCode: zipCodeRef.current,
+				zipCode: postCodeRef.current,
 			};
 
 			await updateUser(shippingAddress);
@@ -139,6 +139,7 @@ function Checkout() {
 							}}>
 							<h3>Shipping Address</h3>
 							<InputContainer
+								disabled={disable}
 								size='small'
 								id='state'
 								label='State:'
@@ -146,6 +147,7 @@ function Checkout() {
 								defaultValue={stateRef.current}
 							/>
 							<InputContainer
+								disabled={disable}
 								size='small'
 								id='city'
 								label='City:'
@@ -154,6 +156,7 @@ function Checkout() {
 								type='text'
 							/>
 							<InputContainer
+								disabled={disable}
 								size='small'
 								id='street'
 								label='Street:'
@@ -161,6 +164,7 @@ function Checkout() {
 								defaultValue={streetRef.current}
 							/>
 							<InputContainer
+								disabled={disable}
 								size='small'
 								id='streetNum'
 								label='StreetNum:'
@@ -169,11 +173,12 @@ function Checkout() {
 								defaultValue={streetNumRef.current}
 							/>
 							<InputContainer
+								disabled={disable}
 								size='small'
 								id='zipCode'
 								label='Post Code:'
-								onChange={(e) => (zipCodeRef.current = e.target.value)}
-								defaultValue={zipCodeRef.current}
+								onChange={(e) => (postCodeRef.current = e.target.value)}
+								defaultValue={postCodeRef.current}
 								type='text'
 							/>
 						</Form>

@@ -20,9 +20,6 @@ function AddProduct() {
 	});
 	const navigate = useNavigate();
 
-	const { productName, category, inventory, price, summary, description } =
-		productData;
-
 	const handleChange = (event) => {
 		setProductData({
 			...productData,

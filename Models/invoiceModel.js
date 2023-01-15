@@ -39,7 +39,7 @@ const invoiceSchema = new mongoose.Schema(
 			city: String,
 			street: String,
 			streetNum: Number,
-			state: String,
+			postCode: String,
 		},
 		total: {
 			type: Number,
@@ -63,7 +63,7 @@ const invoiceSchema = new mongoose.Schema(
 invoiceSchema.index({ seller: 1 });
 
 invoiceSchema.pre(/^find/, function (next) {
-	this.populate("products.product").populate("user");
+	this.populate("products.product").populate("user").populate("seller");
 	next();
 });
 const Invoice = mongoose.model("Invoice", invoiceSchema);
