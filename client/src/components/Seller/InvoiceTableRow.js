@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, ButtonGroup, TableCell, TableRow } from "@mui/material";
-import { generateShippingTicket } from "./shippingTicket";
+import { generateShippingTicket } from "../../utils/shippingTicket";
+
 function InvoiceTableRow({ alertBefore, invoice }) {
 	const {
 		createAt,
