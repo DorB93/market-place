@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, ButtonGroup, TableCell, TableRow } from "@mui/material";
 import { generateShippingTicket } from "../../utils/shippingTicket";
+import { generateItemList } from "../../utils/itemsList";
 
 function InvoiceTableRow({ alertBefore, invoice }) {
 	const {
@@ -31,11 +32,16 @@ function InvoiceTableRow({ alertBefore, invoice }) {
 				<TableCell align='center'>{!sent ? "pending" : "shipped"}</TableCell>
 				<TableCell align='center'>
 					<ButtonGroup variant='outlined'>
-						<Button sx={{ fontSize: "10px" }}>Get items list</Button>
 						<Button
 							sx={{ fontSize: "10px" }}
 							onClick={() => {
-								console.log({ shippingAddress });
+								generateItemList(user, products);
+							}}>
+							Get items list
+						</Button>
+						<Button
+							sx={{ fontSize: "10px" }}
+							onClick={() => {
 								generateShippingTicket(
 									user,
 									shippingAddress,
