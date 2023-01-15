@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
 
 import {
 	Form,
@@ -28,6 +29,7 @@ function SellerProductDetail() {
 	const [image, setImage] = useState({});
 	const [preview, setPreview] = useState("");
 	const [product, setProduct] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		getProduct(productId)
 			.then((res) => res.data._doc)
@@ -41,6 +43,7 @@ function SellerProductDetail() {
 					summary: p.summary,
 					description: p.description,
 				});
+				setIsLoading(false);
 			});
 	}, [productId]);
 	const handleChange = (event) => {
@@ -72,111 +75,99 @@ function SellerProductDetail() {
 
 	return (
 		<PageContainer>
-			<Form onSubmit={handleSubmit}>
-				<InputContainer>
-					<label htmlFor='name'>Product Name:</label>
-					<input
-						onChange={handleChange}
-						type='text'
-						name='name'
+			{isLoading ? (
+				<LoadingSpinner />
+			) : (
+				<Form onSubmit={handleSubmit}>
+					<InputContainer
+						label='Product Name:'
 						id='name'
-						value={productData.name}
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='category'>Category:</label>
-					<input
+						name='name'
 						onChange={handleChange}
-						type='text'
-						name='category'
+						defaultValue={productData.name}
+					/>
+
+					<InputContainer
+						label='Category:'
 						id='category'
-						value={productData.category}
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='price'>Price:</label>
-					<input
+						name='category'
 						onChange={handleChange}
-						type='number'
-						name='price'
+						defaultValue={productData.category}
+					/>
+					<InputContainer
+						label='Price:'
 						id='price'
-						value={productData.price}
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='inventory'>Inventory:</label>
-					<input
-						onChange={handleChange}
+						name='price'
 						type='number'
-						name='inventory'
+						onChange={handleChange}
+						defaultValue={productData.price}
+					/>
+
+					<InputContainer
+						label='Inventory:'
 						id='inventory'
-						value={productData.inventory}
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='summary'>summary :</label>
-					<input
+						name='inventory'
+						type='number'
 						onChange={handleChange}
-						type='text'
-						name='summary'
+						defaultValue={productData.inventory}
+					/>
+
+					<InputContainer
+						label='Summary:'
 						id='summary'
-						placeholder='Enter the new summary'
-					/>
-				</InputContainer>
-				<p>{productData.summary}</p>
-				<InputContainer>
-					<label htmlFor='description'>description :</label>
-					<input
+						name='summary'
+						multiline
 						onChange={handleChange}
-						type='text'
-						name='description'
-						id='description'
-						placeholder='Enter the new description'
+						defaultValue={productData.summary}
 					/>
-				</InputContainer>
-				<p>{productData.description}</p>
-				<ProductImage
-					src={`/img/products/${product.image}`}
-					alt={productData.name}
-				/>
-				<ImageInputContainer>
-					<label htmlFor='image'>Image:</label>
-					<input
-						type='file'
-						onChange={(e) => {
-							const file = e.target.files[0];
-							setImage(file);
-							const reader = new FileReader();
-							if (file) {
+					<InputContainer
+						label='Description:'
+						id='description'
+						name='description'
+						multiline
+						onChange={handleChange}
+						defaultValue={productData.description}
+					/>
+					<ProductImage
+						src={`/img/products/${product.image}`}
+						alt={productData.name}
+					/>
+					<SubmitBtn component='label'>
+						Upload New Image
+						<input
+							type='file'
+							onChange={(e) => {
+								const file = e.target.files[0];
+								setImage(file);
+								const reader = new FileReader();
 								reader.readAsDataURL(file);
 								reader.onloadend = () => {
 									setPreview(reader.result);
 								};
-							} else {
-								setPreview("");
-							}
-						}}
-						name='image'
-						accept='image/*'
-					/>
-				</ImageInputContainer>
-				{preview ? (
-					<PreviewContainer>
-						<img src={preview} alt='Preview' />
-					</PreviewContainer>
-				) : (
-					<span>No image selected</span>
-				)}
-				<BtnContainer>
-					<SubmitBtn
-						onClick={() => {
-							navigate(-1);
-						}}>
-						Back
+							}}
+							name='photo'
+							accept='image/*'
+							hidden
+						/>
 					</SubmitBtn>
-					<SubmitBtn type='submit'>Update</SubmitBtn>
-				</BtnContainer>
-			</Form>
+					{preview ? (
+						<PreviewContainer>
+							<img src={preview} alt='Preview' />
+						</PreviewContainer>
+					) : (
+						<span>No image selected</span>
+					)}
+					<BtnContainer>
+						<SubmitBtn
+							onClick={() => {
+								navigate(-1);
+							}}>
+							Back
+						</SubmitBtn>
+						<SubmitBtn type='submit'>Update</SubmitBtn>
+					</BtnContainer>
+				</Form>
+			)}
 		</PageContainer>
 	);
 }

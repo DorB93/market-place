@@ -69,72 +69,61 @@ function AddProduct() {
 		<PageContainer>
 			<Form onSubmit={handleSubmit}>
 				<h3>Add the product information</h3>
-				<InputContainer>
-					<label htmlFor='productName'>Product Name</label>
-					<input
-						type='text'
-						name='productName'
-						id='productName'
-						value={productName}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='category'>Category</label>
-					<input
-						type='text'
-						name='category'
-						id='category'
-						value={category}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='inventory'>Inventory</label>
-					<input
-						type='number'
-						name='inventory'
-						id='inventory'
-						value={inventory}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='price'>Price</label>
-					<input
-						type='number'
-						name='price'
-						id='price'
-						value={price}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='summary'>Summary</label>
-					<input
-						type='text'
-						name='summary'
-						id='summary'
-						value={summary}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
-				<InputContainer>
-					<label htmlFor='description'>Description</label>
-					<input
-						type='text'
-						name='description'
-						id='description'
-						value={description}
-						onChange={handleChange}
-						required
-					/>
-				</InputContainer>
+				<InputContainer
+					size='small'
+					id='productName'
+					label='Product Name'
+					name='productName'
+					onChange={handleChange}
+					required
+				/>
+
+				<InputContainer
+					label='Category'
+					size='small'
+					id='category'
+					name='category'
+					onChange={handleChange}
+					required
+				/>
+
+				<InputContainer
+					label='Inventory'
+					size='small'
+					id='inventory'
+					name='inventory'
+					onChange={handleChange}
+					required
+				/>
+
+				<InputContainer
+					label='Price'
+					size='small'
+					id='price'
+					name='price'
+					onChange={handleChange}
+					type='number'
+					required
+				/>
+
+				<InputContainer
+					label='Summary'
+					size='small'
+					id='summary'
+					multiline
+					name='summary'
+					onChange={handleChange}
+					required
+				/>
+
+				<InputContainer
+					label='Description'
+					size='small'
+					id='description'
+					name='description'
+					multiline
+					onChange={handleChange}
+					required></InputContainer>
 				<SubmitBtn type='submit'>Upload</SubmitBtn>
 			</Form>
 		</PageContainer>

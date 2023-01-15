@@ -20,19 +20,7 @@ const StyledAvatar = ({ children, ...props }) => (
 );
 */
 ////////////////// Manage Orders ///////////////
-export const DashboardContainer = styled.div`
-	width: 100%;
-	display: grid;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	gap: 20px;
-`;
-export const InvoicesContainer = styled(Grid)`
-	/* display: grid; */
-	/* grid-template-columns: 1fr 1fr; */
-	gap: 15px;
-`;
+
 export const ConfirmActionContainer = styled.div`
 	position: fixed;
 	cursor: pointer;
@@ -153,6 +141,7 @@ export const CategoryOption = styled.div`
 ///////////// My Products ////////////////////
 export const SellerCategoryNav = styled(CategorySelector)`
 	position: sticky;
+	display: flex;
 	top: 60px;
 	left: 190px;
 	z-index: 3;

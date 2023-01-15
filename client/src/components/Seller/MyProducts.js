@@ -1,4 +1,12 @@
-import { Grid } from "@mui/material";
+import {
+	Container,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 import myAxios from "../../api";
@@ -7,12 +15,9 @@ import LoadingSpinner from "../LoadingSpinner";
 import {
 	SellerCategoryNav,
 	StoreContainer,
-	ProductsContainer,
-	ProductContainer,
-	ProductMinDetails,
-	StyledLink,
 	CategoryOption,
 } from "../StyleComponents";
+import SellerProductRow from "./SellerProductRow";
 
 async function getMyProducts() {
 	try {
@@ -29,6 +34,7 @@ async function getMyProducts() {
 function MyProducts() {
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [categoryFilter, setCategoryFilter] = useState("All");
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -38,34 +44,28 @@ function MyProducts() {
 		});
 	}, []);
 
-	const myCategories = Array.from(
-		new Set(products.map((product) => product.category))
-	).map((atr) => (
-		<CategoryOption key={atr} title={atr}>
+	const myCategories = [
+		"All",
+		...Array.from(new Set(products.map((product) => product.category))),
+	].map((atr) => (
+		<CategoryOption
+			onClick={() => {
+				setCategoryFilter(atr);
+			}}
+			key={atr}
+			title={atr}>
 			{atr}
 		</CategoryOption>
 	));
-	const myProducts = products.map((product) => (
-		<Grid item>
-			<ProductContainer key={product._id}>
-				{isLoading && <LoadingSpinner />}
-				<img
-					src={`/img/products/${product.image}`}
-					alt={product.title}
-					onLoad={() => setIsLoading(false)}
-					onError={() => setIsLoading(false)}
-					loading='lazy'
-				/>
-				<ProductMinDetails>
-					<h3>{product.name}</h3>
-					<span>
-						<StyledLink to={`${product._id}`}>Click for more..</StyledLink>
-					</span>
-					<span>Price: ${Number(product.price).toFixed(2)}</span>
-				</ProductMinDetails>
-			</ProductContainer>
-		</Grid>
-	));
+
+	const productsRows = products
+		.filter((product) => {
+			if (categoryFilter === "All") {
+				return product;
+			}
+			return product.category === categoryFilter;
+		})
+		.map((product) => <SellerProductRow product={product} />);
 	return (
 		<StoreContainer>
 			{isLoading ? (
@@ -76,9 +76,21 @@ function MyProducts() {
 						<h4>My Categories:</h4>
 						{myCategories}
 					</SellerCategoryNav>
-					<ProductsContainer container spacing={3}>
-						{myProducts}
-					</ProductsContainer>
+					<TableContainer component={Container}>
+						<Table>
+							<TableHead>
+								<TableRow>
+									<TableCell align='center'>ID</TableCell>
+									<TableCell align='center'>Image</TableCell>
+									<TableCell align='center'>Name</TableCell>
+									<TableCell align='center'>Price</TableCell>
+									<TableCell align='center'>Inventory</TableCell>
+									<TableCell align='center'>Action</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>{productsRows}</TableBody>
+						</Table>
+					</TableContainer>
 				</>
 			)}
 		</StoreContainer>

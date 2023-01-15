@@ -34,9 +34,13 @@ function UserOrders() {
 	}, []);
 
 	const tableContent = orders.length ? (
-		orders.map((order) => <OrderTableDetail key={order._id} order={order} />)
+		orders
+			.sort((a, b) => {
+				return Date.parse(b.createAt) - Date.parse(a.createAt);
+			})
+			.map((order) => <OrderTableDetail key={order._id} order={order} />)
 	) : (
-		<h3>You haven't made any order yet...</h3>
+		<TableRow>You haven't made any order yet...</TableRow>
 	);
 	const table = (
 		<TableContainer component={Paper}>

@@ -6,13 +6,20 @@ import LoadingSpinner from "../LoadingSpinner";
 import {
 	ConfirmAction,
 	ConfirmActionContainer,
-	DashboardContainer,
-	InvoicesContainer,
 	SubmitBtn,
 } from "../StyleComponents";
 import SuccessAlert from "../SuccessAlert";
-import SellerInvoice from "./Invoices/SellerInvoice";
 
+import {
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@mui/material";
+import InvoiceTableRow from "./InvoiceTableRow";
 async function getInvoices() {
 	try {
 		const { data } = await myAxios.get("invoices/my-invoices");
@@ -57,18 +64,12 @@ function SellerDashboard() {
 	}, []);
 	const myInvoices =
 		!isLoading &&
-		data
-			.filter((invoice) => !invoice.sent)
-			.map((invoice) => (
-				<SellerInvoice
-					key={invoice._id}
-					alertBefore={alertBefore}
-					invoice={invoice}
-				/>
-			));
+		data.map((invoice) => (
+			<InvoiceTableRow alertBefore={alertBefore} invoice={invoice} />
+		));
 
 	return (
-		<DashboardContainer>
+		<TableContainer component={Paper}>
 			{errorMessage && <ErrorAlert message={errorMessage} />}
 			{okMessage && <SuccessAlert message={okMessage} />}
 			{display && (
@@ -85,9 +86,22 @@ function SellerDashboard() {
 			{isLoading ? (
 				<LoadingSpinner />
 			) : (
-				<InvoicesContainer>{myInvoices}</InvoicesContainer>
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableCell align='center'>Ordered At</TableCell>
+							<TableCell align='center'>Total Amount</TableCell>
+							<TableCell align='center'>ID</TableCell>
+							<TableCell align='center'>Customer Name</TableCell>
+							<TableCell align='center'>Total Quantity</TableCell>
+							<TableCell align='center'>Status</TableCell>
+							<TableCell align='center'>Action</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>{myInvoices}</TableBody>
+				</Table>
 			)}
-		</DashboardContainer>
+		</TableContainer>
 	);
 }
 
