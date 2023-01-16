@@ -11,6 +11,7 @@ import {
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import myAxios from "../api";
 import AddressForm from "../components/Checkout/AddressForm";
 import OverView from "../components/Checkout/OverView";
@@ -25,7 +26,6 @@ const steps = ["Shipping address", "Payment details", "Review your order"];
 function NewCheckout() {
 	const { user } = useUser();
 	const { updateCatalog, cart, catalog, removeCart, cartFullPrice } = useCart();
-
 	const [currentStep, setCurrentStep] = useState(0);
 	const [address, setAddress] = useState(user.shippingAddress);
 	const [paymentAddress, setPaymentAddress] = useState({});
