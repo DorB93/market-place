@@ -1,76 +1,102 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+	AppBar,
+	Box,
+	Button,
+	Paper,
+	Step,
+	StepLabel,
+	Stepper,
+	Toolbar,
+	Typography,
+	Container,
+} from "@mui/material";
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import myAxios from "../api";
-import CartItem from "../components/Cart/CartItem";
+import AddressForm from "../components/Checkout/AddressForm";
+import OverView from "../components/Checkout/OverView";
+import PaymentForm from "../components/Checkout/PaymentForm";
+import ErrorAlert from "../components/ErrorAlert";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { useCart } from "../context/CartContext";
 import { useUser } from "../context/UserContext";
 
-import ErrorAlert from "../components/ErrorAlert";
-import SuccessAlert from "../components/SuccessAlert";
-import { updateUser } from "../components/Profile/MyInfo";
-import LoadingSpinner from "../components/LoadingSpinner";
-import {
-	ItemsContainer,
-	PageWrapper,
-	SectionContainer,
-	CartContents,
-	CartInfo,
-	Form,
-	InputContainer,
-	SubmitBtn,
-} from "../components/StyleComponents";
+const steps = ["Shipping address", "Payment details", "Review your order"];
 
-function Checkout() {
+function NewCheckout() {
 	const { user } = useUser();
-	const {
-		updateCatalog,
-		cart,
-		removeCart,
-		catalog,
-		cartFullPrice,
-		cartQuantity,
-	} = useCart();
-	const [isLoading, setIsLoading] = useState(false);
-	const [disable, setDisable] = useState(false);
-	const [errorMessage, setErrorMessage] = useState(null);
-	const [successMessage, setSuccessMessage] = useState(null);
+	const { updateCatalog, cart, catalog, removeCart, cartFullPrice } = useCart();
 	const navigate = useNavigate();
-	const stateRef = useRef("");
-	const cityRef = useRef("");
-	const streetRef = useRef("");
-	const streetNumRef = useRef("");
-	const postCodeRef = useRef("");
-	useEffect(() => {
-		setIsLoading(true);
-		if (user.shippingAddress?.state) {
-			stateRef.current = user.shippingAddress.state;
-			cityRef.current = user.shippingAddress.city;
-			streetRef.current = user.shippingAddress.street;
-			streetNumRef.current = user.shippingAddress.streetNum;
-			postCodeRef.current = user.shippingAddress.postCode;
-		} else {
-			setDisable(false);
-		}
-		setIsLoading(false);
-	}, [user]);
-
-	const items = Object.entries(cart).map(([id, q]) => {
+	const [currentStep, setCurrentStep] = useState(0);
+	const [address, setAddress] = useState(user.shippingAddress);
+	const [paymentAddress, setPaymentAddress] = useState({});
+	const [customerName, setCustomerName] = useState(user.username);
+	const [paymentInfo, setPaymentInfo] = useState({});
+	const [sameAddress, setSameAddress] = useState(false);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [orderID, setOrderID] = useState(null);
+	const checkoutItems = Object.entries(cart).map(([id, q]) => {
 		const item = catalog.find((p) => p.id === id);
 		if (!item) return "";
-		return <CartItem key={item.id} item={item} />;
+		return { name: item.name, price: item.getPrice(), quantity: q };
 	});
+
+	function nextStep() {
+		setCurrentStep(currentStep + 1);
+	}
+
+	function stepBack() {
+		setCurrentStep(currentStep - 1);
+	}
+
+	function getStepContent(step) {
+		switch (step) {
+			case 0:
+				return (
+					<AddressForm
+						title={"Shipping address"}
+						address={address}
+						setAddress={setAddress}
+						customerName={customerName}
+						setCustomerName={setCustomerName}
+						setSameAddress={setSameAddress}
+						sameAddress={sameAddress}
+					/>
+				);
+			case 1:
+				return (
+					<PaymentForm
+						paymentAddress={paymentAddress}
+						setPaymentAddress={setPaymentAddress}
+						setPaymentInfo={setPaymentInfo}
+						sameAddress={sameAddress}
+						address={address}
+						paymentInfo={paymentInfo}
+					/>
+				);
+			case 2:
+				return (
+					<OverView
+						paymentInfo={paymentInfo}
+						address={address}
+						paymentAddress={paymentAddress}
+						customerName={customerName}
+						items={checkoutItems}
+						cartFullPrice={cartFullPrice}
+					/>
+				);
+			default:
+				throw new Error("Unknown step");
+		}
+	}
 
 	const handleOrder = async (e) => {
 		e.preventDefault();
 		setErrorMessage(null);
-		setSuccessMessage(null);
 		setIsLoading(true);
 
-		// console.log({ stateRef });
-		// console.log({ cityRef });
-		// console.log({ streetRef });
-		// console.log({ streetNumRef });
-		// console.log({ postCodeRef });
 		try {
 			const products = Object.entries(cart).map(([id, q]) => {
 				const item = catalog.find((p) => p.id === id);
@@ -81,164 +107,105 @@ function Checkout() {
 					seller: item.seller,
 				};
 			});
-			const shippingAddress = {
-				state: stateRef.current,
-				city: cityRef.current,
-				street: streetRef.current,
-				streetNum: streetNumRef.current,
-				zipCode: postCodeRef.current,
-			};
-
-			await updateUser(shippingAddress);
+			const shippingAddress = { ...address };
 			const order = await myAxios
 				.post("/orders", {
 					products,
 					shippingAddress,
 					totalCost: cartFullPrice,
 				})
-				.then((res) => res.data);
-			setSuccessMessage("Order completed successfully! :)");
+				.then((res) => res.data.data._doc);
+			setOrderID(order._id);
 			setIsLoading(false);
-			if (order.status === "success") {
-				removeCart();
-				updateCatalog();
-				navigate("/");
-			}
+			removeCart();
+			updateCatalog();
+			nextStep();
 		} catch (err) {
 			setErrorMessage(err.response.data.message);
 		}
 		setIsLoading(false);
 	};
-
 	return (
-		<PageWrapper>
+		<>
 			{errorMessage && <ErrorAlert message={errorMessage} />}
-			{successMessage && <SuccessAlert message={successMessage} />}
 			{isLoading ? (
 				<LoadingSpinner />
 			) : (
 				<>
-					<SectionContainer>
-						<h2>Cart</h2>
-						<ItemsContainer>
-							<CartContents>{items}</CartContents>
-							<CartInfo>
-								<span>Total quantity: {cartQuantity}</span>
-								<span>Total price: {cartFullPrice.toFixed(2)}$</span>
-							</CartInfo>
-						</ItemsContainer>
-					</SectionContainer>
-					<SectionContainer>
-						<h2>Details</h2>
-						<Form
-							component='div'
-							sx={{
-								width: {
-									xs: "500px",
-								},
-							}}>
-							<h3>Shipping Address</h3>
-							<InputContainer
-								disabled={disable}
-								size='small'
-								id='state'
-								label='State:'
-								onChange={(e) => (stateRef.current = e.target.value)}
-								defaultValue={stateRef.current}
-							/>
-							<InputContainer
-								disabled={disable}
-								size='small'
-								id='city'
-								label='City:'
-								onChange={(e) => (cityRef.current = e.target.value)}
-								defaultValue={cityRef.current}
-								type='text'
-							/>
-							<InputContainer
-								disabled={disable}
-								size='small'
-								id='street'
-								label='Street:'
-								onChange={(e) => (streetRef.current = e.target.value)}
-								defaultValue={streetRef.current}
-							/>
-							<InputContainer
-								disabled={disable}
-								size='small'
-								id='streetNum'
-								label='StreetNum:'
-								type='number'
-								onChange={(e) => (streetNumRef.current = e.target.value)}
-								defaultValue={streetNumRef.current}
-							/>
-							<InputContainer
-								disabled={disable}
-								size='small'
-								id='zipCode'
-								label='Post Code:'
-								onChange={(e) => (postCodeRef.current = e.target.value)}
-								defaultValue={postCodeRef.current}
-								type='text'
-							/>
-						</Form>
-						<Form
-							component='div'
-							sx={{
-								width: {
-									xs: "500px",
-								},
-							}}>
-							<h3>Payment</h3>
-							<InputContainer
-								disabled
-								size='small'
-								id='expDate'
-								label='Expiry date'
-								fullWidth
-								autoComplete='cc-exp'
-								defaultValue='MM/YY'
-							/>
-							<InputContainer
-								disabled
-								size='small'
-								id='cardNumber'
-								label='Card number'
-								fullWidth
-								autoComplete='cc-number'
-								defaultValue='XXXX-XXXX-XXXX-XXXX'
-							/>
-							<InputContainer
-								disabled
-								size='small'
-								id='cardName'
-								label='Name on card'
-								fullWidth
-								autoComplete='cc-name'
-								defaultValue='Your Name'
-							/>
-							<InputContainer
-								disabled
-								size='small'
-								id='cvv'
-								label='CVV'
-								fullWidth
-								autoComplete='cc-csc'
-								defaultValue='###'
-							/>
-
-							<SubmitBtn
-								onClick={handleOrder}
-								type='submit'
-								disabled={isLoading}>
-								Complete Checkout
-							</SubmitBtn>
-						</Form>
-					</SectionContainer>
+					<Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
+						<Paper
+							variant='outlined'
+							sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+							<Typography component='h1' variant='h4' align='center'>
+								Checkout
+							</Typography>
+							<Stepper
+								activeStep={currentStep}
+								sx={{ pt: 3, pb: 5, display: { xs: "none", sm: "flex" } }}>
+								{steps.map((label) => (
+									<Step key={label}>
+										<StepLabel>{label}</StepLabel>
+									</Step>
+								))}
+							</Stepper>
+							<Box
+								sx={{
+									pt: 3,
+									pb: 5,
+									display: { xs: "flex", sm: "none" },
+									justifyContent: "center",
+								}}>
+								<Typography variant='subtitle1'>
+									{steps[currentStep]}
+								</Typography>
+							</Box>
+							{currentStep === steps.length ? (
+								<>
+									<Typography variant='h5' gutterBottom>
+										Thank you for your order.
+									</Typography>
+									<Typography variant='subtitle1'>
+										Your order ID is {orderID}. We have emailed your order
+										confirmation, and will send you an update when your order
+										has shipped. "My Orders" In the meantime, you can review the
+										order in <Link to='/my-profile/my-orders'>"My Orders"</Link>
+										at your profile
+									</Typography>
+								</>
+							) : (
+								<>
+									{getStepContent(currentStep)}
+									<Box
+										sx={{ display: "flex", justifyContent: "space-between" }}>
+										{currentStep !== 0 && (
+											<Button onClick={stepBack} sx={{ mt: 3, ml: 1 }}>
+												Back
+											</Button>
+										)}
+										{currentStep < steps.length - 1 ? (
+											<Button
+												variant='contained'
+												onClick={nextStep}
+												sx={{ mt: 3, ml: 1 }}>
+												Next
+											</Button>
+										) : (
+											<Button
+												variant='contained'
+												onClick={handleOrder}
+												sx={{ mt: 3, ml: 1 }}>
+												Confirm
+											</Button>
+										)}
+									</Box>
+								</>
+							)}
+						</Paper>
+					</Container>
 				</>
 			)}
-		</PageWrapper>
+		</>
 	);
 }
 
-export default Checkout;
+export default NewCheckout;

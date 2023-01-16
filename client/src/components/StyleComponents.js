@@ -295,7 +295,7 @@ export const CartContainer = styled(Box)`
 	flex-direction: column;
 	justify-content: space-between;
 	background: rgba(179, 179, 179, 0.987);
-	z-index: 6;
+	z-index: 3000;
 	/* width: 380px; */
 	border-radius: 10px;
 	box-shadow: 3px 3px 5px 2px rgba(110, 110, 110, 0.868);
