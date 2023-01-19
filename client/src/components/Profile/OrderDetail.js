@@ -15,9 +15,9 @@ import {
 	OrderContainer,
 	OrdersProducts,
 	ProductOdContainer,
-	ReceivedProduct,
 	TimePriceOrder,
 } from "../StyleComponents";
+import { Box, Checkbox, Divider } from "@mui/material";
 
 async function getOrderData(id) {
 	try {
@@ -69,14 +69,21 @@ function OrderDetail() {
 	}
 	const productsData = order.products?.map((p, i) => (
 		<>
-			<ProductOdContainer key={i}>
-				<img src={`/img/products/${p.product.image}`} alt={p.product.name} />
+			<ProductOdContainer key={p.product.name}>
+				<Box>
+					<h4>{p.product.name}</h4>
+					<img src={`/img/products/${p.product.image}`} alt={p.product.name} />
+				</Box>
 				<ProductMinDetails>
-					<span>{p.product.name}</span>
-					<span>Price: ${p.product.price.toFixed(2)}</span>
-					<span>Quantity : {p.quantity}</span>
-					<span>Sellers Email: </span>
-					<span>{p.product.seller.email}</span>
+					<span>
+						<strong>Price:</strong> ${p.product.price.toFixed(2)}
+					</span>
+					<span>
+						<strong>Quantity:</strong> {p.quantity}
+					</span>
+					<span>
+						<strong>Sellers Email:</strong> {p.product.seller.email}
+					</span>
 					<span>
 						Received:
 						{p.received === true ? (
@@ -84,20 +91,15 @@ function OrderDetail() {
 						) : (
 							<IoCloseCircleOutline style={{ color: "red" }} />
 						)}
+						<Checkbox
+							onChange={(e) => {
+								handleChange(e, i);
+							}}
+						/>
 					</span>
 				</ProductMinDetails>
-				<ReceivedProduct>
-					<label>Received?</label>
-					<input
-						name={`${p.product.name}-received`}
-						id={`${p.product.name}-received`}
-						onChange={(e) => {
-							handleChange(e, i);
-						}}
-						type='checkbox'
-					/>
-				</ReceivedProduct>
 			</ProductOdContainer>
+			<Divider />
 		</>
 	));
 
@@ -106,14 +108,17 @@ function OrderDetail() {
 			{loading ? (
 				<LoadingSpinner />
 			) : (
-				<OrderContainer onSubmit={handleSubmit}>
+				<OrderContainer
+					width={{ xs: "100%", md: "650px" }}
+					component='form'
+					onSubmit={handleSubmit}>
+					<h3>Order summary</h3>
 					{errorMessage && <ErrorAlert message={errorMessage} />}
 					{successMessage && <SuccessAlert message={successMessage} />}
-					{order?.products?.length > 1 && <h3>The Products</h3>}
 					<OrdersProducts>
 						{productsData ? productsData : <LoadingSpinner />}
 					</OrdersProducts>
-					<DetailContainer>
+					<DetailContainer flexDirection={{ xs: "column", md: "row" }}>
 						<TimePriceOrder>
 							<h3>Order details:</h3>
 

@@ -4,9 +4,12 @@ import {
 	AppBar,
 	Box,
 	Button,
+	Card,
 	Container,
 	Grid,
 	IconButton,
+	List,
+	ListItem,
 	Paper,
 	TextField,
 	Toolbar,
@@ -195,7 +198,7 @@ export const ProductMinDetails = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: flex-start;
 
 	& a {
 		color: rgb(125, 125, 125);
@@ -620,30 +623,40 @@ export const BtnContainer = styled.div`
 
 ///////////////OrderDetails ////////////////////
 
-export const OrderContainer = styled(Form)`
-	width: 700px;
+export const OrderContainer = styled(Box)`
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #dfdfdf8f;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px 5px rgba(128, 128, 128, 0.193);
+	padding: 1.5rem;
+	padding-top: 0.5rem;
 	& h3 {
 		margin: 0;
 	}
 `;
-export const DetailContainer = styled.div`
+export const DetailContainer = styled(Box)`
 	display: flex;
 	justify-content: space-around;
 	background-color: white;
 	border-radius: 12px;
-	width: 600px;
+	width: 100%;
 `;
 
-export const ProductOdContainer = styled(ProductContainer)`
-	width: 600px;
-`;
-export const ReceivedProduct = styled.div`
+export const ProductOdContainer = styled(ListItem)`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
+	gap: 10px;
+	width: 100%;
+	& img {
+		width: 120px;
+		height: fit-content;
+	}
 `;
+
 export const TimePriceOrder = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -660,9 +673,13 @@ export const BtnGotItems = styled(SubmitBtn)`
 `;
 export const AddressContainer = styled(TimePriceOrder)`
 	width: 200px;
+	& h3 {
+		align-self: center;
+	}
 `;
-export const OrdersProducts = styled.section`
+export const OrdersProducts = styled(List)`
 	height: 70%;
+	width: 100%;
 	overflow: auto;
 	flex-shrink: 0;
 	max-height: 60vh;
@@ -670,7 +687,8 @@ export const OrdersProducts = styled.section`
 	box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
 	-webkit-box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
 	-moz-box-shadow: 5px 3px 22px 11px rgba(0, 0, 0, 0.34) inset;
-	border-radius: 15px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
 	&::-webkit-scrollbar {
 		width: 7px;
 	}
