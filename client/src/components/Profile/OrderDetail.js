@@ -69,12 +69,14 @@ function OrderDetail() {
 	}
 	const productsData = order.products?.map((p, i) => (
 		<>
-			<ProductOdContainer key={p.product.name}>
+			<ProductOdContainer
+				key={p.product.name}
+				sx={{ flexDirection: { xs: "column", md: "row" } }}>
 				<Box>
 					<h4>{p.product.name}</h4>
 					<img src={`/img/products/${p.product.image}`} alt={p.product.name} />
 				</Box>
-				<ProductMinDetails>
+				<ProductMinDetails sx={{ fontSize: { xs: "small", md: "larger" } }}>
 					<span>
 						<strong>Price:</strong> ${p.product.price.toFixed(2)}
 					</span>

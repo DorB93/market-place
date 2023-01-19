@@ -194,7 +194,7 @@ export const ProductContainer = styled(Paper)`
 		align-self: center;
 	}
 `;
-export const ProductMinDetails = styled.div`
+export const ProductMinDetails = styled(Box)`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -203,9 +203,6 @@ export const ProductMinDetails = styled.div`
 	& a {
 		color: rgb(125, 125, 125);
 		text-decoration: none;
-	}
-	& span {
-		font-size: larger;
 	}
 `;
 export const BtnAddToCart = styled(Button)`
@@ -652,7 +649,7 @@ export const ProductOdContainer = styled(ListItem)`
 	gap: 10px;
 	width: 100%;
 	& img {
-		width: 120px;
+		width: 100%;
 		height: fit-content;
 	}
 `;
